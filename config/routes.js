@@ -10,16 +10,25 @@
 
 module.exports.routes = {
 
-  '/': { view: 'pages/homepage'},
-  '/login': { view: 'pages/login_form' }, // Login form page
-  '/signup': {view: 'pages/signup_form'}, //sign up form
-  '/signup_and_login': {view: 'pages/signup_and_login'}, //page taking you to signup or log in options
-  '/student_dashboard': {view: 'pages/child_homepage'}, //child homepg and dashboard
-  '/student_progress': {view: 'pages/progress_child'}, //progress page for child accounts
-  '/rewards_store': {view: 'pages/rewards_store'}, //rewards store page
-  '/parent_dashboard': {view: 'pages/parent_homepg'}, //parent homepg and dashboard
-  '/progress_reports': {view: 'pages/progress_parent'}, //parent progress report page (what student is up to)
-  '/manage_accounts': {view: 'pages/manage_accounts'}, //manage student and parent accounts
 
+  '/': { view: 'pages/homepage'},
+  '/login': { view: 'pages/login_form' }, // Login page
+  '/register': { view: 'pages/signup_form' }, // Register page
+  '/user/login': 'UserController.login', // Login action
+  '/user/logout': 'UserController.logout', // Logout action
+  '/user/register': 'UserController.createAccount', // Register action
+  '/user/edit': {controller: 'UserController', action: 'editAccount', policy: 'sessionAuth'}, // Edit account action
+  '/parent_dashboard': {view: 'pages/parent_accounts/parent_homepg', policy: 'sessionAuth'},
+  // '/messages': {view: 'pages/messages', policy: 'sessionAuth' },
+ // '/residence_halls': {view: 'pages/residence_halls', policy: 'sessionAuth'},
+ // '/dining': {view: 'pages/dining', policy: 'sessionAuth'},
+ // '/supplies': {view: 'pages/supplies', policy: 'sessionAuth'},
+ // '/events': {view: 'pages/events', policy: 'sessionAuth'},
+ // '/sarasota': {view: 'pages/sarasota', policy: 'sessionAuth'},
+ // '/leaderboard': {view: 'pages/leaderboard', policy: 'sessionAuth'},
+  //'/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
+
+
+  
 
 };
