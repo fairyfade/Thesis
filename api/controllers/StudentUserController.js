@@ -147,7 +147,8 @@ module.exports = {
   },
   fetchPlants: async function(req, res) {
     try {
-        const posts = await Student.find().populate('userID');
+        //const posts = await Student.find().populate('userID');
+        const posts = await Student.find({userID: req.session.userId}).populate('userID');
         return res.view('pages/parent_accounts/parent_homepg', {
           postdata:JSON.stringify(posts)
           //postdata:JSON.stringify(combinedPosts)

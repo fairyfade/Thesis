@@ -11,6 +11,9 @@ module.exports = {
         model: 'users',
         required: true,
       },
+      studentUserID: {
+        model: 'users'
+      },
       firstName: { // First name
         type: 'string',
         required: true,
