@@ -1,20 +1,21 @@
 /**
- * Users.js
+ * Student.js
  *
  * A table holding user information.
  */
 
+
 module.exports = {
     attributes: {
+      userID: {
+        model: 'users',
+        required: true,
+      },
       firstName: { // First name
         type: 'string',
         required: true,
       },
       lastName: { // Last name
-        type: 'string',
-        required: true,
-      },
-      email: { // Email
         type: 'string',
         required: true,
       },
@@ -26,7 +27,6 @@ module.exports = {
         type: 'string',
         required: true,
       },
-
     }
   };
   

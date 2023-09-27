@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav ">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="#">Parent Dashboard</a>
+        <a class="nav-link active" aria-current="page" href="/parent_dashboard">Parent Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Progress/Acheivements</a>
+        <a class="nav-link" href="/viewProgress">Progress/Acheivements</a>
       </li>		
       <li class="nav-item">
-        <a class="nav-link active" href="#">Manage Account</a>
+        <a class="nav-link" href="/manage_account">Manage Account</a>
       </li>	
       </ul>		  
     </div>
@@ -22,3 +22,46 @@
 
   <h1>Parent Dashboard</h1>
   <p>Check each child's progress, acheievements, and manage accounts</p>
+  <a href="/create_student_account"><button>Add a Student Account</button></a>
+  <br>
+  <br>
+  <h2>Students: </h2>
+  <div id="plantData" data-post="<%=postdata%>">
+  </div>
+
+
+
+
+  <div class="plants-wrapper">
+  
+  </div>
+
+  <script>
+    $(document).ready(() => {console.log($("#plantData").data("post"))});
+  
+  //var requestedPlantName = document.getElementById("plantSearchBar").value;
+
+
+  $(".plants-wrapper").empty();
+
+
+  let plants = $("#plantData").data("post");
+
+  for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
+      $(".plants-wrapper").append(`
+        <h3>Student Name: <a href="#">${plants[i].firstName}</a></h3>
+        <h4>UserName: ${plants[i].username}</h2>
+        <br>`);
+          
+      }
+  //  $(".students-wrapper").empty();
+
+
+    //let students = $("#studentData").data("post");
+
+  //  for(i = 0; i < students.length; i++){  //update to include general info instead of water info
+ //     $(".students-wrapper").append(`
+ //       <h3>${students[i].firstName}</h3>
+  //      <h2>UserName: ${students[i].username}</h2>`);
+   //   }
+  </script>

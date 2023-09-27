@@ -7,39 +7,39 @@ module.exports = {
     @param {string} password
     @returns {object} success
   */
-  login: async function(req, res) {
-    try {
-      const username = req.param('username');
-      const password = req.param('password');
-      if (!username || !password) { // Check if username and password are provided
-        return res.send({
-          error: 'Username and password required'
-        });
-      }
-      let user = await Users.find({username: username}); // Find user
-      if (!user || user.length === 0) { // Check if user exists
-        return res.send({ // Return error if user doesn't exist
-          error: 'User not found'
-        });
-      }
-      user = user[0];
-      const validPassword = await sails.helpers.passwords.comparePasswords(password, user.password); // Check if password is valid
-      if (!validPassword) { // Return error if password is invalid
-        return res.send({
-          error: 'Invalid password'
-        });
-      }
-      req.session.sessionID = uuidv4(); // Generate session ID
-      req.session.userId = user.id; // Set user ID
-      return res.send({ // Return success
-        success: true
-      });
-    } catch (err) { // Return error if something goes wrong
-      return res.send({
-        error: 'Error logging in'
-      });
-    }
-  },
+    login: async function(req, res) {
+        try {
+          const username = req.param('username');
+          const password = req.param('password');
+          if (!username || !password) { // Check if username and password are provided
+            return res.send({
+              error: 'Username and password required'
+            });
+          }
+          let user = await Student.find({username: username}); // Find user
+          if (!user || user.length === 0) { // Check if user exists
+            return res.send({ // Return error if user doesn't exist
+              error: 'User not found'
+            });
+          }
+          user = user[0];
+          const validPassword = await sails.helpers.passwords.comparePasswords(password, user.password); // Check if password is valid
+          if (!validPassword) { // Return error if password is invalid
+            return res.send({
+              error: 'Invalid password'
+            });
+          }
+          req.session.sessionID = uuidv4(); // Generate session ID
+          req.session.userId = user.id; // Set user ID
+          return res.send({ // Return success
+            success: true
+          });
+        } catch (err) { // Return error if something goes wrong
+          return res.send({
+            error: 'Error logging in'
+          });
+        }
+      },
   /*
     Logout a user.
     @returns {object} success
@@ -61,52 +61,49 @@ module.exports = {
   */
   createAccount: async function(req, res) {
     try {
+      const userId = req.session.userId;
       const firstName = req.param('firstName');
       const lastName = req.param('lastName');
-      const email = req.param('email');
       const username = req.param('username');
       const password = req.param('password');
-      if (!firstName || !lastName || !email || !username || !password) { // Missing required params
+      if (!req.session.userId) { // Check if user is logged in
+        return res.send({
+          error: 'User not logged in'
+        });
+      }
+      if (!firstName || !lastName || !username || !password) { // Missing required params
         return res.send({
           error: 'All fields required'
         });
       }
-      if (firstName === '' || lastName === '' || email === '' || username === '' || password === '') { // Empty params
+      if (firstName === '' || lastName === '' || username === '' || password === '') { // Empty params
         return res.send({
           error: 'All fields required'
         });
       }
-      const existingUser = await Users.find({ // Check if user already exists
-        or: [{email: email}, {username: username}]
+      const existingStudent = await Student.find({ // Check if user already exists
+        or: [{username: username}]
       });
-      if (existingUser && existingUser.length > 0) { // Return error if user already exists
+      if (existingStudent && existingStudent.length > 0) { // Return error if user already exists
         return res.send({
           error: 'User already exists'
         });
       }
       const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
-      await Users.create({ // Create user
+      await Student.create({ // Create user
+        userID: userId,
         firstName: firstName,
         lastName: lastName,
-        email: email,
         username: username,
         password: hash,
-      }).exec((err, user) => { // Error handling
-        if (err) {
-          return res.send({
-            error: 'Error creating user'
-          });
-        }
-      });
-      return res.send({ // Return success
-        success: true
-      });
-    } catch (err) { // Error creating user
-      return res.send({
-        error: 'Error creating user'
-      });
-    }
-  },
+    });
+    return res.send({ // Return success
+      success: true
+    });
+  } catch (error) {
+    console.log(error);
+  }
+},
   /*
     Get a user's account information.
     @param {string} accountId
@@ -114,30 +111,29 @@ module.exports = {
   */
   getAccount: async function(req, res) {
     try {
-      const userId = req.session.userId;
+      const studentId = req.session.userId;
       let accountId = req.param('accountId');
-      if (!userId) { // User not logged in
+      if (!studentId) { // User not logged in
         return res.view('pages/login', {
           error: 'Missing required params'
         });
       }
       if (!accountId) { // Get own account
-        accountId = userId;
+        accountId = studentId;
       }
-      let isSelfEdit = userId === accountId;
-      const foundUser = await Users.find({id: accountId});
-      if (!foundUser || foundUser.length === 0) { // User not found
+      let isSelfEdit = studentId === accountId;
+      const foundStudent = await Student.find({id: accountId});
+      if (!foundStudent || foundStudent.length === 0) { // User not found
         return res.view('pages/homepage', {
           error: 'User not found'
         });
       }
-      const user = foundUser[0];
+      const student = foundStudent[0];
       const account = { // Return account info
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        username: user.username,
+        id: student.id,
+        firstName: student.firstName,
+        lastName: student.lastName,
+        username: student.username,
         isSelfEdit: isSelfEdit
       };
       return res.view('pages/profile', {
@@ -148,6 +144,18 @@ module.exports = {
         error: 'Error getting account'
       });
     }
+  },
+  fetchPlants: async function(req, res) {
+    try {
+        const posts = await Student.find().populate('userID');
+        return res.view('pages/parent_accounts/parent_homepg', {
+          postdata:JSON.stringify(posts)
+          //postdata:JSON.stringify(combinedPosts)
+        }
+        );
+      } catch (error) {
+        console.log(error);
+      }
   },
   /*
     Edit a user's account information.
@@ -161,24 +169,23 @@ module.exports = {
     try {
       const firstName = req.param('firstName');
       const lastName = req.param('lastName');
-      const email = req.param('email');
       const userId = req.session.userId;
       if (!userId) { //Redirect to login page if not logged in
         return res.view('pages/login', {
           error: 'Missing required params'
         });
       }
-      if (!firstName || !lastName || !email || !interests) { //Check for missing params
+      if (!firstName || !lastName) { //Check for missing params
         return res.send({
           error: 'All fields required'
         });
       }
-      if (firstName === '' || lastName === '' || email === '' || interests === '') { //Check for empty params
+      if (firstName === '' || lastName === '') { //Check for empty params
         return res.send({
           error: 'All fields required'
         });
       }
-      let existingUser = await Users.find({ //Check if user exists
+      let existingUser = await Student.find({ //Check if user exists
         id: userId
       });
       if (!existingUser || existingUser.length === 0) { //Return error if user doesn't exist
@@ -187,11 +194,9 @@ module.exports = {
         });
       }
       existingUser = existingUser[0];
-      await Users.update({id: userId}, { //Update user
+      await Student.update({id: userId}, { //Update user
         firstName: firstName,
         lastName: lastName,
-        email: email,
-        interests: interests
       }).exec((err, user) => { //Return error if update fails
         if (err) {
           return res.send({
