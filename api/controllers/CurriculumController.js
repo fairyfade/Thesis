@@ -1,3 +1,5 @@
+const SubLessonActivity = require("../models/SubLessonActivity");
+
 /*CurriculumController.js
 
 */
@@ -18,7 +20,7 @@ module.exports = {
     @param {string} topic
     @param {string} total_num_lessons
     @param {string} completion_rate
-    @returns {boolean} complete
+    @param {boolean} complete
   */
     createUnit: async function(req, res) {
         try {
@@ -67,5 +69,518 @@ module.exports = {
         console.log(error);
       }
     },
+        /*
+    Create a new Lesson.
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} lesson_number
+    @param {string} topic
+    @param {string} total_num_sub_lessons
+    @param {string} completion_rate
+    @param {boolean} complete
+  */
+    createLesson: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const unit_number = req.param('unit_number');
+        const lesson_number = req.param('lesson_number');
+        const topic = req.param('topic');
+        const total_num_sub_lessons = req.param('total_num_sub_lessons');
+        const completion_rate = req.param('completion_rate');
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!unit_number || !lesson_number || !topic || !total_num_sub_lessons || !completion_rate || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (unit_number === '' || lesson_number === '' || topic === '' || total_num_sub_lessons === '' || completion_rate === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingLesson = await Lesson.find({ // Check if Lesson already exists
+          or: [{lesson_number: lesson_number}]
+        });
+        if (existingLesson && existingLesson.length > 0) { // Return error if Lesson already exists
+          return res.send({
+            error: 'Lesson already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await Lesson.create({ // Create lesson
+          userID: userId,
+          unit_number: unit_number,
+          lesson_number: lesson_number,
+          topic: topic,
+          total_num_sub_lessons: total_num_sub_lessons,
+          completion_rate: completion_rate,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+       /*
+    Create a new SubLesson.
+    @param {string} userID
+    @param {string} lesson_number
+    @param {string} sublesson_number
+    @param {string} topic
+    @param {string} total_activities
+    @param {string} completion_rate
+    @param {boolean} complete
+  */
+    createSubLesson: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const lesson_number = req.param('lesson_number');
+        const sublesson_number = req.param('sublesson_number');
+        const topic = req.param('topic');
+        const total_activities = req.param('total_num_activities');
+        const completion_rate = req.param('completion_rate');
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!unit_number || !lesson_number || !sublesson_number || !topic || !total_activities || !completion_rate || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (unit_number === '' || lesson_number === '' || sublesson_number === '' || topic === '' || total_activities === '' || completion_rate === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingSubLesson = await SubLesson.find({ // Check if sublesson already exists
+          or: [{sublesson_number: sublesson_number}]
+        });
+        if (existingSubLesson && existingSubLesson.length > 0) { // Return error if sublesson already exists
+          return res.send({
+            error: 'Sublesson already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await SubLesson.create({ // Create sublesson
+          userID: userId,
+          lesson_number: lesson_number,
+          sublesson_number: sublesson_number,
+          topic: topic,
+          total_activities: total_activities,
+          completion_rate: completion_rate,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+       /*
+    Create a new SubLesson Activity.
+    @param {string} userID
+    @param {string} sublesson_number
+    @param {string} activity_number
+    @param {string} topic
+    @param {string} url
+    @param {string} attemps
+    @param {string} timeSpent
+    @param {boolean} complete
 
+  */
+    createSubLessonActivity: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const sublesson_number = req.param('sublesson_number');
+        const activity_number = req.param('activity_number');
+        const topic = req.param('topic');
+        const url = req.param('url');
+        const attempts = req.param('attempts');
+        const timeSpent = req.param('timeSpent');
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!unit_number || !sublesson_number || !activity_number || !topic || !url || !attempts || !timeSpent || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (unit_number === '' || sublesson_number === '' || activity_number === '' || topic === '' || url === '' || attempts === '' || timeSpent === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingActivity = await SubLessonActivity.find({ // Check if sublesson activity already exists
+          or: [{activity_number: activity_number}]
+        });
+        if (existingActivity && existingActivity.length > 0) { // Return error if sublesson activity already exists
+          return res.send({
+            error: 'Sublesson already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await SubLessonActivity.create({ // Create sublesson activity
+          userID: userId,
+          sublesson_number: sublesson_number,
+          activity_number: activity_number,
+          topic: topic,
+          url : url,
+          attempts: attempts,
+          timeSpent: timeSpent,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+       /*
+    Create a new SubLesson Guided Activity.
+    @param {string} userID
+    @param {string} sublesson_number
+    @param {string} topic
+    @param {string} url
+    @param {boolean} complete
+
+  */
+    createSubLessonGuided: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const sublesson_number = req.param('sublesson_number');
+        const topic = req.param('topic');
+        const url = req.param('url');
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!sublesson_number || !topic || !url || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (sublesson_number === '' || topic === '' || url === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingGuided = await SubLessonGuided.find({ // Check if sublesson activity guided already exists
+          or: [{sublesson_number: sublesson_number}]
+        });
+        if (existingGuided && existingGuided.length > 0) { // Return error if sublesson guided activity already exists
+          return res.send({
+            error: 'Sublesson Guided Activity already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await SubLessonGuided.create({ // Create sublesson activity
+          userID: userId,
+          sublesson_number: sublesson_number,
+          topic: topic,
+          url : url,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+         /*
+    Create a new SubLesson Video.
+    @param {string} userID
+    @param {string} sublesson_number
+    @param {string} topic
+    @param {string} url
+    @param {boolean} complete
+
+  */
+    createSubLessonVideo: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const sublesson_number = req.param('sublesson_number');
+        const topic = req.param('topic');
+        const url = req.param('url');
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!sublesson_number || !topic || !url || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (sublesson_number === '' || topic === '' || url === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingVid = await SubLessonVid.find({ // Check if sublesson video already exists
+          or: [{sublesson_number: sublesson_number}]
+        });
+        if (existingVid && existingVid.length > 0) { // Return error if sublesson video already exists
+          return res.send({
+            error: 'Sublesson Video already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await SubLessonVid.create({ // Create sublesson video
+          userID: userId,
+          sublesson_number: sublesson_number,
+          topic: topic,
+          url : url,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  /*
+    Create a new SubLesson Written.
+    @param {string} userID
+    @param {string} sublesson_number
+    @param {string} topic
+    @param {string} body
+    @param {boolean} complete
+
+  */
+    createSubLessonWritten: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const sublesson_number = req.param('sublesson_number');
+        const topic = req.param('topic');
+        const body = req.param('body');
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!sublesson_number || !topic || !body || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (sublesson_number === '' || topic === '' || body === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingWritten = await SubLessonWritten.find({ // Check if sublesson written already exists
+          or: [{sublesson_number: sublesson_number}]
+        });
+        if (existingWritten && existingWritten.length > 0) { // Return error if sublesson written already exists
+          return res.send({
+            error: 'Sublesson Written already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await SubLessonWritten.create({ // Create sublesson written
+          userID: userId,
+          sublesson_number: sublesson_number,
+          topic: topic,
+          body : body,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+    /*
+    Create a new Unit challenge.
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} topic
+    @param {string} attempts
+    @param {string} url
+    @param {boolean} complete
+
+  */
+    createUnitChallenge: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const unit_number = req.param('unit_number');
+        const topic = req.param('topic');
+        const attempts = req.param('attempts');
+        const url = req.param('url')
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!unit_number || !topic || !attempts || !url || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (unit_number === '' || topic === '' || attempts === '' || url === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingChallenge = await UnitChallenge.find({ // Check if unit challenge written already exists
+          or: [{unit_number: unit_number}]
+        });
+        if (existingChallenge && existingChallenge.length > 0) { // Return error if unit challenge already exists
+          return res.send({
+            error: 'Unit challenge already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await UnitChallenge.create({ // Create unit challenge 
+          userID: userId,
+          unit_number: unit_number,
+          topic: topic,
+          attempts : attempts,
+          url : url,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+      /*
+    Create a new Unit quiz
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} topic
+    @param {string} quiz
+    @param {string} correctness
+    @param {boolean} complete
+
+  */
+    createUnitQuiz: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const unit_number = req.param('unit_number');
+        const topic = req.param('topic');
+        const quiz = req.param('quiz');
+        const correctness = req.param('correctness')
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!unit_number || !topic || !quiz || !correctness || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (unit_number === '' || topic === '' || quiz === '' || correctness === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingQuiz = await UnitQuiz.find({ // Check if unit quiz already exists
+          or: [{unit_number: unit_number}]
+        });
+        if (existingQuiz && existingQuiz.length > 0) { // Return error if unit quiz already exists
+          return res.send({
+            error: 'Unit quiz already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await UnitQuiz.create({ // Create unit quiz
+          userID: userId,
+          unit_number: unit_number,
+          topic: topic,
+          quiz : quiz,
+          correctness : correctness,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+        /*
+    Create a new Unit Review
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} topic
+    @param {string} unit_info
+    @param {boolean} complete
+
+  */
+    createUnitReview: async function(req, res) {
+      try {
+        const userId = req.session.userId;
+        const unit_number = req.param('unit_number');
+        const topic = req.param('topic');
+        const unit_info = req.param('unit_info');
+        const correctness = req.param('correctness')
+        const complete = req.param('complete');
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!unit_number || !topic || !unit_info || !correctness || !complete) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (unit_number === '' || topic === '' || unit_info === '' || correctness === '' || complete === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingReview = await UnitReview.find({ // Check if unit review already exists
+          or: [{unit_number: unit_number}]
+        });
+        if (existingReview && existingReview.length > 0) { // Return error if unit review already exists
+          return res.send({
+            error: 'Unit review already exists'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await UnitReview.create({ // Create unit review
+          userID: userId,
+          unit_number: unit_number,
+          topic: topic,
+          unit_info : unit_info,
+          correctness : correctness,
+          complete: complete,
+      });
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
 }
