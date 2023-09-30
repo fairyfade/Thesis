@@ -69,6 +69,54 @@ module.exports = {
         console.log(error);
       }
     },
+  /*
+    Get a student's unit information.
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} topic
+    @param {string} total_num_lessons
+    @param {string} completion_rate
+    @param {boolean} complete
+  */
+  getUnits: async function(req, res) {
+    try {
+      const studentId = req.session.userId;
+      let accountId = req.param('accountId');
+      if (!studentId) { // User not logged in
+        return res.view('pages/login', {
+          error: 'Missing required params'
+        });
+      }
+      if (!accountId) { // Get own account
+        accountId = studentId;
+      }
+      let isSelfEdit = studentId === accountId;
+      const foundUnit = await Unit.find({userID: req.session.userId}).populate('userID');
+     // const foundStudent = await Student.find({id: accountId});
+      if (!foundUnit || foundUnit.length === 0) { // Unit not found
+        return res.view('pages/homepage', {
+          error: 'Unit not found'
+        });
+      }
+      const unit = foundUnit[0];
+      const account = { // Return account info
+        id: unit.id,
+        unit_number: unit.unit_number,
+        topic: unit.topic,
+        total_num_lessons: unit.total_num_lessons,
+        completion_rate: unit.completion_rate,
+        complete: unit.complete,
+        isSelfEdit: isSelfEdit
+      };
+      return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+        account: JSON.stringify(account)
+      });
+    } catch (err) { // Error getting account
+      return res.send({
+        error: 'Error getting account'
+      });
+    }
+  },
         /*
     Create a new Lesson.
     @param {string} userID
@@ -128,6 +176,56 @@ module.exports = {
       console.log(error);
     }
   },
+    /*
+    Get a student's lesson information
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} lesson_number
+    @param {string} topic
+    @param {string} total_num_sub_lessons
+    @param {string} completion_rate
+    @param {boolean} complete
+  */
+    getLessons: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundLesson = await Lesson.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundLesson || foundLesson.length === 0) { // Lesson not found
+          return res.view('pages/homepage', {
+            error: 'Lesson not found'
+          });
+        }
+        const lesson = foundLesson[0];
+        const account = { // Return account info
+          id: lesson.id,
+          unit_number: lesson.unit_number,
+          lesson_number: lesson.lesson_number,
+          topic: lesson.topic,
+          total_num_sub_lessons: lesson.total_num_sub_lessons,
+          completion_rate: lesson.completion_rate,
+          complete: lesson.complete,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    },
        /*
     Create a new SubLesson.
     @param {string} userID
@@ -187,6 +285,56 @@ module.exports = {
       console.log(error);
     }
   },
+     /*
+    Get a student's sublesson information
+    @param {string} userID
+    @param {string} lesson_number
+    @param {string} sublesson_number
+    @param {string} topic
+    @param {string} total_activities
+    @param {string} completion_rate
+    @param {boolean} complete
+  */
+    getSubLessons: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundSubLesson = await SubLesson.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundSubLesson || foundSubLesson.length === 0) { // Unit not found
+          return res.view('pages/homepage', {
+            error: 'Sublesson not found'
+          });
+        }
+        const sublesson = foundSubLesson[0];
+        const account = { // Return account info
+          id: unit.id,
+          lesson_number: sublesson.lesson_number,
+          sublesson_number: sublesson.sublesson_number,
+          topic: sublesson.topic,
+          total_activities: sublesson.total_activities,
+          completion_rate: sublesson.completion_rate,
+          complete: sublesson.complete,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    },
        /*
     Create a new SubLesson Activity.
     @param {string} userID
@@ -251,6 +399,58 @@ module.exports = {
     }
   },
        /*
+    Get a student's sublesson activity information
+    @param {string} userID
+    @param {string} sublesson_number
+    @param {string} activity_number
+    @param {string} topic
+    @param {string} url
+    @param {string} attemps
+    @param {string} timeSpent
+    @param {boolean} complete
+  */
+    getActivity: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundActivity = await SubLessonActivity.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundActivity || foundActivity.length === 0) { // Unit not found
+          return res.view('pages/homepage', {
+            error: 'Sublesson Activity not found'
+          });
+        }
+        const activity = foundSubLessonActivity[0];
+        const account = { // Return account info
+          id: activity.id,
+          sublesson_number: activity.sublesson_number,
+          activity_number: activity.activity_number,
+          topic: activity.topic,
+          url: activity.url,
+          attempts: activity.attempts,
+          timeSpent: activity.timeSpent,
+          complete: activity.complete,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    },
+       /*
     Create a new SubLesson Guided Activity.
     @param {string} userID
     @param {string} sublesson_number
@@ -304,6 +504,52 @@ module.exports = {
       console.log(error);
     }
   },
+  /*
+    Get a student's sublesson guided activity information
+    @param {string} userID
+    @param {string} sublesson_number
+    @param {string} topic
+    @param {string} url
+    @param {boolean} complete
+  */
+    getGuidedActivity: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundGuidedActivity = await SubLessonGuided.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundGuidedActivity || foundGuidedActivity.length === 0) { // Unit not found
+          return res.view('pages/homepage', {
+            error: 'Sublesson Guided Activity not found'
+          });
+        }
+        const activity = foundGuidedActivity[0];
+        const account = { // Return account info
+          id: activity.id,
+          sublesson_number: activity.sublesson_number,
+          topic: activity.topic,
+          url: activity.url,
+          complete: activity.complete,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    },
          /*
     Create a new SubLesson Video.
     @param {string} userID
@@ -358,6 +604,52 @@ module.exports = {
       console.log(error);
     }
   },
+    /*
+    Get a student's sublesson video information
+    @param {string} userID
+    @param {string} sublesson_number
+    @param {string} topic
+    @param {string} url
+    @param {boolean} complete
+  */
+    getSublessonVid: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundVideo = await SubLessonVid.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundVideo || foundVideo.length === 0) { // Unit not found
+          return res.view('pages/homepage', {
+            error: 'Sublesson Video not found'
+          });
+        }
+        const vid = foundVideo[0];
+        const account = { // Return account info
+          id: vid.id,
+          sublesson_number: vid.sublesson_number,
+          topic: vid.topic,
+          url: vid.url,
+          complete: vid.complete,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    },
   /*
     Create a new SubLesson Written.
     @param {string} userID
@@ -412,6 +704,52 @@ module.exports = {
       console.log(error);
     }
   },
+      /*
+    Get a student's sublesson written information
+    @param {string} userID
+    @param {string} sublesson_number
+    @param {string} topic
+    @param {string} body
+    @param {boolean} complete
+  */
+    getSublessonWritten: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundWritten = await SubLessonWritten.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundWritten || foundWritten.length === 0) { // Unit not found
+          return res.view('pages/homepage', {
+            error: 'Sublesson Video not found'
+          });
+        }
+        const written = foundWritten[0];
+        const account = { // Return account info
+          id: written.id,
+          sublesson_number: written.sublesson_number,
+          topic: written.topic,
+          body: written.body,
+          complete: written.complete,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    },
     /*
     Create a new Unit challenge.
     @param {string} userID
@@ -469,6 +807,53 @@ module.exports = {
       console.log(error);
     }
   },
+       /*
+    Get a student's unit challenge information
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} topic
+    @param {string} attempts
+    @param {string} url
+    @param {boolean} complete
+  */
+    getUnitChallenge: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundChallenge = await UnitChallenge.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundChallenge || foundChallenge.length === 0) { // Unit not found
+          return res.view('pages/homepage', {
+            error: 'Unit Challenge not found'
+          });
+        }
+        const challenge = foundChallenge[0];
+        const account = { // Return account info
+          id: challenge.id,
+          unit_number: challenge.unit_number,
+          topic: challenge.topic,
+          attempts: challenge.attempts,
+          url: challenge.url,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    },
       /*
     Create a new Unit quiz
     @param {string} userID
@@ -526,6 +911,54 @@ module.exports = {
       console.log(error);
     }
   },
+    /*
+    Get a student's unit quiz information
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} topic
+    @param {string} quiz
+    @param {string} correctness
+    @param {boolean} complete
+  */
+    getUnitQuiz: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundQuiz = await UnitQuiz.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundQuiz || foundQuiz.length === 0) { // Unit not found
+          return res.view('pages/homepage', {
+            error: 'Unit Quiz not found'
+          });
+        }
+        const quiz = foundQuiz[0];
+        const account = { // Return account info
+          id: quiz.id,
+          unit_number: quiz.unit_number,
+          topic: quiz.topic,
+          quiz: quiz.quiz,
+          correctness: quiz.correctness,
+          complete: quiz.complete,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    },
 
         /*
     Create a new Unit Review
@@ -583,4 +1016,50 @@ module.exports = {
       console.log(error);
     }
   },
-}
+      /*
+    Get a student's unit review information
+    @param {string} userID
+    @param {string} unit_number
+    @param {string} topic
+    @param {string} unit_info
+    @param {boolean} complete
+  */
+    getUnitReview: async function(req, res) {
+      try {
+        const studentId = req.session.userId;
+        let accountId = req.param('accountId');
+        if (!studentId) { // User not logged in
+          return res.view('pages/login', {
+            error: 'Missing required params'
+          });
+        }
+        if (!accountId) { // Get own account
+          accountId = studentId;
+        }
+        let isSelfEdit = studentId === accountId;
+        const foundReview = await UnitReview.find({userID: req.session.userId}).populate('userID');
+       // const foundStudent = await Student.find({id: accountId});
+        if (!foundReview || foundReview.length === 0) { // Unit not found
+          return res.view('pages/homepage', {
+            error: 'Unit Review not found'
+          });
+        }
+        const review = foundReview[0];
+        const account = { // Return account info
+          id: review.id,
+          unit_number: review.unit_number,
+          topic: review.topic,
+          unit_info: review.unit_info,
+          complete: quiz.complete,
+          isSelfEdit: isSelfEdit
+        };
+        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
+          account: JSON.stringify(account)
+        });
+      } catch (err) { // Error getting account
+        return res.send({
+          error: 'Error getting account'
+        });
+      }
+    }
+  };
