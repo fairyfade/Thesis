@@ -7,9 +7,9 @@
 
 module.exports = {
     attributes: {
-      userID: {
+      studentId: {
         model: 'student',
-        required: true,
+        required: false,
       },
       unit_number: { 
         type: 'string',

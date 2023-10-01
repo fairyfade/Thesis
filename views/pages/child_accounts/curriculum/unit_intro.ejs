@@ -1,0 +1,84 @@
+
+<head>
+  </head>
+  
+  <!-- Navigation bar start  -->
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #191970;">
+    <div class="container-fluid ">
+    <a class="navbar-brand " href="#">Space Python</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/student_dashboard">Student Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
+      </li>		
+      <li class="nav-item">
+        <a class="nav-link" href="/rewards_store">Rewards Store</a>
+      </li>	
+      <li class="nav-item">
+        <a class="nav-link" href="/coding_profile">Coding Profile</a> <!--Mayve this is like their "profile"-->
+      </li>	
+      </ul>		  
+    </div>
+    </div>
+  </nav>
+  <!-- Navigation bar end  -->
+  
+  <body>
+    <br>
+    <br>
+    <br>
+    <div id="unitData" data-unit="<%=unitInfo%>"></div>
+    <div class="codingJourneyGraphic"></div> <!--Leaving space (lol) for interactive graphic that shows where they are along their coding journey-->
+    <div class="unitNameHeader">
+      <h3 id="unitName">Unit Name:</h3>
+    </div>
+    <div class="learningGoals">
+      <h4 id="learningGoalsHeader">Learning Goals:</h4>
+      <p id="unitLearningGoals">orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="syntaxLink">
+      <h4 id="syntaxHeader">Syntax Link for Unit _</h4>
+    </div>
+    <div class="unitIntroduction">
+      <h4 id="introductionHeader">Introduction for Unit _</h4>
+      <p id="unitIntroText">orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="unitLessons">
+      <h4 id="lessongJourneyHeader">Lesson Journey</h4>
+      <div id="lessonInformation"></div>
+    </div>
+    <div class="continueButton">
+      <button id="continueButton">Continue</button> <!--Will need to work out exactly how I am continuing the unit-->
+    </div>
+  
+  
+  
+    <script type="text/javascript">
+
+      // adapted from @Npitcher12 & @ascemek: Script to populate plant information
+      $(document).ready(() => {
+        const unitData = $("#unitData").data("unit");
+        $("#unitName").text(unitData.topic);
+     //   $("#unitLearningGoals").text(unitData.learning_goals);
+     //   $("#syntaxHeader").text(unitData.syntaxLink);
+     //   $("#introductionHeader").text(unitData.introHeader);
+      //  $("#unitIntroText").text(unitData.about);
+       // $("#lessonInformation").text(unitData.lessonInfo);
+    
+      //  $("#newPlantLink").attr("href", "/new_plant/" + plantData.id)
+      });
+    </script>
+  
+    <br>
+    <br>
+    <br>
+    <br>
+  </body>
+  
+  

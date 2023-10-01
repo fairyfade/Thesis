@@ -20,7 +20,22 @@ module.exports.bootstrap = async function(done) {
       password: await sails.helpers.passwords.hashPassword('admin'), // Hash password
     });
   }
+    //Unit Information database
+   if (await Unit.count() === 0){
+      await Unit.createEach( [
+       {
+        //unit 1
+         unit_number: '1',
+         topic: 'Unit 1: Blasting Off With Space Python',
+         total_num_lessons: 'unknown',
+         completion_rate: '0',
+         complete: false,
+
+       },
+     ]);
+  }
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
   return done();
 };
+ 

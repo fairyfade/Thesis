@@ -30,6 +30,8 @@ module.exports.routes = {
   '/coding_profile': {view: 'pages/child_accounts/coding_profile', policy: 'sessionAuth'}, //coding profile page
   '/my_progress': {view: 'pages/child_accounts/progress_child', policy: 'sessionAuth'}, //view student progress (student accout)
   '/rewards_store': {view: 'pages/child_accounts/rewards_store', policy: 'sessionAuth'}, //view Rewards Store
+  '/unit/overview/:unit_number': {view: 'pages/child_accounts/curriculum/unit_intro', controller: 'CurriculumController', action: 'getUnits'}, //view first page of a new unit
+
 
 
 

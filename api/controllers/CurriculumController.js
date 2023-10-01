@@ -24,7 +24,7 @@ module.exports = {
   */
     createUnit: async function(req, res) {
         try {
-          const userId = req.session.userId;
+          const studentId = req.session.studentId;
           const unit_number = req.param('unit_number');
           const topic = req.param('topic');
           const total_num_lessons = req.param('total_num_lessons');
@@ -55,7 +55,7 @@ module.exports = {
           }
          // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
           await Unit.create({ // Create unit
-            userID: userId,
+            studentID: studentId,
             unit_number: unit_number,
             topic: topic,
             total_num_lessons: total_num_lessons,
@@ -71,7 +71,7 @@ module.exports = {
     },
   /*
     Get a student's unit information.
-    @param {string} userID
+    @param {string} studentId
     @param {string} unit_number
     @param {string} topic
     @param {string} total_num_lessons
@@ -80,41 +80,21 @@ module.exports = {
   */
   getUnits: async function(req, res) {
     try {
-      const studentId = req.session.userId;
-      let accountId = req.param('accountId');
-      if (!studentId) { // User not logged in
-        return res.view('pages/login', {
-          error: 'Missing required params'
+      const unit_number = req.param('unit_number');
+      if (!unit_number) { // Check if plant ID is valid
+        return res.send({
+          error: 'Invalid plant ID'
         });
       }
-      if (!accountId) { // Get own account
-        accountId = studentId;
-      }
-      let isSelfEdit = studentId === accountId;
-      const foundUnit = await Unit.find({userID: req.session.userId}).populate('userID');
-     // const foundStudent = await Student.find({id: accountId});
-      if (!foundUnit || foundUnit.length === 0) { // Unit not found
-        return res.view('pages/homepage', {
-          error: 'Unit not found'
-        });
-      }
-      const unit = foundUnit[0];
-      const account = { // Return account info
-        id: unit.id,
-        unit_number: unit.unit_number,
-        topic: unit.topic,
-        total_num_lessons: unit.total_num_lessons,
-        completion_rate: unit.completion_rate,
-        complete: unit.complete,
-        isSelfEdit: isSelfEdit
-      };
-      return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
-        account: JSON.stringify(account)
+      const unitInfo = await Unit.find({
+        where: {unit_number: unit_number},
       });
-    } catch (err) { // Error getting account
-      return res.send({
-        error: 'Error getting account'
-      });
+      return res.view('pages/child_accounts/curriculum/unit_intro', {
+        unitInfo: JSON.stringify(unitInfo[0])
+      }
+      );
+    } catch (error) {
+      console.log(error);
     }
   },
         /*

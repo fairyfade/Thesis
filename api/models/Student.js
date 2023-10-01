@@ -7,15 +7,12 @@
 
 module.exports = {
     attributes: {
-      userID: {
-        model: 'users',
-        required: true,
-      },
-      studentUserID: {
-        model: 'users'
-      },
       firstName: { // First name
         type: 'string',
+        required: true,
+      },
+      userID: {
+        model: 'users',
         required: true,
       },
       lastName: { // Last name
