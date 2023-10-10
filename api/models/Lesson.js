@@ -7,9 +7,9 @@
 
 module.exports = {
     attributes: {
-      userID: {
+      studentId: {
         model: 'student',
-        required: true,
+        required: false,
       },
       unit_number: { //unit number
         model: 'unit',
@@ -23,6 +23,18 @@ module.exports = {
         type: 'string',
         required: true,
       },
+  //    lesson_intro: { //the lesson's introduction
+  //      type: 'string',
+   //     requried: true,
+   //   },
+   //   lesson_goal: { //the lesson's goal
+    //    type: 'string',
+    //    requrired: true,
+    //  },
+    //  lesson_plan: { //the lesson's plan
+    //    type: 'string',
+   //     required: true,
+   //   },
       total_num_sub_lessons: { //the total number of sub-lessons in the lesson
         type: 'string',
         required: true,

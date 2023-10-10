@@ -36,25 +36,25 @@
     <div id="unitData" data-unit="<%=unitInfo%>"></div>
     <div class="codingJourneyGraphic"></div> <!--Leaving space (lol) for interactive graphic that shows where they are along their coding journey-->
     <div class="unitNameHeader">
-      <h3 id="unitName">Unit Name:</h3>
+      <h3 id="unitName"></h3>
     </div>
     <div class="learningGoals">
-      <h4 id="learningGoalsHeader">Learning Goals:</h4>
-      <p id="unitLearningGoals">orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h4 id="learningGoalsHeader"></h4>
+      <p id="unitLearningGoals"></p>
     </div>
     <div class="syntaxLink">
-      <h4 id="syntaxHeader">Syntax Link for Unit _</h4>
+      <h4 id="syntaxHeader"></h4>
     </div>
     <div class="unitIntroduction">
-      <h4 id="introductionHeader">Introduction for Unit _</h4>
-      <p id="unitIntroText">orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h4 id="introductionHeader"></h4>
+      <p id="unitIntroText"></p>
     </div>
     <div class="unitLessons">
-      <h4 id="lessongJourneyHeader">Lesson Journey</h4>
+      <h4 id="lessongJourneyHeader"></h4>
       <div id="lessonInformation"></div>
     </div>
     <div class="continueButton">
-      <button id="continueButton">Continue</button> <!--Will need to work out exactly how I am continuing the unit-->
+      <a id=continueLink></a><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
     </div>
   
   
@@ -65,13 +65,13 @@
       $(document).ready(() => {
         const unitData = $("#unitData").data("unit");
         $("#unitName").text(unitData.topic);
-     //   $("#unitLearningGoals").text(unitData.learning_goals);
-     //   $("#syntaxHeader").text(unitData.syntaxLink);
+        $("#unitLearningGoals").text(unitData.learning_goals);
+        $("#syntaxHeader").text(unitData.syntax_link);
      //   $("#introductionHeader").text(unitData.introHeader);
-      //  $("#unitIntroText").text(unitData.about);
-       // $("#lessonInformation").text(unitData.lessonInfo);
+        $("#unitIntroText").text(unitData.introduction_text);
+        $("#lessonInformation").text(unitData.lesson_journey);
     
-      //  $("#newPlantLink").attr("href", "/new_plant/" + plantData.id)
+        $("#continueLink").attr("href", "/lesson/overview/1")
       });
     </script>
   

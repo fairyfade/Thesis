@@ -19,6 +19,24 @@ module.exports = {
         type: 'string',
         required: true,
       },
+      syntax_link: { //link to the syntax sheet for this unit
+        type: 'string',
+        required: false,
+      },
+      introduction_text: {
+        //what the unit is about (brief summary/overview)
+        type: 'string',
+        required: true,
+      },
+      lesson_journey: {
+        //what will the lessons in this unit be about (brief overview)
+        type: 'string',
+        required: true,
+      },
+      learning_goals: {//what are the learning goals for this unit
+        type: 'string',
+        required: true,
+      },
       total_num_lessons: { //the total number of lessons in the unit
         type: 'string',
         required: true,

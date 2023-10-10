@@ -15,9 +15,13 @@ module.exports = {
 */
     /*
     Create a new Unit.
-    @param {string} userID
+    @param {string} studentID
     @param {string} unit_number
     @param {string} topic
+    @param {string} syntax_link
+    @param {string} introduction_text
+    @param {string} lesson_journey
+    @param {string} learning_goals
     @param {string} total_num_lessons
     @param {string} completion_rate
     @param {boolean} complete
@@ -27,6 +31,10 @@ module.exports = {
           const studentId = req.session.studentId;
           const unit_number = req.param('unit_number');
           const topic = req.param('topic');
+          const syntax_link = req.param('syntax_link');
+          const introduction_text = req.param('introduction_text');
+          const lesson_journey = req.param('lesson_journey');
+          const learning_goals = req.param('learning_goals');
           const total_num_lessons = req.param('total_num_lessons');
           const completion_rate = req.param('completion_rate');
           const complete = req.param('complete');
@@ -35,12 +43,12 @@ module.exports = {
               error: 'Student User not logged in'
             });
           }
-          if (!unit_number || !topic || !total_num_lessons || !completion_rate || !complete) { // Missing required params
+          if (!unit_number || !topic || !syntax_link || !introduction_text || !lesson_journey || !learning_goals || !total_num_lessons || !completion_rate || !complete) { // Missing required params
             return res.send({
               error: 'All fields required'
             });
           }
-          if (unit_number === '' || topic === '' || total_num_lessons === '' || completion_rate === '' || complete === '') { // Empty params
+          if (unit_number === '' || topic === '' || syntax_link === '' || introduction_text === '' || lesson_journey === ''|| learning_goals === '' || total_num_lessons === '' || completion_rate === '' || complete === '') { // Empty params
             return res.send({
               error: 'All fields required'
             });
@@ -58,6 +66,10 @@ module.exports = {
             studentID: studentId,
             unit_number: unit_number,
             topic: topic,
+            syntax_link: syntax_link,
+            introduction_text: introduction_text,
+            lesson_journey: lesson_journey,
+            learning_goals: learning_goals,
             total_num_lessons: total_num_lessons,
             completion_rate: completion_rate,
             complete: complete,
@@ -71,9 +83,13 @@ module.exports = {
     },
   /*
     Get a student's unit information.
-    @param {string} studentId
+    @param {string} studentID
     @param {string} unit_number
     @param {string} topic
+    @param {string} syntax_link
+    @param {string} introduction_text
+    @param {string} lesson_journey
+    @param {string} learning_goals
     @param {string} total_num_lessons
     @param {string} completion_rate
     @param {boolean} complete
@@ -81,9 +97,9 @@ module.exports = {
   getUnits: async function(req, res) {
     try {
       const unit_number = req.param('unit_number');
-      if (!unit_number) { // Check if plant ID is valid
+      if (!unit_number) { // Check if unit Number is valid
         return res.send({
-          error: 'Invalid plant ID'
+          error: 'Invalid Unit Number'
         });
       }
       const unitInfo = await Unit.find({
@@ -103,16 +119,22 @@ module.exports = {
     @param {string} unit_number
     @param {string} lesson_number
     @param {string} topic
+    @param {string} lesson_intro
+    @param {string} lesson_goal
+    @param {string} lesson_plan
     @param {string} total_num_sub_lessons
     @param {string} completion_rate
     @param {boolean} complete
   */
     createLesson: async function(req, res) {
       try {
-        const userId = req.session.userId;
+        const userId = req.session.studentId;
         const unit_number = req.param('unit_number');
         const lesson_number = req.param('lesson_number');
         const topic = req.param('topic');
+     //   const lesson_intro = req.param('lesson_intro');
+      //  const lesson_goal = req.param('lesson_goal');
+       // const lesson_plan = req.param('lesson_plan');
         const total_num_sub_lessons = req.param('total_num_sub_lessons');
         const completion_rate = req.param('completion_rate');
         const complete = req.param('complete');
@@ -167,44 +189,23 @@ module.exports = {
     @param {boolean} complete
   */
     getLessons: async function(req, res) {
-      try {
-        const studentId = req.session.userId;
-        let accountId = req.param('accountId');
-        if (!studentId) { // User not logged in
-          return res.view('pages/login', {
-            error: 'Missing required params'
+        try {
+          const lesson_number = req.param('lesson_number');
+          if (!lesson_number) { // Check if lesson Number is valid
+            return res.send({
+              error: 'Invalid Lesson Number'
+            });
+          }
+          const lessonInfo = await Lesson.find({
+            where: {lesson_number: lesson_number},
           });
+          return res.view('pages/child_accounts/curriculum/lesson_intro', {
+            lessonInfo: JSON.stringify(lessonInfo[0])
+          }
+          );
+        } catch (error) {
+          console.log(error);
         }
-        if (!accountId) { // Get own account
-          accountId = studentId;
-        }
-        let isSelfEdit = studentId === accountId;
-        const foundLesson = await Lesson.find({userID: req.session.userId}).populate('userID');
-       // const foundStudent = await Student.find({id: accountId});
-        if (!foundLesson || foundLesson.length === 0) { // Lesson not found
-          return res.view('pages/homepage', {
-            error: 'Lesson not found'
-          });
-        }
-        const lesson = foundLesson[0];
-        const account = { // Return account info
-          id: lesson.id,
-          unit_number: lesson.unit_number,
-          lesson_number: lesson.lesson_number,
-          topic: lesson.topic,
-          total_num_sub_lessons: lesson.total_num_sub_lessons,
-          completion_rate: lesson.completion_rate,
-          complete: lesson.complete,
-          isSelfEdit: isSelfEdit
-        };
-        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
-          account: JSON.stringify(account)
-        });
-      } catch (err) { // Error getting account
-        return res.send({
-          error: 'Error getting account'
-        });
-      }
     },
        /*
     Create a new SubLesson.
