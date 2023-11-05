@@ -9,6 +9,10 @@ module.exports = {
     attributes: {
       userID: {
         model: 'student',
+        required: false,
+      },
+      unit_number:{
+        model: 'unit',
         required: true,
       },
       lesson_number:{ //lesson number
@@ -20,6 +24,14 @@ module.exports = {
         required: true,
       },
       topic: { //the sub-lesson's topic explanation
+        type: 'string',
+        required: true,
+      },
+      url: { //the sublesson's video explanation url
+        type: 'string',
+        required: true,
+      },
+      body: { //the sublesson's written explanation
         type: 'string',
         required: true,
       },

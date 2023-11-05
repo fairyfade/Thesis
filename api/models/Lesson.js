@@ -23,18 +23,22 @@ module.exports = {
         type: 'string',
         required: true,
       },
-  //    lesson_intro: { //the lesson's introduction
-  //      type: 'string',
-   //     requried: true,
-   //   },
-   //   lesson_goal: { //the lesson's goal
-    //    type: 'string',
-    //    requrired: true,
-    //  },
-    //  lesson_plan: { //the lesson's plan
-    //    type: 'string',
-   //     required: true,
-   //   },
+      introduction: { //the lesson's introduction
+        type: 'string',
+        required: true,
+      },
+      newData: {
+        type: 'string',
+        required: true,
+      },
+      lesson_goal: { //the lesson's goal
+        type: 'string',
+        required: true,
+      },
+   //   lesson_plan: { //the lesson's plan
+     //   type: 'string',
+       // required: true,
+      //},
       total_num_sub_lessons: { //the total number of sub-lessons in the lesson
         type: 'string',
         required: true,

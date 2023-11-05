@@ -1,0 +1,64 @@
+<html>
+    <!--This page will give detailed info about the student to the parent -->
+    <!--Will need to fix the backend on this for sure-->
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #374B4A;">
+        <div class="container-fluid ">
+        <a class="navbar-brand " href="#">Space Python</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav ">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/parent_dashboard">Parent Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/viewProgress">Progress/Acheivements</a>
+          </li>		
+          <li class="nav-item">
+            <a class="nav-link" href="/manage_account">Manage Account</a>
+          </li>	
+          </ul>		  
+        </div>
+        </div>
+      </nav>
+    
+      <br>
+      <br>
+      <br>
+
+      <h2>Detailed Student Profile: </h2>
+
+      <div id="plantData" data-post="<%=postdata%>">
+    </div>
+  
+  
+  
+  
+    <div class="plants-wrapper">
+    
+    </div>
+
+</html>
+
+
+<script>
+    $(document).ready(() => {console.log($("#plantData").data("post"))});
+  
+  //var requestedPlantName = document.getElementById("plantSearchBar").value;
+
+
+  $(".plants-wrapper").empty();
+
+
+  let plants = $("#plantData").data("post");
+
+  for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
+      $(".plants-wrapper").append(`
+        <h4>Student Name: <a href="#">${plants[i].firstName}</a></h4>
+        <h5>UserName: ${plants[i].username}</h5>
+        <br>`);
+          
+      }
+
+  </script>

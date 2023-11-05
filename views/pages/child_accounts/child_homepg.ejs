@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #374B4A;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,45 @@
     </div>
     </div>
   </nav>
+  <br>
+  <br>
+  <br>
 
   <h1>Student Dashboard</h1>
-  <p>Check each child's progress, acheievements, and manage accounts</p>
+  <div class="welcomeMsg" id="welcomeMsg" data-msg="<%=msgdata%>"></div>
+  <div class="msg-wrapper">
+  
+  </div>
+
+  <p>Let's continue on our Space Python Journey!</p>
+
+  <button id="progress">Look at Acheivements or Progress</button> <br> <br>
+
+  <button id="startCoding">Start Coding</button> <br> <br>
+
+  <h3>Current Lessons: </h3>
+  <div class="currLessons" id="currLessons" data-lessons="<%=lessonsdata%>"></div>
+  <div class="lessons-wrapper">
+  
+  </div>
+
+
+  <script>
+    $(document).ready(() => {console.log($("#msgData").data("post"))});
+  
+  //var requestedPlantName = document.getElementById("plantSearchBar").value;
+
+
+  $(".msg-wrapper").empty();
+
+
+  let msg = $("#msgdata").data("post");
+
+  for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
+      $(".msg-wrapper").append(`
+        <p>Welcome ${msg[i].firstName}</p>
+        <br>`);
+          
+      }
+
+  </script>

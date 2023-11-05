@@ -53,8 +53,10 @@
       <h4 id="lessongJourneyHeader"></h4>
       <div id="lessonInformation"></div>
     </div>
+
+
     <div class="continueButton">
-      <a id=continueLink></a><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
+      <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
     </div>
   
   
@@ -63,15 +65,21 @@
 
       // adapted from @Npitcher12 & @ascemek: Script to populate plant information
       $(document).ready(() => {
+        
         const unitData = $("#unitData").data("unit");
+        /* If I write a function to change the link, what would be the best way to do so from this page...*/
+        /*This page will always lead to the first lesson introduction for the current unit, so I should make the link go there */
+        const curr_unit = unitData.unit_number;
+
         $("#unitName").text(unitData.topic);
         $("#unitLearningGoals").text(unitData.learning_goals);
         $("#syntaxHeader").text(unitData.syntax_link);
      //   $("#introductionHeader").text(unitData.introHeader);
         $("#unitIntroText").text(unitData.introduction_text);
         $("#lessonInformation").text(unitData.lesson_journey);
-    
-        $("#continueLink").attr("href", "/lesson/overview/1")
+
+        lessonLink ="/lesson/overview/" + curr_unit + '/1'
+        $("#continueLink").attr("href", lessonLink);
       });
     </script>
   

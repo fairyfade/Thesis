@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #374B4A;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,12 +20,16 @@
     </div>
   </nav>
 
-  <h1>Parent Dashboard</h1>
+  <br>
+  <br>
+  <br>
+
+  <h2>Parent Dashboard</h2>
   <p>Check each child's progress, acheievements, and manage accounts</p>
   <a href="/create_student_account"><button>Add a Student Account</button></a>
   <br>
   <br>
-  <h2>Students: </h2>
+  <h3>Students: </h3>
   <div id="plantData" data-post="<%=postdata%>">
   </div>
 
@@ -35,6 +39,14 @@
   <div class="plants-wrapper">
   
   </div>
+
+  <h3>Parent Controls: </h3>
+  <br>
+  <button id="account">Your Account</button> <br> <br>
+  <button id="childAcc">Manage Child Account</button> <br> <br>
+  <button id="progress">View Student Progress</button> <br> <br>
+  <button id="activity">View Student Activity</button> <br> <br>
+  <button id="curr">View Student Curriculum</button> <br> <br>
 
   <script>
     $(document).ready(() => {console.log($("#plantData").data("post"))});
@@ -49,8 +61,8 @@
 
   for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
       $(".plants-wrapper").append(`
-        <h3>Student Name: <a href="#">${plants[i].firstName}</a></h3>
-        <h4>UserName: ${plants[i].username}</h2>
+        <h4>Student Name: <a href="/parent_dashboard/view_profile/${plants[i].id}">${plants[i].firstName}</a></h4>
+        <h5>UserName: ${plants[i].username}</h5>
         <br>`);
           
       }
@@ -65,3 +77,10 @@
   //      <h2>UserName: ${students[i].username}</h2>`);
    //   }
   </script>
+<style>
+button{
+
+  background-color: #374B4A;
+  color: white;
+}
+</style>

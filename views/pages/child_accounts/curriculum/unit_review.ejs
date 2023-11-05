@@ -33,22 +33,15 @@
   <br>
   <br>
   <br>
-  <div id="lessonData" data-lesson="<%=lessonInfo%>"></div>
+  <div id="unitData" data-unit="<%=unitInfo%>"></div>
   <div class="codingJourneyGraphic"></div> <!--Leaving space (lol) for interactive graphic that shows where they are along their coding journey-->
-  <div class="lessonNameHeader">
-    <h3 id="lessonName"></h3>
+  <div class="unitReviewHeader">
+    <h3 id="unitName"></h3>
   </div>
-  <div class="newData">
-    <p id="newData"></p>
+  <div class="review">
+    <p id="review"></p>
   </div>
-  <div class="lessonIntro">
-    <p id="lessonIntro"></p>
-  </div>
-
-  <h4>Lesson Goal:</h4>
-  <div class="lessonGoal">
-    <p id="lessonGoal"></p>
-  </div>
+  <iframe src="https://trinket.io/embed/python/edd948bf08" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
   <div class="continueButton">
     <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
@@ -60,18 +53,16 @@
 
     // adapted from @Npitcher12 & @ascemek: Script to populate plant information
     $(document).ready(() => {
-      const lessonData = $("#lessonData").data("lesson");
-      $("#lessonName").text(lessonData.topic);
-      $("#lessontIntro").text(lessonData.introduction);
-      $("#lessonGoal").text(lessonData.lesson_goal);
-      $("#newData").text(lessonData.newData);
+      const unitData = $("#unitData").data("unit");
+      $("#unitName").text(unitData.topic);
+      $("#review").text(unitData.unit_info);
+
 
    //   $("#introductionHeader").text(unitData.introHeader);
   //    $("#unitIntroText").text(unitData.introduction_text);
   //    $("#lessonInformation").text(unitData.lesson_journey);
-      //link = "/sublesson/video/" + lessonData.unit_number + '/' + lessonData.lesson_number + '/' +
-  //    lessonLink ="/sublesson/video/" + lessonData.unit_number + "/" + lessonData.lesson_number + "/" + lessonData.sublesson_number
-   //     $("#continueLink").attr("href", lessonLink);
+      link = "/unit/quiz/" + unitData.unit_number
+      $("#continueLink").attr("href", link)
     });
   </script>
 

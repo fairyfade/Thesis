@@ -9,7 +9,7 @@ module.exports = {
     attributes: {
       userID: {
         model: 'student',
-        required: true,
+        required: false,
       },
       unit_number: { 
         model: 'unit',

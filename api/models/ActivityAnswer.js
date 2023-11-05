@@ -9,6 +9,14 @@ module.exports = {
     attributes: {
       userID: {
         model: 'student',
+        required: false,
+      },
+      unit_number: {
+        model: 'Unit',
+        required: true,
+      },
+      lesson_number: {
+        model: 'Lesson',
         required: true,
       },
       sublesson_number:{ //sub-lesson number
