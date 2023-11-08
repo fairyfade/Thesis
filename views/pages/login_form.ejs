@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #374B4A;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="/">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,10 +20,21 @@
   </div>
 </nav>
 <style>
+  h2{
+    color: #0F402C;
+  }
   .loginContainer {
       margin: auto;
       width: 50%;
       padding: 10px;
+  }
+  input {
+      margin-left: 20px;
+      width: 35%;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
   }
   #username {
       margin-left: 20px;
@@ -34,25 +45,31 @@
       width: 35%;
   }
   #login {
-      margin-left: 50%;
-      background-color: #374B4A;
-      color: white;
+      margin-left: 60%;
+      background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
   }
   #register {
-      margin-left: 37%;
-      background-color: #374B4A;
-      color: white;
+      margin-left: 47%;
+          background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
   }
   #stu_login{
-      margin-left: 50%;
-      background-color: #374B4A;
-      color: white;
+      margin-left: 60%;
+      background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
   }
 </style>
 
-<h1>Space Python</h1><br/><br/><br/>
+<h1>Space Python</h1><br/>
 <div class="loginContainer"> <!-- This is the login container -->
-  <h2>Parent Log In to Space Python:</h2><br/>
+  <h2>Parent Log In</h2><br/>
   <label for="username">Username</label> <!-- Username label -->
   <input name="username" id="username" placeholder="Username"> <!-- Username input -->
   <br/><br/>
@@ -70,7 +87,7 @@
 <hr>
 <br>
 <div class="loginContainer"> <!-- This is the login container -->
-  <h2>Student Log In to Space Python:</h2><br/>
+  <h2>Student Log In</h2><br/>
   <label for="stu_username">Username</label> <!-- Username label -->
   <input name="stu_username" id="stu_username" placeholder="Username"> <!-- Username input -->
   <br/><br/>

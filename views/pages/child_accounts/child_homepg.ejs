@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #374B4A;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,23 +26,40 @@
   <br>
   <br>
 
-  <h1>Student Dashboard</h1>
-  <div class="welcomeMsg" id="welcomeMsg" data-msg="<%=msgdata%>"></div>
-  <div class="msg-wrapper">
-  
-  </div>
+  <h2>Student Dashboard</h2>
+
 
   <p>Let's continue on our Space Python Journey!</p>
 
-  <button id="progress">Look at Acheivements or Progress</button> <br> <br>
+  <a href="/startCoding"><button id="startCoding">Start Coding</button></a> <br> <br>
 
-  <button id="startCoding">Start Coding</button> <br> <br>
+  <a href="/my_progress"><button id="progress">Look at Acheivements or Progress</button></a> <br> <br>
 
-  <h3>Current Lessons: </h3>
-  <div class="currLessons" id="currLessons" data-lessons="<%=lessonsdata%>"></div>
-  <div class="lessons-wrapper">
-  
+  <a href="/rewards_store"><button id="rewardStore">Visit the Reward Store</button></a><br> <br>
+
+  <a href="/coding_profile"><button id="viewProfile">View Coding Profile</button></a> <br> <br>
+
+
+  <h3>Current Lessons </h3>
+
+  <div class="lessonContainer">
+    <p>Try out coding with the "Start Coding" button above :)</p>
   </div>
+
+  <style>
+      h2{
+    color: #024b0c;
+  }
+  h3{
+    color: #024b0c;
+  }
+  button{
+    background-color: #4895ef;
+    border-color: #4895ef;
+    color: white;
+    border-radius: 8px;
+  }
+  </style>
 
 
   <script>

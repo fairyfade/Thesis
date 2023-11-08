@@ -370,7 +370,46 @@ if (await SubLessonGuidedActivity.count() === 0){
     complete: false,
 
    },
-   
+   {
+    //unit 2 lesson 1 sublesson 1 guided activity 1
+    unit_number: '2',
+    lesson_number: '1',
+    sublesson_number: '2',
+    topic: "How to Write an If Statement",
+    url: "youtube URL link",
+    complete: false,
+
+   },
+   {
+    //unit 2 lesson 1 sublesson 3 guided activity 1
+    unit_number: '2',
+    lesson_number: '1',
+    sublesson_number: '3',
+    topic: "Using Conditional Statements",
+    url: "youtube URL link",
+    complete: false,
+
+   },
+   {
+    //unit 2 lesson 2 sublesson 1 guided activity 1
+    unit_number: '2',
+    lesson_number: '2',
+    sublesson_number: '1',
+    topic: "Checking Supplies",
+    url: "youtube URL link",
+    complete: false,
+
+   },
+   {
+    //unit 2 lesson 2 sublesson 2 guided activity 1
+    unit_number: '2',
+    lesson_number: '2',
+    sublesson_number: '2',
+    topic: "Make a While Loop",
+    url: "youtube URL link",
+    complete: false,
+
+   },
  ]);
 }
 if (await SubLessonActivity.count() === 0){
@@ -421,6 +460,71 @@ if (await SubLessonActivity.count() === 0){
     sublesson_number: '2',
     activity_number: '2',
     topic: " Ask for five items the user would take on a rocket ship journey. Use a for loop.",
+    url: "youtube URL link",
+    complete: false,
+    attempts: '0',
+    timeSpent: '0',
+
+   },
+   {
+    //unit 2 lesson 1 sublesson 1 activity 1
+    unit_number: '2',
+    lesson_number: '1',
+    sublesson_number: '1',
+    activity_number: '1',
+    topic: " Launch Countdown",
+    url: "youtube URL link",
+    complete: false,
+    attempts: '0',
+    timeSpent: '0',
+
+   },
+   {
+    //unit 2 lesson 1 sublesson 2 activity 1
+    unit_number: '2',
+    lesson_number: '1',
+    sublesson_number: '2',
+    activity_number: '1',
+    topic: " Checking Distance",
+    url: "youtube URL link",
+    complete: false,
+    attempts: '0',
+    timeSpent: '0',
+
+   },
+   {
+    //unit 2 lesson 1 sublesson 3 activity 1
+    unit_number: '2',
+    lesson_number: '1',
+    sublesson_number: '3',
+    activity_number: '1',
+    topic: " Checking Distance and Fuel Levels",
+    url: "youtube URL link",
+    complete: false,
+    attempts: '0',
+    timeSpent: '0',
+
+   },
+   {
+    //unit 2 lesson 2 sublesson 1 activity 1
+    unit_number: '2',
+    lesson_number: '2',
+    sublesson_number: '1',
+    activity_number: '1',
+    topic: " Calculating Fuel",
+    url: "youtube URL link",
+    complete: false,
+    attempts: '0',
+    timeSpent: '0',
+
+   },
+   {
+    //unit 2 lesson 2 sublesson 2 activity 1
+    unit_number: '2',
+    lesson_number: '2',
+    sublesson_number: '2',
+    activity_number: '1',
+    topic: " Make Another While Loop",
     url: "youtube URL link",
     complete: false,
     attempts: '0',
@@ -504,6 +608,61 @@ if (await ActivityAnswer.count() === 0){
     sublesson_number: '2',
     activity_number: '2',
     topic: "Answer for - Ask for five items the user would take on a rocket ship journey. Use a for loop.",
+    url: "youtube URL link",
+    complete: false,
+
+   },
+   {
+    //unit 2 lesson 1 sublesson 1 activity 1
+    unit_number: '2',
+    lesson_number: '1',
+    sublesson_number: '1',
+    activity_number: '1',
+    topic: "Answer for - Launch Countdown",
+    url: "youtube URL link",
+    complete: false,
+
+   },
+   {
+    //unit 2 lesson 1 sublesson 2 activity 1
+    unit_number: '2',
+    lesson_number: '1',
+    sublesson_number: '2',
+    activity_number: '1',
+    topic: "Answer for - Checking Distance",
+    url: "youtube URL link",
+    complete: false,
+
+   },
+   {
+    //unit 2 lesson 1 sublesson 3 activity 1
+    unit_number: '2',
+    lesson_number: '1',
+    sublesson_number: '3',
+    activity_number: '1',
+    topic: "Answer for - Checking Distance and Fuel Level",
+    url: "youtube URL link",
+    complete: false,
+
+   },
+   {
+    //unit 2 lesson 2 sublesson 1 activity 1
+    unit_number: '2',
+    lesson_number: '2',
+    sublesson_number: '1',
+    activity_number: '1',
+    topic: "Answer for - Calculating Fuel",
+    url: "youtube URL link",
+    complete: false,
+
+   },
+   {
+    //unit 2 lesson 2 sublesson 2 activity 1
+    unit_number: '2',
+    lesson_number: '2',
+    sublesson_number: '2',
+    activity_number: '1',
+    topic: "Answer for - Making Another While Loop",
     url: "youtube URL link",
     complete: false,
 

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="#">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,25 +19,31 @@
   </div>
   </div>
 </nav>
-<h2>Student Registration Information</h2><br/>
+<br>
+<br>
+<br>
+
+<div class="registerForm">
+  <h2>Student Registration Information</h2><br/>
 <form id="registerForm"> <!-- Register form -->
+
     <label for="firstName"> <!--Student First name label-->
-      Student First Name:
+      Student First Name
     </label>
     <input name="firstName" id="firstName" placeholder="Student First Name" required>
     <br/><br/>
     <label for="lastName"> <!--Student Last Name label-->
-      Student Last Name:
+      Student Last Name
     </label>
     <input name="lastName" id="lastName" placeholder="Student Last Name" required>
     <br/><br/>
     <label for="username"> <!--Student Username label-->
-      Student Username:
+      Student Username
     </label>
     <input name="username" id="username" placeholder="Student Username" required>
     <br/><br/>
     <label for="password"> <!--Student Password label-->
-      Student Password:
+      Student Password
     </label>
     <input type="password" name="password" id="password" placeholder="Student Password" required>
     <br/><br/>
@@ -49,7 +55,7 @@
     <button id="cancel">Cancel</button> <!-- Cancel button -->
     <button type="submit" id="register">Register</button> <!-- Register button -->
     </form>
-
+  </div>
     <script>
 
       function initPage() { // Initialize the page
@@ -105,5 +111,33 @@
         initPage(); // Initialize the page
       });
 </script>
+
+<style>
+    input {
+      margin-left: 20px;
+      width: 35%;
+  }
+    h2{
+    color: #024b0c;
+  }
+  .registerForm {
+      margin: auto;
+      width: 50%;
+      padding: 10px;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
+  }
+  button{
+    background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
+    }
+    #register {
+    margin-left: 42%;
+  }
+</style>
       
       

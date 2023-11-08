@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #374B4A;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,35 +20,9 @@
     </div>
   </nav>
 
+  <br>
+  <br>
+  <br>
+
   <h1>Parent Progress Reports</h1>
   <p>Check each child's progress, and acheivements/what they're doing on the site</p>
-  <div id="plantData" data-post="<%=postdata%>">
-  </div>
-
-
-
-
-  <div class="plants-wrapper">
-  
-  </div>
-
-  <script>
-    $(document).ready(() => {console.log($("#plantData").data("post"))});
-  
-  //var requestedPlantName = document.getElementById("plantSearchBar").value;
-
-
-  $(".plants-wrapper").empty();
-
-
-  let plants = $("#plantData").data("post");
-
-  for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
-      $(".plants-wrapper").append(`
-        <h4>Student Name: <a href="/parent_dashboard/view_profile/${plants[i].id}">${plants[i].firstName}</a></h4>
-        <h5>UserName: ${plants[i].username}</h5>
-        <br>`);
-          
-      }
-
-  </script>
