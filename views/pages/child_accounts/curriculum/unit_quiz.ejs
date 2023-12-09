@@ -3,7 +3,7 @@
 </head>
 
 <!-- Navigation bar start  -->
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="#">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,12 +17,7 @@
     <li class="nav-item">
       <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
     </li>		
-    <li class="nav-item">
-      <a class="nav-link" href="/rewards_store">Rewards Store</a>
-    </li>	
-    <li class="nav-item">
-      <a class="nav-link" href="/coding_profile">Coding Profile</a> <!--Mayve this is like their "profile"-->
-    </li>	
+
     </ul>		  
   </div>
   </div>
@@ -41,46 +36,344 @@
   <div class="instructions">
     <p id="instructions"></p>
   </div>
-  <div class="q1">
-    <p id="q1"></p>
+  <div class="quizForm">
+    <div class="q1">
+      <h5 id="q1"></h5>
+      <input type="radio" name="q1" id="q1a">
+      <label id="q1_ans1"></label><br>
+      <input type="radio" name="q1" id="q1b">
+      <label id="q1_ans2"></label><br>
+      <input type="radio" name="q1" id="q1c">
+      <label id="q1_ans3"></label><br>
+      </div>
+    
+      <p id="correctAns1" style="color: red;"></p>
+
+    <br>
+
+    <div class="q2">
+      <h5 id="q2"></h5>
+      <input type="radio" name="q2" id="q2a">
+      <label id="q2_ans1"></label><br>
+      <input type="radio" name="q2" id="q2b">
+      <label id="q2_ans2"></label><br>
+      <input type="radio" name="q2" id="q2c">
+      <label id="q2_ans3"></label><br>
+      </div>
+
+      <p id="correctAns2" style="color: red;"></p>
+      <br>
+    <div class="q3">
+      <h5 id="q3"></h5>
+      <input type="radio" name="q3" id="q3a">
+      <label id="q3_ans1"></label><br>
+      <input type="radio" name="q3" id="q3b">
+      <label id="q3_ans2"></label><br>
+      <input type="radio" name="q3" id="q3c">
+      <label id="q3_ans3"></label><br>
+      </div>
+      <p id="correctAns3" style="color: red;"></p>
+      <br>
+    <div class="q4">
+      <h5 id="q4"></h5>
+      <input type="radio" name="q4" id="q4a">
+      <label id="q4_ans1"></label><br>
+      <input type="radio" name="q4" id="q4b">
+      <label id="q4_ans2"></label><br>
+      <input type="radio" name="q4" id="q4c">
+      <label id="q4_ans3"></label><br>
+      </div>
+      <p id="correctAns4" style="color: red;"></p>
+      <br>
+    <div class="q5">
+      <h5 id="q5"></h5>
+      <input type="radio" name="q5" id="q5a">
+      <label id="q5_ans1"></label><br>
+      <input type="radio" name="q5" id="q5b">
+      <label id="q5_ans2"></label><br>
+      <input type="radio" name="q5" id="q5c">
+      <label id="q5_ans3"></label><br>
+      </div>
+      <p id="correctAns5" style="color: red;"></p>
+      <br>
   </div>
-  <div class="q2">
-    <p id="q2"></p>
-  </div>
-  <div class="q3">
-    <p id="q3"></p>
-  </div>
-  <div class="q4">
-    <p id="q4"></p>
-  </div>
-  <div class="q5">
-    <p id="q5"></p>
+  <div class="answerStatus">
+    <!--This is where a message will display if the student hasn't answered every question-->
+    <p id="answerMessage" style="color: red;"></p>
+  </div> 
+  <div class="checkButton">
+    <button id="checkButton" style="float: center;" onclick="displayValue()">Check Answer</button>
   </div>
   <div class="continueButton">
-    <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
+    <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> 
   </div>
 
 
 
   <script type="text/javascript">
+    
+    
+
+    function displayValue() {
+      //check what is checked under q1
+      if(document.getElementById('q1a').checked) {
+        selcted = document.getElementById('q1a').value;
+      } 
+      else if(document.getElementById('q1b').checked){
+        selcted = document.getElementById('q1b').value;
+      }
+      else if(document.getElementById('q1c').checked){
+        selcted = document.getElementById('q1c').value;
+      }
+      else{
+        selcted = "none"
+      }
+      //check what is checked under q2
+      if(document.getElementById('q2a').checked) {
+        selcted2 = document.getElementById('q2a').value;
+      } 
+      else if(document.getElementById('q2b').checked){
+        selcted2 = document.getElementById('q2b').value;
+      }
+      else if(document.getElementById('q2c').checked){
+        selcted2 = document.getElementById('q2c').value;
+      }
+      else{
+        selcted2 = "none"
+      }
+
+      //check what is checked under q3
+      if(document.getElementById('q3a').checked) {
+        selcted3 = document.getElementById('q3a').value;
+      } 
+      else if(document.getElementById('q3b').checked){
+        selcted3 = document.getElementById('q3b').value;
+      }
+      else if(document.getElementById('q3c').checked){
+        selcted3 = document.getElementById('q3c').value;
+      }
+      else{
+        selcted3 = "none"
+      }
+      //check what is checked under q4
+      if(document.getElementById('q4a').checked) {
+        selcted4 = document.getElementById('q4a').value;
+      } 
+      else if(document.getElementById('q4b').checked){
+        selcted4 = document.getElementById('q4b').value;
+      }
+      else if(document.getElementById('q4c').checked){
+        selcted4 = document.getElementById('q4c').value;
+      }
+      else{
+        selcted4 = "none"
+      }
+      //check what is checked under q5
+      if(document.getElementById('q5a').checked) {
+        selcted5 = document.getElementById('q5a').value;
+      } 
+      else if(document.getElementById('q5b').checked){
+        selcted5 = document.getElementById('q5b').value;
+      }
+      else if(document.getElementById('q5c').checked){
+        selcted5 = document.getElementById('q5c').value;
+      }
+      else{
+        selcted5 = "none"
+      }
+      console.log(selcted);
+      console.log(selcted2);
+      console.log(selcted3);
+      console.log(selcted4);
+      console.log(selcted5);
+      const unitData = $("#unitData").data("unit");
+
+      //make sure all answers have been selected
+      if((document.getElementById('q1a').checked || document.getElementById('q1b').checked || document.getElementById('q1c').checked) && (document.getElementById('q2a').checked || document.getElementById('q2b').checked || document.getElementById('q2c').checked) && (document.getElementById('q3a').checked || document.getElementById('q3b').checked || document.getElementById('q3c').checked) && (document.getElementById('q4a').checked || document.getElementById('q4b').checked || document.getElementById('q4c').checked) && (document.getElementById('q5a').checked || document.getElementById('q5b').checked || document.getElementById('q5c').checked)){
+        all_answered = true;
+
+      }
+      else{
+        all_answered = false;
+        console.log("Not all are answered");
+        
+
+      }
+      //calculate score
+      score = 0; //set score to 0
+        //check answer 1
+        if(selcted == unitData.q1_correct){
+          console.log("First answer is correct");
+          $("#q1").text("\u2713 " + unitData.q1);
+          document.getElementById("q1").setAttribute("style", "color: green;");
+          score += 1;
+        }else{
+          console.log("First answer is incorrect");
+          $("#q1").text("\u2715 " + unitData.q1);
+          document.getElementById("q1").setAttribute("style", "color: red;");
+          //show correct answer
+          $("#correctAns1").text("Correct Answer: "+ unitData.q1_correct);
+        }
+        if(selcted2 == unitData.q2_correct){
+          console.log("Second answer is correct");
+          $("#q2").text("\u2713 " + unitData.q2);
+          document.getElementById("q2").setAttribute("style", "color: green;");
+          score += 1;
+        }else{
+          console.log("Second answer is incorrect");
+          $("#q2").text("\u2715 " + unitData.q2);
+          document.getElementById("q2").setAttribute("style", "color: red;");
+          //show correct answer
+          $("#correctAns2").text("Correct Answer: " + unitData.q2_correct);
+        }
+        if(selcted3 == unitData.q3_correct){
+          console.log("Third answer is correct");
+          $("#q3").text("\u2713 " + unitData.q3);
+          document.getElementById("q3").setAttribute("style", "color: green;");
+          score += 1;
+        }else{
+          console.log("Fourth answer is incorrect");
+          $("#q3").text("\u2715 " + unitData.q3);
+          document.getElementById("q3").setAttribute("style", "color: red;");
+          //show correct answer
+          $("#correctAns3").text("Correct Answer: " + unitData.q3_correct);
+        }
+        if(selcted4 == unitData.q4_correct){
+          console.log("Fourth answer is correct");
+          $("#q4").text("\u2713 " + unitData.q4);
+          document.getElementById("q4").setAttribute("style", "color: green;");
+          score += 1;
+        }else{
+          console.log("First answer is correct");
+          $("#q4").text("\u2715 " + unitData.q4);
+          document.getElementById("q4").setAttribute("style", "color: red;");
+          //show correct answer
+          $("#correctAns4").text("Correct Answer: " + unitData.q4_correct);
+        }
+        if(selcted5 == unitData.q5_correct){
+          console.log("Fifth answer is correct");
+          $("#q5").text("\u2713 " + unitData.q5);
+          document.getElementById("q5").setAttribute("style", "color: green;");
+          score += 1;
+        }else{
+          console.log("Fifth answer is incorrect");
+          $("#q5").text("\u2715 " + unitData.q5);
+          document.getElementById("q5").setAttribute("style", "color: red;");
+          //show correct answer
+          $("#correctAns5").text("Correct Answer: " + unitData.q5_correct);
+        }
+        quiz_score = (score / 5) * 100; //calculate percentage
+
+        if(all_answered == true){
+          //display score inside paragraph
+          document.getElementById("answerMessage").innerHTML = "All questions have been answered. Score: " + quiz_score + "%";
+          document.getElementById("answerMessage").setAttribute("style", "color: green;");
+          document.getElementById("checkButton").style.display = "none";
+        }
+
+
+    }
+      
+
 
     // adapted from @Npitcher12 & @ascemek: Script to populate plant information
-    $(document).ready(() => {
+   
       const unitData = $("#unitData").data("unit");
       $("#unitName").text(unitData.topic);
       $("#instructions").text(unitData.instructions);
       $("#q1").text(unitData.q1);
+      $("#q1_ans1").text(unitData.q1_ans1);
+      $("#q1a").attr("value", unitData.q1_ans1);
+      $("#q1_ans2").text(unitData.q1_ans2);
+      $("#q1b").attr("value", unitData.q1_ans2);
+      $("#q1_ans3").text(unitData.q1_ans3);
+      $("#q1c").attr("value", unitData.q1_ans3);
+
       $("#q2").text(unitData.q2);
+      $("#q2_ans1").text(unitData.q2_ans1);
+      $("#q2a").attr("value", unitData.q2_ans1);
+      $("#q2_ans2").text(unitData.q2_ans2);
+      $("#q2b").attr("value", unitData.q2_ans2);
+      $("#q2_ans3").text(unitData.q2_ans3);
+      $("#q2c").attr("value", unitData.q2_ans3);
+
       $("#q3").text(unitData.q3);
+      $("#q3_ans1").text(unitData.q3_ans1);
+      $("#q3a").attr("value", unitData.q3_ans1);
+      $("#q3_ans2").text(unitData.q3_ans2);
+      $("#q3b").attr("value", unitData.q3_ans2);
+      $("#q3_ans3").text(unitData.q3_ans3);
+      $("#q3c").attr("value", unitData.q3_ans3);
+
       $("#q4").text(unitData.q4);
+      $("#q4_ans1").text(unitData.q4_ans1);
+      $("#q4a").attr("value", unitData.q4_ans1);
+      $("#q4_ans2").text(unitData.q4_ans2);
+      $("#q4b").attr("value", unitData.q4_ans2);
+      $("#q4_ans3").text(unitData.q4_ans3);
+      $("#q4c").attr("value", unitData.q4_ans3);
+
       $("#q5").text(unitData.q5);
+      $("#q5_ans1").text(unitData.q5_ans1);
+      $("#q5a").attr("value", unitData.q5_ans1);
+      $("#q5_ans2").text(unitData.q5_ans2);
+      $("#q5b").attr("value", unitData.q5_ans2);
+      $("#q5_ans3").text(unitData.q5_ans3);
+      $("#q5c").attr("value", unitData.q5_ans3);
    //   $("#introductionHeader").text(unitData.introHeader);
   //    $("#unitIntroText").text(unitData.introduction_text);
    //   $("#lessonInformation").text(unitData.lesson_journey);
-
+   //   document.getElementById("q1_ans1").setAttribute("value", unitData.q1_ans1); 
+  // document.getElementById("q1_ans1").value = "newRadioBtnValue";
       lessonLink ="/unit/challenge/" + unitData.unit_number 
       $("#continueLink").attr("href", lessonLink);
-    });
+
+      
+
+
+    $("#continueButton").on("click", () => { 
+      $.ajax({ // update student progress
+          type: 'GET', 
+          url: "/updateStudentProgress",
+          dataType: 'json',
+          contentType: 'json',
+          data: {
+                 unit_number: unitData.unit_number,
+                 lesson_number: '0',
+                 sublesson_number: '0',
+                 activity_number: '0',
+                 type_curriculum: "Quiz",
+                 topic: unitData.topic,
+                 grade: quiz_score}, // Use the username and password
+          async: false, // Make the request synchronous
+          success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Congratulations, you have completed the activity. : )',
+                text: 'You have earned __ coins for the rewards store!',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+           }).then(function() {
+            window.location.href = lessonLink;
+          })
+           console.log(data);
+              }
+          },
+          error: (err) => { // If the request fails
+            Swal.fire({ // Show an error message
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!'
+            })
+          }
+      });
+
+    })
   </script>
 
   <br>
@@ -89,3 +382,19 @@
   <br>
 </body>
 
+<style>
+input { vertical-align: middle; margin-top: -1px;}
+label {vertical-align: middle; margin-top: -1px;}
+#checkButton{
+  background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
+}
+#continueButton{
+  background-color: #4895ef;
+  border-color: #4895ef;
+  color: white;
+  border-radius: 8px;
+}
+</style>

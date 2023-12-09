@@ -3,7 +3,7 @@
 </head>
 
 <!-- Navigation bar start  -->
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="#">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,12 +17,7 @@
     <li class="nav-item">
       <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
     </li>		
-    <li class="nav-item">
-      <a class="nav-link" href="/rewards_store">Rewards Store</a>
-    </li>	
-    <li class="nav-item">
-      <a class="nav-link" href="/coding_profile">Coding Profile</a> <!--Mayve this is like their "profile"-->
-    </li>	
+
     </ul>		  
   </div>
   </div>
@@ -35,28 +30,20 @@
   <br>
   <div id="unitData" data-unit="<%=unitInfo%>"></div>
   <div class="codingJourneyGraphic"></div> <!--Leaving space (lol) for interactive graphic that shows where they are along their coding journey-->
-  <div class="unitNameHeader">
-    <h3 id="unitName"></h3>
+  <div class="challengeName">
+    <h3 id="challengeName">Challenge Name</h3>
   </div>
   <div class="instructions">
-    <p id="instructions"></p>
+    <p id="instructions">instructions</p>
   </div>
-  <div class="q1">
-    <p id="q1"></p>
+  <div class="challenegeVid">
+    
+    <iframe id="challengeVid" width="100%" height="356"></iframe>
   </div>
-  <div class="q2">
-    <p id="q2"></p>
+  <div class="textEd">
+    
+    <iframe id="trinket_url" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
   </div>
-  <div class="q3">
-    <p id="q3"></p>
-  </div>
-  <div class="q4">
-    <p id="q4"></p>
-  </div>
-  <div class="q5">
-    <p id="q5"></p>
-  </div>
-  <iframe src="https://trinket.io/embed/python/edd948bf08" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
   <div class="continueButton">
     <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
   </div>
@@ -66,22 +53,73 @@
   <script type="text/javascript">
 
     // adapted from @Npitcher12 & @ascemek: Script to populate plant information
-    $(document).ready(() => {
+
       const unitData = $("#unitData").data("unit");
-      $("#unitName").text(unitData.topic);
+      $("#challengeName").text(unitData.topic);
       $("#instructions").text(unitData.instructions);
-      $("#q1").text(unitData.q1);
-      $("#q2").text(unitData.q2);
-      $("#q3").text(unitData.q3);
-      $("#q4").text(unitData.q4);
-      $("#q5").text(unitData.q5);
+      $("#challengeVid").attr("src", unitData.url);
+      $("trinket_url").attr("src", unitData.trinket_url);
+
    //   $("#introductionHeader").text(unitData.introHeader);
   //    $("#unitIntroText").text(unitData.introduction_text);
    //   $("#lessonInformation").text(unitData.lesson_journey);
 
    //   lessonLink ="/unit/challenge/" + unitData.unit_number 
-  //    $("#continueLink").attr("href", lessonLink);
-    });
+      castUnitNum = parseInt(unitData.unit_number);
+      castTotalNum = parseInt(unitData.total_units);
+      if(castUnitNum < castTotalNum){
+        unitInt = castUnitNum + 1;
+        unitNum = unitInt.toString();
+        lessonLink = "/unit/overview/" + unitNum;
+      }
+      else{
+        lessonLink = "/startCoding"; //maybe change this to the unit progress page? 
+      }
+      $("#continueLink").attr("href", lessonLink);
+
+    $("#continueButton").on("click", () => { 
+      $.ajax({ // update student progress
+          type: 'GET', 
+          url: "/updateStudentProgress",
+          dataType: 'json',
+          contentType: 'json',
+          data: {
+                 unit_number: unitData.unit_number,
+                 lesson_number: '0',
+                 sublesson_number: '0',
+                 activity_number: '0',
+                 type_curriculum: "Unit Challenge",
+                 topic: unitData.topic,
+                 grade: '100'}, // Use the username and password
+          async: false, // Make the request synchronous
+          success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Congratulations, you have completed the activity. : )',
+                text: 'You have earned __ coins for the rewards store!',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+           }).then(function() {
+            window.location.href = lessonLink;
+          })
+           console.log(data);
+              }
+          },
+          error: (err) => { // If the request fails
+            Swal.fire({ // Show an error message
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!'
+            })
+          }
+      });
+
+    })
   </script>
 
   <br>

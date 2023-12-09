@@ -27,11 +27,27 @@ module.exports = {
         type: 'string',
         required: true,
       },
+      number_sublessons: { //number of sublessons
+        type: 'string',
+        required: true,
+      },
+      number_activities: { //number of activities
+        type: 'string',
+        required: true,
+      },
+      number_lessons: { //number of lessons
+        type: 'string',
+        required: true,
+      },
       topic: { //the sub-lesson's topic explanation
         type: 'string',
         required: true,
       },
       url: { //video url for activity
+        type: 'string',
+        required: true,
+      },
+      trinket_url: { //trinket url 
         type: 'string',
         required: true,
       },

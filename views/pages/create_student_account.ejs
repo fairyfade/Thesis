@@ -1,19 +1,19 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
-  <a class="navbar-brand " href="#">Space Python</a>
+  <a class="navbar-brand " href="/">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="navbar-nav ">
     <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="/parent_dashboard">Parent Dashboard</a>
+      <a class="nav-link" aria-current="page" href="/">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/viewProgress">Progress/Acheivements</a>
+      <a class="nav-link" href="/about">About</a>
     </li>		
     <li class="nav-item">
-      <a class="nav-link" href="/manage_account">Manage Account</a>
+      <a class="nav-link active" href="/login">Sign Up/Log In</a>
     </li>	
     </ul>		  
   </div>
@@ -26,6 +26,7 @@
 <div class="registerForm">
   <h2>Student Registration Information</h2><br/>
 <form id="registerForm"> <!-- Register form -->
+  
 
     <label for="firstName"> <!--Student First name label-->
       Student First Name
@@ -41,6 +42,11 @@
       Student Username
     </label>
     <input name="username" id="username" placeholder="Student Username" required>
+    <br/><br/>
+    <label for="email"> <!--Student Email label-->
+      Parent Email
+    </label>
+    <input name="email" id="email" placeholder="Parent Email" required>
     <br/><br/>
     <label for="password"> <!--Student Password label-->
       Student Password
@@ -68,6 +74,7 @@
           let firstName = $("#firstName").val(); // Get the first name
           let lastName = $("#lastName").val(); // Get the last name
           let username = $("#username").val(); // Get the username
+          let email = $("#email").val(); // Get the email
           let password = $("#password").val(); // Get the password
           let confirmPassword = $("#confirmPassword").val(); // Get the confirm password
           if (password !== confirmPassword) { // If the passwords do not match
@@ -78,27 +85,44 @@
           } else { // If the passwords match
             $.ajax({ // Send a request to the server to register the user
               type: 'GET',
-              url: "/student/register",
+              url: "/user/register",
               dataType: 'json',
               contentType: 'json',
               async: false,
-              data: {firstName: firstName, lastName: lastName, username: username, password: password}, // Send the user's information
-              success: (data) => { // When the request is successful
-                if (data.error) { // If there is an error
-                  Swal.fire({ // Display the error message
-                    icon: 'error',
-                    text: data.error
-
-                  })
-                } else { // If there is no error
-                  window.location.href = "/parent_dashboard"; // Redirect to the home page
-                  console.log("Successfully created student account")
-                }
-              },
-              error: async (err) => { // When the request fails
-                Swal.fire({ // Display an error message
+              data: {firstName: firstName, lastName: lastName, email: email, username: username, password: password, account_type: 'student'}, // Send the user's information
+              success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
                   icon: 'error',
-                  text: "An error occurred"
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Student Account Created',
+                text: 'Would you like to create another student account?',
+                icon: 'success',
+                showCancelButton: true,
+                showDenyButton: true,
+                confirmButtonText: 'Create another student account',
+                denyButtonText: 'Continue to login page'
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  //go to this page again
+                  window.location.href = "/create_student_account";
+                } else if (result.isDenied) {
+                  //go to login page
+                  window.location.href = "/login";
+                }
+              });
+              console.log(data);
+                  }
+              },
+              error: (err) => { // If the request fails
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!'
                 })
               }
             });

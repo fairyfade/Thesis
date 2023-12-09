@@ -39,6 +39,7 @@
     
     </div>
 
+
 </html>
 
 
@@ -55,10 +56,40 @@
 
   for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
       $(".plants-wrapper").append(`
-        <h4>Student Name: <a href="#">${plants[i].firstName}</a></h4>
-        <h5>UserName: ${plants[i].username}</h5>
-        <br>`);
+        <h4>Student Name: ${plants[i].firstName}</h4>
+        <h5>Username: ${plants[i].username}</h5>
+        <a href="/viewProgress><button style="background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px;">View Progress</button></a>
+        <br>`); //will add units in once progress controller is working
           
       }
 
+  
+
+   
+
   </script>
+  <style>
+    h2{
+      color: #024b0c;
+    }
+    h4{
+      color: #024b0c;
+    }
+  
+    h5{
+      color: #024b0c;
+    }
+  .backButton{
+  
+    background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
+    
+  
+  }
+  
+
+
+  
+  </style>

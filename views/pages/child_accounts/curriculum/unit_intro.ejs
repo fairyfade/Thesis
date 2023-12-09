@@ -3,7 +3,7 @@
   </head>
   
   <!-- Navigation bar start  -->
-  <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #191970;">
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,12 +17,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
       </li>		
-      <li class="nav-item">
-        <a class="nav-link" href="/rewards_store">Rewards Store</a>
-      </li>	
-      <li class="nav-item">
-        <a class="nav-link" href="/coding_profile">Coding Profile</a> <!--Mayve this is like their "profile"-->
-      </li>	
+
       </ul>		  
     </div>
     </div>
@@ -38,6 +33,8 @@
     <div class="unitNameHeader">
       <h3 id="unitName"></h3>
     </div>
+    <br>
+    <h5>Learning Goals:</h5>
     <div class="learningGoals">
       <h4 id="learningGoalsHeader"></h4>
       <p id="unitLearningGoals"></p>
@@ -45,15 +42,18 @@
     <div class="syntaxLink">
       <h4 id="syntaxHeader"></h4>
     </div>
+    <h5>Unit Introduction:</h5>
     <div class="unitIntroduction">
       <h4 id="introductionHeader"></h4>
       <p id="unitIntroText"></p>
     </div>
+    <h5>Lesson Plan:</h5>
     <div class="unitLessons">
       <h4 id="lessongJourneyHeader"></h4>
       <div id="lessonInformation"></div>
     </div>
 
+    <br>
 
     <div class="continueButton">
       <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
@@ -64,7 +64,7 @@
     <script type="text/javascript">
 
       // adapted from @Npitcher12 & @ascemek: Script to populate plant information
-      $(document).ready(() => {
+
         
         const unitData = $("#unitData").data("unit");
         /* If I write a function to change the link, what would be the best way to do so from this page...*/
@@ -80,7 +80,51 @@
 
         lessonLink ="/lesson/overview/" + curr_unit + '/1'
         $("#continueLink").attr("href", lessonLink);
+
+
+      $("#continueButton").on("click", () => { 
+      $.ajax({ // update student progress
+          type: 'GET', 
+          url: "/updateStudentProgress",
+          dataType: 'json',
+          contentType: 'json',
+          data: {
+                 unit_number: unitData.unit_number,
+                 lesson_number: '0',
+                 sublesson_number: '0',
+                 activity_number: '0',
+                 type_curriculum: "Introduction",
+                 topic: unitData.topic,
+                 grade: '100'}, // Use the username and password
+          async: false, // Make the request synchronous
+          success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Congratulations, you have completed the activity. : )',
+                text: 'You have earned __ coins for the rewards store!',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+           }).then(function() {
+            window.location.href = lessonLink;
+          })
+           console.log(data);
+              }
+          },
+          error: (err) => { // If the request fails
+            Swal.fire({ // Show an error message
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!'
+            })
+          }
       });
+
+    })
     </script>
   
     <br>
@@ -88,5 +132,25 @@
     <br>
     <br>
   </body>
+  <style>
+    h2{
+  color: #024b0c;
+}
+h3{
+  color: #024b0c;
+}
+h4{
+  color: #024b0c;
+}
+h5{
+  color: #024b0c;
+}
+button{
+  background-color: #4895ef;
+  border-color: #4895ef;
+  color: white;
+  border-radius: 8px;
+}
+</style>
   
   

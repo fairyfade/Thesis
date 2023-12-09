@@ -9,13 +9,21 @@ module.exports = {
     attributes: {
       userID: {
         model: 'student',
-        required: true,
+        required: false,
       },
       unit_number: { 
         model: 'unit',
         required: true,
       },
+      total_units: { //total number of units
+        type: 'string',
+        required: true,
+      },
       topic: { //the unit's topic explanation
+        type: 'string',
+        required: true,
+      },
+      instructions: { //unit challenge instructions
         type: 'string',
         required: true,
       },
@@ -30,6 +38,10 @@ module.exports = {
       url: { //the video explanation url
         type: 'string',
         required: false,
+      },
+      trinket_url: {
+        type: 'string',
+        required: true,
       },
     }
   };

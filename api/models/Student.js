@@ -13,7 +13,7 @@ module.exports = {
       },
       userID: {
         model: 'users',
-        required: true,
+        required: false,
       },
       lastName: { // Last name
         type: 'string',
@@ -27,6 +27,7 @@ module.exports = {
         type: 'string',
         required: true,
       },
+
     }
   };
   

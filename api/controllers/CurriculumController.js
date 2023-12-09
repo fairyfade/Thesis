@@ -1,3 +1,5 @@
+const uuidv4 = require('uuid/v4'); // Import uuid
+const { lesson_number, sublesson_number, activity_number } = require('../models/StudentProgress');
 
 
 /*CurriculumController.js
@@ -329,7 +331,9 @@ module.exports = {
         const sublesson_number = req.param('sublesson_number');
         const activity_number = req.param('activity_number');
         const topic = req.param('topic');
+        const instructions = req.param('instructions');
         const url = req.param('url');
+        const trinket_url = req.param('trinket_url');
         const attempts = req.param('attempts');
         const timeSpent = req.param('timeSpent');
         const complete = req.param('complete');
@@ -338,12 +342,12 @@ module.exports = {
             error: 'Student User not logged in'
           });
         }
-        if (!unit_number ||!lesson_number || !sublesson_number || !activity_number || !topic || !url || !attempts || !timeSpent || !complete) { // Missing required params
+        if (!unit_number ||!lesson_number || !sublesson_number || !activity_number || !topic || !instructions || !url || !trinket_url ||  !attempts || !timeSpent || !complete) { // Missing required params
           return res.send({
             error: 'All fields required'
           });
         }
-        if (unit_number === '' || lesson_number === '' || sublesson_number === '' || activity_number === '' || topic === '' || url === '' || attempts === '' || timeSpent === '' || complete === '') { // Empty params
+        if (unit_number === '' || lesson_number === '' || sublesson_number === '' || activity_number === '' || topic === '' || instructions === '' || url === '' || trinket_url === '' || attempts === '' || timeSpent === '' || complete === '') { // Empty params
           return res.send({
             error: 'All fields required'
           });
@@ -362,7 +366,9 @@ module.exports = {
           sublesson_number: sublesson_number,
           activity_number: activity_number,
           topic: topic,
+          instructions: instructions,
           url : url,
+          trinket_url: trinket_url,
           attempts: attempts,
           timeSpent: timeSpent,
           complete: complete,
@@ -422,20 +428,23 @@ module.exports = {
         const unit_number = req.param('unit_number');
         const lesson_number = req.param('lesson_number');
         const sublesson_number = req.param('sublesson_number');
+        const number_activities = req.param('number_activities');
+        const number_sublessons = req.param('number_sublessons');
         const topic = req.param('topic');
         const url = req.param('url');
+        const trinket_url = req.param('trinket_url');
         const complete = req.param('complete');
         if (!req.session.userId) { // Check if student is logged in
           return res.send({
             error: 'Student User not logged in'
           });
         }
-        if (!unit_number || !lesson_number || !sublesson_number || !topic || !url || !complete) { // Missing required params
+        if (!unit_number || !lesson_number || !sublesson_number || !number_activities || !number_sublessons || !topic || !url || !trinket_url || !complete) { // Missing required params
           return res.send({
             error: 'All fields required'
           });
         }
-        if (unit_number === '' || lesson_number === '' || sublesson_number === '' || topic === '' || url === '' || complete === '') { // Empty params
+        if (unit_number === '' || lesson_number === '' || sublesson_number === '' || number_activities === '' ||number_sublessons === '' || topic === '' || url === '' || trinket_url === '' || complete === '') { // Empty params
           return res.send({
             error: 'All fields required'
           });
@@ -454,8 +463,11 @@ module.exports = {
           unit_number: unit_number,
           lesson_number, lesson_number,
           sublesson_number: sublesson_number,
+          number_activities: number_activities,
+          number_sublessons: number_sublessons,
           topic: topic,
           url : url,
+          trinket_url: trinket_url,
           complete: complete,
       });
       return res.send({ // Return success
@@ -514,20 +526,24 @@ module.exports = {
         const lesson_number = req.param('lesson_number');
         const sublesson_number = req.param('sublesson_number');
         const activity_number = req.param('activity_number');
+        const number_sublessons = req.param('number_sublessons');
+        const number_activities = req.param('number_activities');
+        const number_lessons = req.param('number_lessons');
         const topic = req.param('topic');
         const url = req.param('url');
+        const trinket_url = req.param('trinket_url');
         const complete = req.param('complete');
         if (!req.session.userId) { // Check if student is logged in
           return res.send({
             error: 'Student User not logged in'
           });
         }
-        if (!unit_number || !lesson_number || !sublesson_number || !activity_number || !topic || !url || !complete) { // Missing required params
+        if (!unit_number || !lesson_number || !sublesson_number || !activity_number || !number_sublessons || !number_activities || !number_lessons || !topic || !url || !trinket_url || !complete) { // Missing required params
           return res.send({
             error: 'All fields required'
           });
         }
-        if (unit_number === '' || lesson_number === '' || sublesson_number === '' || activity_number === '' || topic === '' || url === '' || complete === '') { // Empty params
+        if (unit_number === '' || lesson_number === '' || sublesson_number === '' || activity_number === '' || number_sublessons === '' || number_activities === '' || number_lessons === '' || topic === '' || url === '' || trinket_url === '' || complete === '') { // Empty params
           return res.send({
             error: 'All fields required'
           });
@@ -547,8 +563,12 @@ module.exports = {
           lesson_number, lesson_number,
           sublesson_number: sublesson_number,
           activity_number: activity_number,
+          number_sublessons: number_sublessons,
+          number_activities: number_activities,
+          number_lessons: number_lessons,
           topic: topic,
           url : url,
+          trinket_url: trinket_url,
           complete: complete,
       });
       return res.send({ // Return success
@@ -594,21 +614,24 @@ module.exports = {
       try {
         const userId = req.session.userId;
         const unit_number = req.param('unit_number');
+        const total_units = req.param('total_units');
         const topic = req.param('topic');
+        const instructions = req.param('instructions');
         const attempts = req.param('attempts');
         const url = req.param('url')
+        const trinket_url = req.param('trinket_url');
         const complete = req.param('complete');
         if (!req.session.userId) { // Check if student is logged in
           return res.send({
             error: 'Student User not logged in'
           });
         }
-        if (!unit_number || !topic || !attempts || !url || !complete) { // Missing required params
+        if (!unit_number || !total_units || !topic || !instructions || !attempts || !url || !trinket_url || !complete) { // Missing required params
           return res.send({
             error: 'All fields required'
           });
         }
-        if (unit_number === '' || topic === '' || attempts === '' || url === '' || complete === '') { // Empty params
+        if (unit_number === '' || total_units === '' || topic === '' || instructions === ''|| attempts === '' || url === '' || trinket_url === '' || complete === '') { // Empty params
           return res.send({
             error: 'All fields required'
           });
@@ -625,9 +648,12 @@ module.exports = {
         await UnitChallenge.create({ // Create unit challenge 
           userID: userId,
           unit_number: unit_number,
+          total_units: total_units,
           topic: topic,
+          instructions: instructions,
           attempts : attempts,
           url : url,
+          trinket_url: trinket_url,
           complete: complete,
       });
       return res.send({ // Return success
@@ -648,40 +674,22 @@ module.exports = {
   */
     getUnitChallenge: async function(req, res) {
       try {
-        const studentId = req.session.userId;
-        let accountId = req.param('accountId');
-        if (!studentId) { // User not logged in
-          return res.view('pages/login', {
-            error: 'Missing required params'
+        const unit_number = req.param('unit_number');
+
+        if (!unit_number) { // Check if unit Number is valid
+          return res.send({
+            error: 'Invalid Unit Number'
           });
         }
-        if (!accountId) { // Get own account
-          accountId = studentId;
-        }
-        let isSelfEdit = studentId === accountId;
-        const foundChallenge = await UnitChallenge.find({userID: req.session.userId}).populate('userID');
-       // const foundStudent = await Student.find({id: accountId});
-        if (!foundChallenge || foundChallenge.length === 0) { // Unit not found
-          return res.view('pages/homepage', {
-            error: 'Unit Challenge not found'
-          });
-        }
-        const challenge = foundChallenge[0];
-        const account = { // Return account info
-          id: challenge.id,
-          unit_number: challenge.unit_number,
-          topic: challenge.topic,
-          attempts: challenge.attempts,
-          url: challenge.url,
-          isSelfEdit: isSelfEdit
-        };
-        return res.view('pages/profile', { /*TODO need to change this link to the unit info page or something */
-          account: JSON.stringify(account)
+        const unitInfo = await UnitChallenge.find({
+          where: {unit_number: unit_number},
         });
-      } catch (err) { // Error getting account
-        return res.send({
-          error: 'Error getting account'
-        });
+        return res.view('pages/child_accounts/curriculum/unit_challenge', {
+          unitInfo: JSON.stringify(unitInfo[0])
+        }
+        );
+      } catch (error) {
+        console.log(error);
       }
     },
       /*
@@ -701,15 +709,35 @@ module.exports = {
         const topic = req.param('topic');
         const instructions = req.param('instructions');
         const q1 = req.param('q1');
-        const q1_ans = req.param('q1_ans');
+        const q1_ans1 = req.param('q1_ans1');
+        const q1_ans2 = req.param('q1_ans2');
+        const q1_ans3 = req.param('q1_ans3');
+        const q1_ans4 = req.param('q1_ans4');
+        const q1_correct = req.param('q1_correct');
         const q2 = req.param('q2');
-        const q2_ans = req.param('q2_ans');
+        const q2_ans1 = req.param('q2_ans1');
+        const q2_ans2 = req.param('q2_ans2');
+        const q2_ans3 = req.param('q2_ans3');
+        const q2_ans4 = req.param('q2_ans4');
+        const q2_correct = req.param('q2_correct');
         const q3 = req.param('q3');
-        const q3_ans = req.param('q3_ans');
+        const q3_ans1 = req.param('q3_ans1');
+        const q3_ans2 = req.param('q3_ans2');
+        const q3_ans3 = req.param('q3_ans3');
+        const q3_ans4 = req.param('q3_ans4');
+        const q3_correct = req.param('q3_correct');
         const q4 = req.param('q4');
-        const q4_ans = req.param('q4_ans');
+        const q4_ans1 = req.param('q4_ans1');
+        const q4_ans2 = req.param('q4_ans2');
+        const q4_ans3 = req.param('q4_ans3');
+        const q4_ans4 = req.param('q4_ans4');
+        const q4_correct = req.param('q4_correct');
         const q5 = req.param('q5');
-        const q5_ans = req.param('q5_ans');
+        const q5_ans1 = req.param('q5_ans1');
+        const q5_ans2 = req.param('q5_ans2');
+        const q5_ans3 = req.param('q5_ans3');
+        const q5_ans4 = req.param('q5_ans4');
+        const q5_correct = req.param('q5_correct');
         const correctness = req.param('correctness')
         const complete = req.param('complete');
         if (!req.session.userId) { // Check if student is logged in
@@ -717,12 +745,12 @@ module.exports = {
             error: 'Student User not logged in'
           });
         }
-        if (!unit_number || !topic || !instructions || !q1 || !q1_ans || !q2 || !q2_ans || !q3 || !q3_ans || !q4 || !q4_ans || !q5 || !q5_ans || !correctness || !complete) { // Missing required params
+        if (!unit_number || !topic || !instructions || !q1 || !q1_ans1 || !q1_ans2 || !q1_ans3 || !q1_ans4 || !q1_correct || !q2 || !q2_ans1 || !q2_ans2 || !q2_ans3 || !q2_ans4 || !q2_correct || !q3 || !q3_ans1|| !q3_ans2 || !q3_ans3 || !q3_ans4 || !q3_correct || !q4 || !q4_ans1 || !q4_ans2 || !q4_ans3 || !q4_ans4 || !q4_correct || !q5 || !q5_ans1 || !q5_ans2 || !q5_ans3 || !q5_ans4 || !q5_correct || !correctness || !complete) { // Missing required params
           return res.send({
             error: 'All fields required'
           });
         }
-        if (unit_number === '' || topic === '' || instructions === '' || q1 === '' || q1_ans === '' ||q2 === '' || q2_ans === '' || q3 === '' ||  q3_ans === '' || q4 === '' || q4_ans === ''|| q5 === '' || q5_ans === '' ||correctness === '' || complete === '') { // Empty params
+        if (unit_number === '' || topic === '' || instructions === '' || q1 === '' || q1_ans1 === '' || q1_ans2 === '' || q1_ans3 === '' || q1_ans4 === '' || q1_correct === '' || q2 === '' || q2_ans1 === '' || q2_ans2 === '' || q2_ans3 === '' || q2_ans4 === '' || q2_correct === '' || q3 === '' ||  q3_ans1 === '' || q3_ans2 === '' || q3_ans3 === '' || q3_ans4 === '' || q3_correct === '' || q4 === '' || q4_ans1 === ''|| q4_ans2 === ''||q4_ans3 === '' || q4_ans4 === '' || q4_correct === ''|| q5 === '' || q5_ans1 === '' || q5_ans2 === ''|| q5_ans3 === '' || q5_ans4 === ''  || q5_correct === '' ||correctness === '' || complete === '') { // Empty params
           return res.send({
             error: 'All fields required'
           });
@@ -742,15 +770,35 @@ module.exports = {
           topic: topic,
           instructions : instructions,
           q1: q1,
-          q1_ans: q1_ans,
+          q1_ans1: q1_ans1,
+          q1_ans2: q1_ans2,
+          q1_ans3: q1_ans3,
+          q1_ans4: q1_ans4,
+          q1_correct: q1_correct,
           q2: q2,
-          q2_ans: q2_ans,
+          q2_ans1: q2_ans1,
+          q2_ans2: q2_ans2,
+          q2_ans3: q2_ans3,
+          q2_ans4: q2_ans4,
+          q2_correct: q2_correct,
           q3: q3,
-          q3_ans: q3_ans,
+          q3_ans1: q3_ans1,
+          q3_ans2: q3_ans2,
+          q3_ans3: q3_ans3,
+          q3_ans4: q3_ans4,
+          q3_correct: q3_correct,
           q4: q4,
-          q4_ans: q4_ans,
+          q4_ans1: q4_ans1,
+          q4_ans2: q4_ans2,
+          q4_ans3: q4_ans3,
+          q4_ans4: q4_ans4,
+          q4_correct: q4_correct,
           q5: q5,
-          q5_ans: q5_ans,
+          q5_ans1: q5_ans1,
+          q5_ans2: q5_ans2,
+          q5_ans3: q5_ans3,
+          q5_ans4: q5_ans4,
+          q5_correct: q5_correct,
           correctness : correctness,
           complete: complete,
       });
@@ -805,19 +853,21 @@ module.exports = {
         const unit_number = req.param('unit_number');
         const topic = req.param('topic');
         const unit_info = req.param('unit_info');
-        const correctness = req.param('correctness')
+        const correctness = req.param('correctness');
+        const url = req.param('url');
+        const trinket_url = req.param('trinket_url');
         const complete = req.param('complete');
         if (!req.session.userId) { // Check if student is logged in
           return res.send({
             error: 'Student User not logged in'
           });
         }
-        if (!unit_number || !topic || !unit_info || !correctness || !complete) { // Missing required params
+        if (!unit_number || !topic || !unit_info || !correctness || !url || !trinket_url || !complete) { // Missing required params
           return res.send({
             error: 'All fields required'
           });
         }
-        if (unit_number === '' || topic === '' || unit_info === '' || correctness === '' || complete === '') { // Empty params
+        if (unit_number === '' || topic === '' || unit_info === '' || correctness === '' || url === '' || trinket_url ==='' || complete === '') { // Empty params
           return res.send({
             error: 'All fields required'
           });
@@ -837,6 +887,8 @@ module.exports = {
           topic: topic,
           unit_info : unit_info,
           correctness : correctness,
+          url: url,
+          trinket_url: trinket_url,
           complete: complete,
       });
       return res.send({ // Return success
@@ -872,5 +924,79 @@ module.exports = {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    createProgress: async function(req, res) {
+      try {
+        const userID =  req.session.userId;
+        const unit_number = req.param('unit_number');
+        const lesson_number = req.param('lesson_number');
+        const sublesson_number = req.param('sublesson_number');
+        const activity_number = req.param('activity_number');
+        const type_curriculum = req.param('type_curriculum');
+        const topic = req.param('topic');
+        const grade = req.param('grade');
+
+  
+        if (!req.session.userId) { // Check if student is logged in
+          return res.send({
+            error: 'Student User not logged in'
+          });
+        }
+        if (!unit_number || !lesson_number || !sublesson_number || !activity_number || !type_curriculum || !topic || !grade) { // Missing required params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        if (unit_number === '' || lesson_number === '' || activity_number === '' || type_curriculum  === '' || topic === '' || grade === '') { // Empty params
+          return res.send({
+            error: 'All fields required'
+          });
+        }
+        const existingUnit = await Progress.find({unit_number: unit_number, lesson_number: lesson_number, sublesson_number: sublesson_number, activity_number: activity_number, topic: topic
+        });
+        if (existingUnit && existingUnit.length > 0) { // Return error if Unit already exists
+          return res.send({
+            success: 'You have already completed this unit'
+          });
+        }
+       // const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
+        await Progress.create({ // Create unit
+          userID: req.session.userId,
+       //   studentID: studentId,
+          unit_number: unit_number,
+          lesson_number: lesson_number,
+          sublesson_number: sublesson_number,
+          activity_number: activity_number,
+          type_curriculum: type_curriculum,
+          topic: topic,
+          grade: grade,
+
+      });
+      console.log(unit_number);
+      return res.send({ // Return success
+        success: true
+      });
+    } catch (error) {
+      console.log(error);
     }
+  },
+  
+  fetchProgress: async function(req, res) {
+    try {
+      const userId = req.session.userId;
+      const unit_number = req.param('unit_number');
+      //  const posts = await Student.find();
+        const studentProgress = await Progress.find({});
+      //  console.log(studentProgress);
+        return res.view({
+          progressdata:JSON.stringify(studentProgress)
+          //postdata:JSON.stringify(combinedPosts)
+        }
+        );
+      } catch (error) {
+        console.log("Not working");
+      }
+      //console.log(studentProgress);
+  }
   };

@@ -6,6 +6,7 @@
 
 
 module.exports = {
+    attributes: {
     userID: {
         model: 'users',
         required: true,
@@ -18,7 +19,7 @@ module.exports = {
 
     unit_number:{
         type: 'string',
-        required: true,
+        required: false,
     },
     lesson_number:{
         type: 'string',
@@ -36,13 +37,14 @@ module.exports = {
         type: 'string',
         required: true,
     },
-    
-    code: {
+    topic: {
         type: 'string',
-        required: false,
+        required: true,
     },
-    codeRuns: {  //true if the students code successfully runs 
-        type: 'boolean',
-        required: false,
-    }
+    grade: { //this will hold quiz grades and placeholder grades for the other activities that don't have autograders
+        type: 'string',
+        required: true,
+    },
 }
+
+};

@@ -3,7 +3,7 @@
 </head>
 
 <!-- Navigation bar start  -->
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="#">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,12 +17,7 @@
     <li class="nav-item">
       <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
     </li>		
-    <li class="nav-item">
-      <a class="nav-link" href="/rewards_store">Rewards Store</a>
-    </li>	
-    <li class="nav-item">
-      <a class="nav-link" href="/coding_profile">Coding Profile</a> <!--Mayve this is like their "profile"-->
-    </li>	
+
     </ul>		  
   </div>
   </div>
@@ -38,11 +33,20 @@
   <div class="unitReviewHeader">
     <h3 id="unitName"></h3>
   </div>
+  <br>
   <div class="review">
     <p id="review"></p>
   </div>
+  <br>
+  <div class="reviewVid">
+    <iframe id="reviewVid" width="100%" height="356"></iframe>
+  </div>
+  <br>
+
   <iframe src="https://trinket.io/embed/python/edd948bf08" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
+  <br>
+  
   <div class="continueButton">
     <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
   </div>
@@ -52,18 +56,61 @@
   <script type="text/javascript">
 
     // adapted from @Npitcher12 & @ascemek: Script to populate plant information
-    $(document).ready(() => {
+
       const unitData = $("#unitData").data("unit");
       $("#unitName").text(unitData.topic);
       $("#review").text(unitData.unit_info);
 
-
+      $("#reviewVid").attr("src", unitData.url);
    //   $("#introductionHeader").text(unitData.introHeader);
   //    $("#unitIntroText").text(unitData.introduction_text);
   //    $("#lessonInformation").text(unitData.lesson_journey);
       link = "/unit/quiz/" + unitData.unit_number
       $("#continueLink").attr("href", link)
-    });
+
+    $("#continueButton").on("click", () => { 
+      $.ajax({ // update student progress
+          type: 'GET', 
+          url: "/updateStudentProgress",
+          dataType: 'json',
+          contentType: 'json',
+          data: {
+                 unit_number: unitData.unit_number,
+                 lesson_number: '0',
+                 sublesson_number: '0',
+                 activity_number: '0',
+                 type_curriculum: "Unit Review",
+                 topic: unitData.topic,
+                 grade: '100'}, // Use the username and password
+          async: false, // Make the request synchronous
+          success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Congratulations, you have completed the activity. : )',
+                text: 'You have earned __ coins for the rewards store!',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+           }).then(function() {
+            window.location.href = lessonLink;
+          })
+           console.log(data);
+              }
+          },
+          error: (err) => { // If the request fails
+            Swal.fire({ // Show an error message
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!'
+            })
+          }
+      });
+
+    })
   </script>
 
   <br>
@@ -71,4 +118,18 @@
   <br>
   <br>
 </body>
+<style>
+  h2{
+color: #024b0c;
+}
+h3{
+color: #024b0c;
+}
+button{
+background-color: #4895ef;
+border-color: #4895ef;
+color: white;
+border-radius: 8px;
+}
+</style>
 

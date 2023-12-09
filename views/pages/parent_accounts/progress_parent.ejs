@@ -25,4 +25,60 @@
   <br>
 
   <h1>Parent Progress Reports</h1>
-  <p>Check each child's progress, and acheivements/what they're doing on the site</p>
+
+  <p>Your student has completed the following modules: </p>
+
+  
+  <div id="progressData" data-post="<%=progressdata%>">
+  </div>
+
+
+
+
+  <div class="progress-wrapper">
+
+  
+  <script type="text/javascript">
+    
+    $(document).ready(() => {console.log($("#progressData").data("post"))});
+  
+  //var requestedPlantName = document.getElementById("plantSearchBar").value;
+
+
+  $(".progress-wrapper").empty();
+
+
+  let studentProgress = $("#progressData").data("post");
+
+  quiz_avg = 0;
+  num_quizzes = 0;
+
+
+  for(i = 0; i< studentProgress.length; i++){
+    //check if it is a quiz
+    if(studentProgress[i].type_curriculum == "Quiz"){
+      //count number of quizzes
+      num_quizzes++;
+      quiz_avg = quiz_avg + studentProgress[i].grade;
+
+
+    }
+    quiz_avg = quiz_avg / num_quizzes;
+    console.log(quiz_avg);
+
+  }
+
+  $("#quizAvg").text(quiz_avg);
+
+  for(i=0; i<studentProgress.length; i++){
+    $(".progress-wrapper").append(`
+      <h4>Unit ${studentProgress[i].unit_number}, Lesson ${studentProgress[i].lesson_number}, ${studentProgress[i].type_curriculum}-${studentProgress[i].topic}, Grade ${studentProgress[i].grade}%</h4>
+      <br>
+
+      `);
+  }
+
+ 
+   
+
+  </script>

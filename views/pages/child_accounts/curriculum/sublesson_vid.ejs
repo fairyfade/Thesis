@@ -2,7 +2,7 @@
 </head>
 
 <!-- Navigation bar start  -->
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="#">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,12 +16,7 @@
     <li class="nav-item">
       <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
     </li>		
-    <li class="nav-item">
-      <a class="nav-link" href="/rewards_store">Rewards Store</a>
-    </li>	
-    <li class="nav-item">
-      <a class="nav-link" href="/coding_profile">Coding Profile</a> <!--Mayve this is like their "profile"-->
-    </li>	
+
     </ul>		  
   </div>
   </div>
@@ -37,12 +32,22 @@
   <div class="sublessonNameHeader">
     <h3 id="sublessonName">Sublesson Name</h3>
   </div>
+
+  <br>
+
   <div class="sublessonVid">
-    <p id="sublessonVid">sublesson vid url</p>
+    
+      <iframe id="sublessonVid" width="800" height="500"></iframe>
+    
+  </div>
+  <br>
+  <div class="textEd">
+    <iframe src="https://trinket.io/embed/python/e8b4e7e5f9" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
   </div>
   <div class="written">
-    <p id="written">written explanation</p>
+    <p id="written"></p>
   </div>
+  <br>
   <div class="continueButton">
     <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
   </div>
@@ -55,8 +60,9 @@
     $(document).ready(() => {
       const sublessonData = $("#sublessonData").data("sublesson");
       $("#sublessonName").text(sublessonData.topic);
-      $("#sublessonVid").text(sublessonData.url);
-      $("#written").text(sublessonData.body);
+     // $("#sublessonVid").text(sublessonData.url);
+   //   $("#written").text(sublessonData.body);
+      $("#sublessonVid").attr("src", sublessonData.url);
    //   $("#introductionHeader").text(unitData.introHeader);
     //  $("#unitIntroText").text(unitData.introduction_text);
     //  $("#lessonInformation").text(unitData.lesson_journey);
@@ -71,4 +77,18 @@
   <br>
   <br>
 </body>
+<style>
+  h2{
+color: #024b0c;
+}
+h3{
+color: #024b0c;
+}
+button{
+background-color: #4895ef;
+border-color: #4895ef;
+color: white;
+border-radius: 8px;
+}
+</style>
 

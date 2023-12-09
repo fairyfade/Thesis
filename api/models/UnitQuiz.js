@@ -27,7 +27,23 @@ module.exports = {
         type: 'string',
         required: true,
       },
-      q1_ans: { //the answer to the first question
+      q1_correct: { //the correct answer to the first question
+        type: 'string',
+        required: true,
+      },
+      q1_ans1: { //the answer to the first question
+        type: 'string',
+        required: true,
+      },
+      q1_ans2: { //the second answer to the first question
+        type: 'string',
+        required: true,
+      },
+      q1_ans3: { //the third answer to the first question
+        type: 'string',
+        required: true,
+      },
+      q1_ans4: { //the fourth answer to the first question
         type: 'string',
         required: true,
       },
@@ -35,7 +51,23 @@ module.exports = {
         type: 'string',
         required: true,
       },
-      q2_ans: { //the answer to the second question
+      q2_correct: { //the correct answer to the second question
+        type: 'string',
+        required: true,
+      },
+      q2_ans1: { //the first answer to the second question
+        type: 'string',
+        required: true,
+      },
+      q2_ans2: { //the second answer to the second question
+        type: 'string',
+        required: true,
+      },
+      q2_ans3: { //the third answer to the second question
+        type: 'string',
+        required: true,
+      },
+      q2_ans4: { //the fourth answer to the second question
         type: 'string',
         required: true,
       },
@@ -43,7 +75,23 @@ module.exports = {
         type: 'string',
         required: true,
       },
-      q3_ans: { //the answer to the third question
+      q3_correct: { //the correct answer to the third question
+        type: 'string',
+        required: true,
+      },
+      q3_ans1: { //the answer to the third question
+        type: 'string',
+        required: true,
+      },
+      q3_ans2: { //the answer to the third question
+        type: 'string',
+        required: true,
+      },
+      q3_ans3: { //the answer to the third question
+        type: 'string',
+        required: true,
+      },
+      q3_ans4: { //the answer to the third question
         type: 'string',
         required: true,
       },
@@ -51,7 +99,23 @@ module.exports = {
         type: 'string',
         required: true,
       },
-      q4_ans: { //the answer to the fourth question
+      q4_correct: { //the correct answer to the fourth question
+        type: 'string',
+        required: true,
+      },
+      q4_ans1: { //the answer to the fourth question
+        type: 'string',
+        required: true,
+      },
+      q4_ans2: { //the answer to the fourth question
+        type: 'string',
+        required: true,
+      },
+      q4_ans3: { //the answer to the fourth question
+        type: 'string',
+        required: true,
+      },
+      q4_ans4: { //the answer to the fourth question
         type: 'string',
         required: true,
       },
@@ -59,7 +123,23 @@ module.exports = {
         type: 'string',
         required: true,
       },
-      q5_ans: { //the answer to the fifth question
+      q5_correct: { //the correct answer to the fifth question
+        type: 'string',
+        required: true,
+      },
+      q5_ans1: { //the first answer to the fifth question
+        type: 'string',
+        required: true,
+      },
+      q5_ans2: { //the second answer to the fifth question
+        type: 'string',
+        required: true,
+      },
+      q5_ans3: { //the third answer to the fifth question
+        type: 'string',
+        required: true,
+      },
+      q5_ans4: { //the fourth answer to the fifth question
         type: 'string',
         required: true,
       },

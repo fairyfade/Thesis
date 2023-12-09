@@ -27,17 +27,22 @@
   <h2>Parent Dashboard</h2>
   <p>Check each child's progress, acheievements, and manage accounts</p>
   <br>
-  <a href="/create_student_account"><button class="studentButton">Add a Student Account</button></a>
+  <!--a href="/create_student_account"><button class="studentButton">Add a Student Account</button></a-->
   <br>
   <br>
   <h3 style="text-align: center;">Students: </h3>
-  <div id="plantData" data-post="<%=postdata%>">
+  <div id="accountData" data-post="<%=accountdata%>">
+  </div>
+  <div id="studentData" data-post="<%=studentdata%>">
   </div>
 
 
 
+  <div class="account-wrapper">
+  
+  </div>
 
-  <div class="plants-wrapper">
+  <div class="students-wrapper">
   
   </div>
   <br>
@@ -59,36 +64,41 @@
 <br>
 <br>
   <script>
-    $(document).ready(() => {console.log($("#plantData").data("post"))});
+    $(document).ready(() => {console.log($("#accountData").data("post"))});
   
   //var requestedPlantName = document.getElementById("plantSearchBar").value;
 
 
-  $(".plants-wrapper").empty();
+  $(".account-wrapper").empty();
+  $(".students-wrapper").empty();
 
+  let account = $("#accountData").data("post");
+  let parent_email = account.email;
+  parent_name = account.firstName;
+ // console.log("First name-", parent_name);
+ // console.log("Parent account-", parent_email);
 
-  let plants = $("#plantData").data("post");
+  let students = $("#studentData").data("post");
+  //will need to filter students by those with the same email as the parent account
 
-  for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
-      $(".plants-wrapper").append(`
+  for(i = 0; i < students.length; i++){  //update to include general info instead of water info
+    student_email = students[i].email;
+    account_type = students[i].account_type;
+   // console.log("Student account-", student_email);
+    if(student_email == parent_email && account_type == 'student'){
+      $(".students-wrapper").append(`
       <div class="flex-container" style="border: 1px solid black; width: 60%; padding-left: 2%; padding-top: 2%; display: block; margin-left: auto; margin-right: auto;">
-        <h4>Student Name: <a href="/parent_dashboard/view_profile/${plants[i].id}">${plants[i].firstName}</a></h4>
-        <h5>Username: ${plants[i].username}</h5>
+        <h4>Student Name: <a href="/parent_dashboard/view_profile/${students[i].username}">${students[i].firstName}</a></h4>
+        <h5>Username: ${students[i].username}</h5>
         <br>
         <br>
       </div>`);
+
+    }
+    
           
       }
-  //  $(".students-wrapper").empty();
 
-
-    //let students = $("#studentData").data("post");
-
-  //  for(i = 0; i < students.length; i++){  //update to include general info instead of water info
- //     $(".students-wrapper").append(`
- //       <h3>${students[i].firstName}</h3>
-  //      <h2>UserName: ${students[i].username}</h2>`);
-   //   }
   </script>
 <style>
   h2{

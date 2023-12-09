@@ -112,7 +112,7 @@ function initPage() { // Initialize the page
         dataType: 'json',
         contentType: 'json',
         async: false,
-        data: {firstName: firstName, lastName: lastName, email: email, username: username, password: password}, // Send the user's information
+        data: {firstName: firstName, lastName: lastName, email: email, username: username, password: password, account_type: 'parent'}, // Send the user's information
         success: (data) => { // When the request is successful
           if (data.error) { // If there is an error
             Swal.fire({ // Display the error message
@@ -120,7 +120,7 @@ function initPage() { // Initialize the page
               text: data.error
             })
           } else { // If there is no error
-            window.location.href = "/"; // Redirect to the home page
+            window.location.href = "/create_student_account"; // Redirect to create student account page
           }
         },
         error: async (err) => { // When the request fails

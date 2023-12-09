@@ -31,7 +31,15 @@ module.exports = {
         type: 'string',
         required: true,
       },
+      instructions: { //the instructions
+        type: 'string',
+        required: true,
+      },
       url: { //video url for activity
+        type: 'string',
+        required: true,
+      },
+      trinket_url: { //the url for the embedded trinket window
         type: 'string',
         required: true,
       },

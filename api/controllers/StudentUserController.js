@@ -61,22 +61,19 @@ module.exports = {
   */
   createAccount: async function(req, res) {
     try {
-      const userId = req.session.userId;
+      //const userID = req.session.userId;
       const firstName = req.param('firstName');
       const lastName = req.param('lastName');
       const username = req.param('username');
       const password = req.param('password');
-      if (!req.session.userId) { // Check if user is logged in
-        return res.send({
-          error: 'User not logged in'
-        });
-      }
-      if (!firstName || !lastName || !username || !password) { // Missing required params
+      //const parent = req.param('parent');
+
+      if (!firstName || !lastName || !username || !password ) { // Missing required params
         return res.send({
           error: 'All fields required'
         });
       }
-      if (firstName === '' || lastName === '' || username === '' || password === '') { // Empty params
+      if (firstName === '' || lastName === '' || username === '' || password === '' ) { // Empty params
         return res.send({
           error: 'All fields required'
         });
@@ -91,11 +88,12 @@ module.exports = {
       }
       const hash = await sails.helpers.passwords.hashPassword(password); // Hash password
       await Student.create({ // Create user
-        userID: userId,
+       // userID: req.session.userId,
         firstName: firstName,
         lastName: lastName,
         username: username,
         password: hash,
+       // parent: parent,
     });
     return res.send({ // Return success
       success: true
@@ -149,7 +147,20 @@ module.exports = {
     try {
         //const posts = await Student.find().populate('userID');
         const posts = await Student.find({userID: req.session.userId}).populate('userID');
-        return res.view('pages/parent_accounts/parent_homepg', {
+        return res.view({
+          postdata:JSON.stringify(posts)
+          //postdata:JSON.stringify(combinedPosts)
+        }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+  },
+  fetchStudentProfile: async function(req, res) {
+    try {
+        //const posts = await Student.find().populate('userID');
+        const posts = await Student.find({userID: req.session.userId}).populate('userID');
+        return res.view({
           postdata:JSON.stringify(posts)
           //postdata:JSON.stringify(combinedPosts)
         }

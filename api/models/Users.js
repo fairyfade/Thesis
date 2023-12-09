@@ -26,6 +26,10 @@ module.exports = {
         type: 'string',
         required: true,
       },
+      account_type: { //student or parent account
+        type: 'string',
+        required: true,
+      },
 
     }
   };

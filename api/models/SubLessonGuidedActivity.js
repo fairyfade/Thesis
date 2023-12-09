@@ -21,13 +21,25 @@ module.exports = {
       },
       sublesson_number:{ //sub-lesson number
         model: 'SubLesson',
-        required: true
+        required: true,
+      },
+      number_activities:{ //number of activities
+        type: 'string',
+        required: true,
+      },
+      number_sublessons: { //number of sublessons
+        type: 'string',
+        required: true,
       },
       topic: { //the sub-lesson's topic explanation
         type: 'string',
         required: true,
       },
       url: { //video url for guided activity
+        type: 'string',
+        required: true,
+      },
+      trinket_url: { //url for the embedded trinket window
         type: 'string',
         required: true,
       },

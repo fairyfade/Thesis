@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #374B4A;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,37 +19,74 @@
     </div>
     </div>
   </nav>
+  <div id="parentData" data-post="<%=parentdata%>">
+  </div>
 
+  <br>
+  <br>
+  <br>
+  <br>
   <h1>Manage Accounts</h1>
   <p>Select accounts and manage them</p>
 
-  <div id="plantData" data-post="<%=postdata%>">
+  <h2>My Account:</h2>
+
+  <div class="parents-wrapper">
+
   </div>
-
-
-
-
-  <div class="plants-wrapper">
-  
-  </div>
+  <br>
+  <br>
+  <a href="/manage_student_account"><button class="manageStudentButton">Manage Student Accounts</button></a>
+  <br>
+  <br>
+  <a href="/logout"><button class="logoutButton">Log Out</button></a>
 
   <script>
-    $(document).ready(() => {console.log($("#plantData").data("post"))});
+    $(document).ready(() => {console.log($("#parentData").data("parent"))});
   
   //var requestedPlantName = document.getElementById("plantSearchBar").value;
 
 
-  $(".plants-wrapper").empty();
+  $(".parents-wrapper").empty();
 
 
-  let plants = $("#plantData").data("post");
+  let parent = $("#parentsData").data("post");
 
-  for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
-      $(".plants-wrapper").append(`
-        <h4>Student Name: <a href="/parent_dashboard/view_profile/${plants[i].id}">${plants[i].firstName}</a></h4>
-        <h5>UserName: ${plants[i].username}</h5>
+  $(".parents-wrapper").append(`
+        <h4>Parent Name: ${parent.firstName}</h4>
+        <h5>Username: ${parent.username}</h5>
+        <h5>Email: ${parent.email}</h5>
+        
         <br>`);
-          
-      }
+  
 
   </script>
+  <style>
+    h2{
+      color: #024b0c;
+    }
+  
+    h3{
+      color: #024b0c;
+    }
+  .logoutButton{
+  
+    background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
+    
+  
+  }
+  .manageStudentButton{
+  
+  background-color: #DC8D9C;
+  border-color: #DC8D9C;
+  color: black;
+  border-radius: 8px;
+  
+
+}
+  
+  
+  </style>

@@ -3,7 +3,7 @@
 </head>
 
 <!-- Navigation bar start  -->
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="#">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,12 +17,7 @@
     <li class="nav-item">
       <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
     </li>		
-    <li class="nav-item">
-      <a class="nav-link" href="/rewards_store">Rewards Store</a>
-    </li>	
-    <li class="nav-item">
-      <a class="nav-link" href="/coding_profile">Coding Profile</a> <!--Mayve this is like their "profile"-->
-    </li>	
+
     </ul>		  
   </div>
   </div>
@@ -54,12 +49,12 @@
     <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
   </div>
 
-
+</body>
 
   <script type="text/javascript">
 
     // adapted from @Npitcher12 & @ascemek: Script to populate plant information
-    $(document).ready(() => {
+
       const lessonData = $("#lessonData").data("lesson");
       $("#lessonName").text(lessonData.topic);
       $("#lessontIntro").text(lessonData.introduction);
@@ -70,14 +65,88 @@
   //    $("#unitIntroText").text(unitData.introduction_text);
   //    $("#lessonInformation").text(unitData.lesson_journey);
       //link = "/sublesson/video/" + lessonData.unit_number + '/' + lessonData.lesson_number + '/' +
-  //    lessonLink ="/sublesson/video/" + lessonData.unit_number + "/" + lessonData.lesson_number + "/" + lessonData.sublesson_number
-   //     $("#continueLink").attr("href", lessonLink);
-    });
+      lessonLink ="/sublesson/video/" + lessonData.unit_number + "/" + lessonData.lesson_number + "/1"
+        $("#continueLink").attr("href", lessonLink);
+        //confetti effect if lesson is not the first lesson (meaning the completed the past lesson)
+        lessonNum = parseInt(lessonData.lesson_number)
+        if(lessonNum > 1){
+          startConfetti();
+          setTimeout(stopEffect1, 3000);
+
+        }
+        
+        function stopEffect1() {
+          stopConfetti();
+      }
+
+
+    $("#continueButton").on("click", () => { 
+      $.ajax({ // update student progress
+          type: 'GET', 
+          url: "/updateStudentProgress",
+          dataType: 'json',
+          contentType: 'json',
+          data: {
+                 unit_number: lessonData.unit_number,
+                 lesson_number: lessonData.lesson_number,
+                 sublesson_number: '0',
+                 activity_number: '0',
+                 type_curriculum: "Introduction",
+                 topic: lessonData.topic,
+                 grade: '100'}, // Use the username and password
+          async: false, // Make the request synchronous
+          success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Congratulations, you have completed the activity. : )',
+                text: 'You have earned __ coins for the rewards store!',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+           }).then(function() {
+            window.location.href = lessonLink;
+          })
+           console.log(data);
+              }
+          },
+          error: (err) => { // If the request fails
+            Swal.fire({ // Show an error message
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!'
+            })
+          }
+      });
+
+    })
   </script>
+  <script src="/assets/js/confetti-falling-animation/confetti-falling-animation/confetti.js"></script>
+  <!--https://www.cssscript.com/confetti-animation-party/-->
+
+
 
   <br>
   <br>
   <br>
   <br>
 </body>
+
+<style>
+  h4{
+color: #024b0c;
+}
+h3{
+color: #024b0c;
+}
+button{
+background-color: #4895ef;
+border-color: #4895ef;
+color: white;
+border-radius: 8px;
+}
+</style>
 
