@@ -953,7 +953,7 @@ module.exports = {
             error: 'All fields required'
           });
         }
-        const existingUnit = await Progress.find({unit_number: unit_number, lesson_number: lesson_number, sublesson_number: sublesson_number, activity_number: activity_number, topic: topic
+        const existingUnit = await Progress.find({userID: userID, unit_number: unit_number, lesson_number: lesson_number, sublesson_number: sublesson_number, activity_number: activity_number, topic: topic
         });
         if (existingUnit && existingUnit.length > 0) { // Return error if Unit already exists
           return res.send({
@@ -987,7 +987,7 @@ module.exports = {
       const userId = req.session.userId;
       const unit_number = req.param('unit_number');
       //  const posts = await Student.find();
-        const studentProgress = await Progress.find({});
+        const studentProgress = await Progress.find({userID: userId});
       //  console.log(studentProgress);
         return res.view({
           progressdata:JSON.stringify(studentProgress)

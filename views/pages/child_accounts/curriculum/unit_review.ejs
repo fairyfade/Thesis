@@ -2,7 +2,6 @@
 <head>
 </head>
 
-<!-- Navigation bar start  -->
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="#">Space Python</a>
@@ -15,7 +14,10 @@
       <a class="nav-link" aria-current="page" href="/student_dashboard">Student Dashboard</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
+      <a class="nav-link" href="/my_progress">Progress/Achievements</a>
+    </li>		
+    <li class="nav-item">
+      <a class="nav-link" href="/my_profile">Student Profile</a>
     </li>		
 
     </ul>		  
@@ -66,7 +68,7 @@
   //    $("#unitIntroText").text(unitData.introduction_text);
   //    $("#lessonInformation").text(unitData.lesson_journey);
       link = "/unit/quiz/" + unitData.unit_number
-      $("#continueLink").attr("href", link)
+   //   $("#continueLink").attr("href", link)
 
     $("#continueButton").on("click", () => { 
       $.ajax({ // update student progress
@@ -91,12 +93,12 @@
                 })
               } else { // If there is no error
                 Swal.fire({
-                title: 'Congratulations, you have completed the activity. : )',
-                text: 'You have earned __ coins for the rewards store!',
+                title: 'Congratulations',
+                text: 'You have completed the unit review. : )',
                 icon: 'success',
                 confirmButtonText: 'Continue'
            }).then(function() {
-            window.location.href = lessonLink;
+            window.location.href = link;
           })
            console.log(data);
               }

@@ -69,7 +69,7 @@
 
 <h1>Space Python</h1><br/>
 <div class="loginContainer"> <!-- This is the login container -->
-  <h2>Parent Log In</h2><br/>
+  <h2>Log In</h2><br/>
   <label for="username">Username</label> <!-- Username label -->
   <input name="username" id="username" placeholder="Username"> <!-- Username input -->
   <br/><br/>
@@ -86,18 +86,7 @@
 
 <hr>
 <br>
-<div class="loginContainer"> <!-- This is the login container -->
-  <h2>Student Log In</h2><br/>
-  <label for="stu_username">Username</label> <!-- Username label -->
-  <input name="stu_username" id="stu_username" placeholder="Username"> <!-- Username input -->
-  <br/><br/>
-  <label for="stu_password">Password</label> <!-- Password label -->
-  <input type="stu_password" name="stu_password" id="stu_password" placeholder="Password"> <!-- Password input -->
-  <br/><br/>
-  <button id="stu_login">Login</button> <!-- Login button -->
-  <br/>
-  <br/>
-</div>
+
 <button id="bypass">Click me to bypass login</button> <!-- Bypass button -->
 <div id="developerSettings" data-devmode="<%=sails.config.custom.devMode%>"></div> <!-- Developer settings -->
 
@@ -170,35 +159,7 @@ $(document).ready(() => { // When the page is ready
   $("#register").on("click", () => { // When the register button is clicked
       window.location.href = "/register"; // Redirect to the register page
   });
-  $("#stu_login").on("click", () => { // When the login button is clicked
-      let stu_username = $("#stu_username").val(); // Get the username
-      let stu_password = $("#stu_password").val(); // Get the password
-      $.ajax({ // Send a request to the login endpoint
-          type: 'GET', 
-          url: "/student/login",
-          dataType: 'json',
-          contentType: 'json',
-          data: {username: stu_username, password: stu_password}, // Use the username and password
-          async: false, // Make the request synchronous
-          success: (data) => { // If the request is successful
-              if (data.error) { // If there is an error
-                Swal.fire({ // Show an error message
-                  icon: 'error',
-                  text: data.error
-                })
-              } else { // If there is no error
-                window.location.href = "/student_dashboard"; // Redirect to the home page
-              }
-          },
-          error: (err) => { // If the request fails
-            Swal.fire({ // Show an error message
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!'
-            })
-          }
-      });
-  });
+ 
 });
 </script>
 

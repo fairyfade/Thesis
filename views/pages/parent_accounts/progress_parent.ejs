@@ -24,61 +24,72 @@
   <br>
   <br>
 
-  <h1>Parent Progress Reports</h1>
+  <h1>Student Progress Reports</h1>
 
-  <p>Your student has completed the following modules: </p>
-
-  
-  <div id="progressData" data-post="<%=progressdata%>">
+  <p>Select a student to view their progress.</p>
+  <hr style="border-top: dotted 5px;" />
+  <h3>Students:</h3>
+  <div id="accountData" data-post="<%=accountdata%>">
+  </div>
+  <div id="studentData" data-post="<%=studentdata%>">
   </div>
 
-
-
-
-  <div class="progress-wrapper">
-
+  <div class="account-wrapper">
   
-  <script type="text/javascript">
+  </div>
+
+  <div class="students-wrapper">
+  
+  </div>
+  
+  
+    <script>
+
+      $(document).ready(() => {console.log($("#accountData").data("post"))});
     
-    $(document).ready(() => {console.log($("#progressData").data("post"))});
+    //var requestedPlantName = document.getElementById("plantSearchBar").value;
   
-  //var requestedPlantName = document.getElementById("plantSearchBar").value;
-
-
-  $(".progress-wrapper").empty();
-
-
-  let studentProgress = $("#progressData").data("post");
-
-  quiz_avg = 0;
-  num_quizzes = 0;
-
-
-  for(i = 0; i< studentProgress.length; i++){
-    //check if it is a quiz
-    if(studentProgress[i].type_curriculum == "Quiz"){
-      //count number of quizzes
-      num_quizzes++;
-      quiz_avg = quiz_avg + studentProgress[i].grade;
-
-
+  
+    $(".account-wrapper").empty();
+    $(".students-wrapper").empty();
+  
+    let account = $("#accountData").data("post");
+  
+    if(account.account_type == 'student'){
+      window.location.href = "/student_dashboard";
     }
-    quiz_avg = quiz_avg / num_quizzes;
-    console.log(quiz_avg);
+    let parent_email = account.email;
+    parent_name = account.firstName;
+   // console.log("First name-", parent_name);
+   // console.log("Parent account-", parent_email);
+  
+    let students = $("#studentData").data("post");
+    //will need to filter students by those with the same email as the parent account
+  
+    for(i = 0; i < students.length; i++){  //update to include general info instead of water info
+      student_email = students[i].email;
+      account_type = students[i].account_type;
+     // console.log("Student account-", student_email);
+      if(student_email == parent_email && account_type == 'student'){
+        $(".students-wrapper").append(`
+        <br>
+        <a href="/parent_dashboard/view_profile/${students[i].username}"><button>${students[i].firstName} ${students[i].lastName}</button></a>
+          <br>
+          <br>
+        </div>`);
+  
+      }
+      
+            
+        }
+  
+    </script>
 
-  }
-
-  $("#quizAvg").text(quiz_avg);
-
-  for(i=0; i<studentProgress.length; i++){
-    $(".progress-wrapper").append(`
-      <h4>Unit ${studentProgress[i].unit_number}, Lesson ${studentProgress[i].lesson_number}, ${studentProgress[i].type_curriculum}-${studentProgress[i].topic}, Grade ${studentProgress[i].grade}%</h4>
-      <br>
-
-      `);
-  }
-
- 
-   
-
-  </script>
+    <style>
+      button{
+        background-color: #DC8D9C;
+        border-color: #DC8D9C;
+        color: black;
+        border-radius: 8px;
+      }
+    </style>

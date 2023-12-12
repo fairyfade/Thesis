@@ -7,66 +7,54 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav ">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="/parent_dashboard">Parent Dashboard</a>
+        <a class="nav-link " aria-current="page" href="/student_dashboard">Student Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/viewProgress">Progress/Acheivements</a>
+        <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
       </li>		
       <li class="nav-item">
-        <a class="nav-link active" href="/manage_account">Manage Account</a>
-      </li>	
+        <a class="nav-link active" href="/my_profile">Student Profile</a>
+      </li>		
+
       </ul>		  
     </div>
     </div>
   </nav>
   <div id="parentData" data-post="<%=parentdata%>">
-  </div>
+</div>
+<br>
+<br>
+<br>
+<h1 id="parentProfile">Profile</h1>
+<div class="accountContainer"> <!-- container for account info -->
+
+  <br/>
+  <label for="username"><b>Username:</b></label> <!-- label for username -->
+  <div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
+  <br/>
+  <label for="firstName"><b>First Name:</b></label> <!-- label for first name -->
+  <div id="firstName" name="firstName" class="userInfo"></div> <!-- div to hold first name -->
+  <br/>
+  <label for="lastName"><b>Last Name:</b></label> <!-- label for last name -->
+  <div id="lastName" name="lastName" class="userInfo"></div> <!-- div to hold last name -->
+  <br/>
+  <label for="email"><b>Email:</b></label> <!-- label for email -->
+  <div id="email" name="email" class="userInfo"></div> <!-- div to hold email -->
+  <br/>
+  <br/><br/><br/>
+  <button id="editAccountValues" class="editButton">Edit My Account</button></div> <!-- div to hold edit and logout buttons -->
+
+  <button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
   <br>
   <br>
-  <br>
-  <h1 id="parentProfile">Profile</h1>
-  <p>Select accounts and manage them</p>
-  <div class="accountContainer"> <!-- container for account info -->
-  
-    <br/>
-    <label for="username"><b>Username:</b></label> <!-- label for username -->
-    <div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
-    <br/>
-    <label for="firstName"><b>First Name:</b></label> <!-- label for first name -->
-    <div id="firstName" name="firstName" class="userInfo"></div> <!-- div to hold first name -->
-    <br/>
-    <label for="lastName"><b>Last Name:</b></label> <!-- label for last name -->
-    <div id="lastName" name="lastName" class="userInfo"></div> <!-- div to hold last name -->
-    <br/>
-    <label for="email"><b>Email:</b></label> <!-- label for email -->
-    <div id="email" name="email" class="userInfo"></div> <!-- div to hold email -->
-    <br/>
-    <br/><br/><br/>
-    <button id="editAccountValues" class="editButton">Edit Parent Account</button></div> <!-- div to hold edit and logout buttons -->
 
-    <button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
-    <br>
-    <br>
+  <a href="/logout"><button class="logoutButton">Log Out</button></a>
+</div>
 
-    <a href="/logout"><button class="logoutButton">Log Out</button></a>
-  </div>
-
-  <br>
-  <br>
-  <br>
-  
-
-
-
-
-  
-    
-
-
-
-  <br>
-
-  <script>
+<br>
+<br>
+<br>
+<script>
     $(document).ready(() => {console.log($("#parentData").data("post"))});
   
   //var requestedPlantName = document.getElementById("plantSearchBar").value;
@@ -89,7 +77,7 @@
     
 
     if (parent.isSelfEdit) { //if user is viewing their own profile
-      $("#parentProfile").text("Parent Profile"); //change header to "My Profile"
+      $("#parentProfile").text("My Profile"); //change header to "My Profile"
       $("#editAccountValues").click(function() { //edit button
         $("#firstName").html(`<input type="text" id="firstNameInput" name="firstNameInput" value="${parent.firstName}">`); //change to input
         $("#lastName").html(`<input type="text" id="lastNameInput" name="lastNameInput" value="${parent.lastName}">`); //change to input

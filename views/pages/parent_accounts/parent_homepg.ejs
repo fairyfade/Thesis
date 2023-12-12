@@ -28,6 +28,7 @@
   <p>Check each child's progress, acheievements, and manage accounts</p>
   <br>
   <!--a href="/create_student_account"><button class="studentButton">Add a Student Account</button></a-->
+  <button id="studentButton" class="studentButton">Add a Student Account</button>
   <br>
   <br>
   <h3 style="text-align: center;">Students: </h3>
@@ -36,7 +37,7 @@
   <div id="studentData" data-post="<%=studentdata%>">
   </div>
 
-
+  
 
   <div class="account-wrapper">
   
@@ -64,6 +65,9 @@
 <br>
 <br>
   <script>
+    $("#studentButton").on("click", () => { // When the add student button is clicked
+      window.location.href = "/parent_dashboard/create_student_account"; // Redirect to the register student page
+    });
     $(document).ready(() => {console.log($("#accountData").data("post"))});
   
   //var requestedPlantName = document.getElementById("plantSearchBar").value;
@@ -73,6 +77,10 @@
   $(".students-wrapper").empty();
 
   let account = $("#accountData").data("post");
+
+  if(account.account_type == 'student'){
+    window.location.href = "/student_dashboard";
+  }
   let parent_email = account.email;
   parent_name = account.firstName;
  // console.log("First name-", parent_name);

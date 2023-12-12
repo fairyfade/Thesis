@@ -50,6 +50,12 @@ module.exports = {
       
     });
   },
+  createAnotherStudent:function(req, res) {
+    req.session.userId = undefined; // Clear session
+    return res.view('pages/create_student_account', {
+      
+    });
+  },
   /*
     Create a new user.
     @param {string} firstName
@@ -145,8 +151,8 @@ module.exports = {
         username: user.username,
         isSelfEdit: isSelfEdit
       };
-      return res.view('pages/profile', {
-        account: JSON.stringify(account)
+      return res.view( {
+        parentdata:JSON.stringify(account)
       });
     } catch (err) { // Error getting account
       return res.send({
@@ -154,6 +160,7 @@ module.exports = {
       });
     }
   },
+  
   /*
     Edit a user's account information.
     @param {string} firstName
@@ -166,19 +173,19 @@ module.exports = {
     try {
       const firstName = req.param('firstName');
       const lastName = req.param('lastName');
-      const email = req.param('email');
+
       const userId = req.session.userId;
       if (!userId) { //Redirect to login page if not logged in
         return res.view('pages/login', {
           error: 'Missing required params'
         });
       }
-      if (!firstName || !lastName || !email || !interests) { //Check for missing params
+      if (!firstName || !lastName ) { //Check for missing params
         return res.send({
           error: 'All fields required'
         });
       }
-      if (firstName === '' || lastName === '' || email === '' || interests === '') { //Check for empty params
+      if (firstName === '' || lastName === '' ) { //Check for empty params
         return res.send({
           error: 'All fields required'
         });
@@ -195,8 +202,8 @@ module.exports = {
       await Users.update({id: userId}, { //Update user
         firstName: firstName,
         lastName: lastName,
-        email: email,
-        interests: interests
+
+
       }).exec((err, user) => { //Return error if update fails
         if (err) {
           return res.send({
@@ -254,6 +261,7 @@ viewStudents: async function(req, res) {
         lastName: user.lastName,
         email: user.email,
         username: user.username,
+        account_type: user.account_type,
       };
     //const posts = await Student.find().populate('userID');
  //   const parent = await Users.find({id: accountId});
@@ -267,6 +275,48 @@ viewStudents: async function(req, res) {
     );
   } catch (error) {
     console.log(error);
+  }
+},
+
+viewStudentProfile: async function(req, res){
+  try {
+    const userId = req.session.userId;
+    let accountId = req.param('accountId');
+    const username = req.param('username');
+    if (!userId) { // User not logged in
+      return res.view('pages/login', {
+        error: 'Missing required params'
+      });
+    }
+    if (!accountId) { // Get own account
+      accountId = userId;
+    }
+    let isSelfEdit = userId === accountId;
+    const foundUser = await Users.find({username: username});
+    
+    if (!foundUser || foundUser.length === 0) { // User not found
+      return res.view('pages/homepage', {
+        error: 'User not found'
+      });
+    }
+    const user = foundUser[0];
+    const account = { // Return account info
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      username: user.username,
+      isSelfEdit: isSelfEdit
+    };
+    const studentProgress = await Progress.find({userID: account.id});
+    return res.view( {
+      parentdata:JSON.stringify(account),
+      progressdata:JSON.stringify(studentProgress)
+    });
+  } catch (err) { // Error getting account
+    return res.send({
+      error: 'Error getting account'
+    });
   }
 }
 };

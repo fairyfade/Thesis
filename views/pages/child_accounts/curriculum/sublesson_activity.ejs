@@ -14,7 +14,10 @@
       <a class="nav-link" aria-current="page" href="/student_dashboard">Student Dashboard</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
+      <a class="nav-link" href="/my_progress">Progress/Achievements</a>
+    </li>		
+    <li class="nav-item">
+      <a class="nav-link" href="/my_profile">Student Profile</a>
     </li>		
 
     </ul>		  
@@ -94,8 +97,8 @@
                 })
               } else { // If there is no error
                 Swal.fire({
-                title: 'Congratulations, you have completed the activity. : )',
-                text: 'You have earned __ coins for the rewards store!',
+                title: 'Congratulations',
+                text: 'You have completed the activity. : )',
                 icon: 'success',
                 confirmButtonText: 'Continue'
            }).then(function() {

@@ -18,18 +18,21 @@ module.exports.routes = {
   '/user/login': 'UserController.login', // Login action
   '/logout': 'UserController.logout', // Logout action
   '/user/register': 'UserController.createAccount', // Register action
-  '/user/edit': {controller: 'UserController', action: 'editAccount', policy: 'sessionAuth'}, // Edit account action
+  '/editParentAccount': {controller: 'UserController', action: 'editAccount', policy: 'sessionAuth'}, // Edit account action
   '/parent_dashboard': {view: 'pages/parent_accounts/parent_homepg', controller: 'UserController', action: 'viewStudents', policy: 'sessionAuth'},
-  '/parent_dashboard/view_profile/:username': {view: 'pages/parent_accounts/studentDetail',controller: 'StudentUserController', action: 'fetchStudentProfile', policy: 'sessionAuth'},//action to view specific student profile
+  '/parent_dashboard/view_profile/:username': {view: 'pages/parent_accounts/studentDetail',controller: 'UserController', action: 'viewStudentProfile', policy: 'sessionAuth'},//action to view specific student profile
   
   '/student/register': {controller:'StudentUserController', action: 'createAccount'}, //create student account
   '/create_student_account': {view: 'pages/create_student_account'}, //student signup form 
+  '/parent_dashboard/create_student_account': 'UserController.createAnotherStudent', //create a student account after the signup process
   '/plants/fetch': {controller: 'StudentUserController', action: 'fetchPlants', policy: 'sessionAuth'}, //get all plants
-  '/viewProgress': {view: 'pages/parent_accounts/progress_parent', controller: 'CurriculumController', action: 'fetchProgress', policy: 'sessionAuth'}, //view student progress (from parent account)
-  '/manage_account': {view: 'pages/parent_accounts/manage_accounts', controller: 'UserController', action: 'fetchParent', policy: 'sessionAuth'}, //manage parent accounts
+  '/viewProgress': {view: 'pages/parent_accounts/progress_parent', controller: 'UserController', action: 'viewStudents', policy: 'sessionAuth'}, //view student progress (from parent account)
+  '/manage_account': {view: 'pages/parent_accounts/manage_accounts', controller: 'UserController', action: 'getAccount', policy: 'sessionAuth'}, //manage parent accounts
+  '/manage_student_accounts': {view: 'pages/parent_accounts/manageStudentAccount', controller: 'UserController', action: 'viewStudents', policy: 'sessionAuth'}, //manage student accounts
+  
   '/student_dashboard': {view: 'pages/child_accounts/child_homepg', policy: 'sessionAuth'},
   '/student/login': 'StudentUserController.login', //login to student account
-  '/coding_profile': {view: 'pages/child_accounts/coding_profile', policy: 'sessionAuth'}, //coding profile page
+  '/my_profile': {view: 'pages/child_accounts/my_profile', controller: 'UserController', action: 'getAccount', policy: 'sessionAuth'}, //coding profile page
   '/my_progress': {view: 'pages/child_accounts/progress_child', controller: 'CurriculumController', action: 'fetchProgress', policy: 'sessionAuth'}, //view student progress (student accout)
   '/rewards_store': {view: 'pages/child_accounts/rewards_store', policy: 'sessionAuth'}, //view Rewards Store
   '/startCoding': {view: 'pages/child_accounts/curriculum/startCoding', policy: 'sessionAuth'},
