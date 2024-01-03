@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,21 +7,84 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav ">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="#">Child Dashboard</a>
+        <a class="nav-link active" aria-current="page" href="/student_dashboard">Student Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Progress/Acheivements</a>
+        <a class="nav-link" href="/my_progress">Progress/Achievements</a>
       </li>		
       <li class="nav-item">
-        <a class="nav-link active" href="#">Rewards Store</a>
-      </li>	
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Coding Profile</a> <!--Mayve this is like their "profile"-->
-      </li>	
+        <a class="nav-link" href="/my_profile">Student Profile</a>
+      </li>		
+
       </ul>		  
     </div>
     </div>
   </nav>
+  <br>
+  <br>
+  <br>
 
-  <h1>Parent Dashboard</h1>
-  <p>Check each child's progress, acheievements, and manage accounts</p>
+  <h2>Student Dashboard</h2>
+
+
+  <p>Let's continue on our Space Python Journey!</p>
+
+  <a href="/startCoding"><button id="startCoding">Start Coding</button></a> <br> <br>
+
+  <a href="/my_progress"><button id="progress">Look at Progress</button></a> <br> <br>
+
+  <a href="/my_profile"><button id="profile">Visit Student Profile</button></a> <br> <br>
+  <h3>Current Lessons </h3>
+
+  <div class="lessonContainer">
+    <p>Try out coding with the "Start Coding" button above :)</p>
+  </div>
+  <br>
+  <img src="/images/student/starry.png" alt="Starry Night Sky" class="centerImg">
+  <br>
+  <br>
+  <style>
+      h2{
+    color: #024b0c;
+  }
+  h3{
+    color: #024b0c;
+  }
+  button{
+    background-color: #4895ef;
+    border-color: #4895ef;
+    color: white;
+    border-radius: 8px;
+  }
+  body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+  .centerImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+} 
+  </style>
+
+
+  <script>
+    $(document).ready(() => {console.log($("#msgData").data("post"))});
+  
+  //var requestedPlantName = document.getElementById("plantSearchBar").value;
+
+
+  $(".msg-wrapper").empty();
+
+
+  let msg = $("#msgdata").data("post");
+
+  for(i = 0; i < plants.length; i++){  //update to include general info instead of water info
+      $(".msg-wrapper").append(`
+        <p>Welcome ${msg[i].firstName}</p>
+        <br>`);
+          
+      }
+
+  </script>

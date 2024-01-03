@@ -1,0 +1,152 @@
+<head>
+</head>
+
+<!-- Navigation bar start  -->
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
+  <div class="container-fluid ">
+  <a class="navbar-brand " href="#">Space Python</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav ">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/student_dashboard">Student Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/my_progress">Progress/Acheivements</a>
+    </li>		
+    <li class="nav-item">
+      <a class="nav-link" href="/my_profile">Student Profile</a>
+    </li>		
+
+    </ul>		  
+  </div>
+  </div>
+</nav>
+<!-- Navigation bar end  -->
+
+<body>
+  <br>
+  <br>
+  <br>
+  <div id="guidedData" data-guided="<%=guidedInfo%>"></div>
+  <div class="codingJourneyGraphic"></div> <!--Leaving space (lol) for interactive graphic that shows where they are along their coding journey-->
+  <div class="guidedName">
+    <h3 id="guidedName">Guided Activity Name</h3>
+  </div>
+  <br>
+  <div class="guidedVid">
+    
+    <iframe id="guidedVid" width="100%" height="356"></iframe>
+  
+</div>
+<br>
+  <div class="textEd">
+    <iframe id="trinket_url" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+  </div>
+  <br>
+  <div class="continueButton">
+    <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
+  </div>
+
+
+
+  <script type="text/javascript">
+
+    // adapted from @Npitcher12 & @ascemek: Script to populate plant information
+
+      const guidedData = $("#guidedData").data("guided");
+      $("#guidedName").text(guidedData.topic);
+      //$("#guidedVid").text(guidedData.url);
+      $("#guidedVid").attr("src", guidedData.url);
+      $("#trinket_url").attr("src", guidedData.trinket_url);
+      //https://trinket.io/embed/python/4e609d1a22  this is for the activity when I fix that 
+      //$("#written").text(sublessonData.body);
+   //   $("#introductionHeader").text(unitData.introHeader);
+    //  $("#unitIntroText").text(unitData.introduction_text);
+    //  $("#lessonInformation").text(unitData.lesson_journey);
+
+      if(guidedData.number_activities == '1'){
+        lessonLink = "/sublesson/activity/" + guidedData.unit_number + "/" + guidedData.lesson_number + "/" + guidedData.sublesson_number + "/1"; 
+      }
+      else{
+        sublessonNum = parseInt(guidedData.sublesson_number); //turn into int for comparison
+      numberSublessons = parseInt(guidedData.number_sublessons); //turn into int for comparison 
+        newSublessonNumInt = sublessonNum + 1;
+        newSublessonNum = newSublessonNumInt.toString(); //turn back to string for link 
+        lessonLink = '/sublesson/video/' + guidedData.unit_number + '/' + guidedData.lesson_number + '/' + newSublessonNum;
+      }
+
+    //  lessonLink ="/sublesson/activity/" + guidedData.unit_number + "/" + guidedData.lesson_number + "/" + guidedData.sublesson_number + "/" activity number?
+     // $("#continueLink").attr("href", lessonLink);
+
+    $("#continueButton").on("click", () => { 
+      $.ajax({ // update student progress
+          type: 'GET', 
+          url: "/updateStudentProgress",
+          dataType: 'json',
+          contentType: 'json',
+          data: {
+                 unit_number: guidedData.unit_number,
+                 lesson_number: guidedData.lesson_number,
+                 sublesson_number: guidedData.sublesson_number,
+                 activity_number: '0',
+                 type_curriculum: "Guided Activity",
+                 topic: guidedData.topic,
+                 grade: '100'}, // Use the username and password
+          async: false, // Make the request synchronous
+          success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Congratulations',
+                text: 'You have completed the guided activity. : )',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+           }).then(function() {
+            window.location.href = lessonLink;
+          })
+           console.log(data);
+              }
+          },
+          error: (err) => { // If the request fails
+            Swal.fire({ // Show an error message
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!'
+            })
+          }
+      });
+
+    })
+  </script>
+
+  <br>
+  <br>
+  <br>
+  <br>
+</body>
+<style>
+  h2{
+color: #024b0c;
+}
+h3{
+color: #024b0c;
+}
+button{
+background-color: #4895ef;
+border-color: #4895ef;
+color: white;
+border-radius: 8px;
+}
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+</style>
+

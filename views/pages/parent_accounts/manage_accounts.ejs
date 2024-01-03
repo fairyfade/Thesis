@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,18 +7,201 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav ">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="#">Parent Dashboard</a>
+        <a class="nav-link" aria-current="page" href="/parent_dashboard">Parent Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Progress/Acheivements</a>
+        <a class="nav-link" href="/viewProgress">Progress/Acheivements</a>
       </li>		
       <li class="nav-item">
-        <a class="nav-link active" href="#">Manage Account</a>
+        <a class="nav-link active" href="/manage_account">Manage Account</a>
       </li>	
       </ul>		  
     </div>
     </div>
   </nav>
-
-  <h1>Manage Accounts</h1>
+  <div id="parentData" data-post="<%=parentdata%>">
+  </div>
+  <br>
+  <br>
+  <br>
+  <h1 id="parentProfile">Profile</h1>
   <p>Select accounts and manage them</p>
+  <div class="accountContainer"> <!-- container for account info -->
+  
+    <br/>
+    <label for="username"><b>Username:</b></label> <!-- label for username -->
+    <div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
+    <br/>
+    <label for="firstName"><b>First Name:</b></label> <!-- label for first name -->
+    <div id="firstName" name="firstName" class="userInfo"></div> <!-- div to hold first name -->
+    <br/>
+    <label for="lastName"><b>Last Name:</b></label> <!-- label for last name -->
+    <div id="lastName" name="lastName" class="userInfo"></div> <!-- div to hold last name -->
+    <br/>
+    <label for="email"><b>Email:</b></label> <!-- label for email -->
+    <div id="email" name="email" class="userInfo"></div> <!-- div to hold email -->
+    <br/>
+    <br/><br/><br/>
+    <button id="editAccountValues" class="editButton">Edit Parent Account</button></div> <!-- div to hold edit and logout buttons -->
+
+    <button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
+    <br>
+    <br>
+
+    <a href="/logout"><button class="logoutButton">Log Out</button></a>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  
+
+
+
+
+  
+    
+
+
+
+  <br>
+
+  <script>
+    $(document).ready(() => {console.log($("#parentData").data("post"))});
+  
+  //var requestedPlantName = document.getElementById("plantSearchBar").value;
+
+
+  $(".parents-wrapper").empty();
+
+
+  let parent = $("#parentData").data("post");
+  
+  $("#username").text(parent.username); //set username
+    $("#firstName").text(parent.firstName); //set first name
+    $("#lastName").text(parent.lastName); //set last name
+
+    $("#email").text(parent.email); //set email
+
+
+  
+  $("#saveAccountValues").hide(); //hide save button
+    
+
+    if (parent.isSelfEdit) { //if user is viewing their own profile
+      $("#parentProfile").text("Parent Profile"); //change header to "My Profile"
+      $("#editAccountValues").click(function() { //edit button
+        $("#firstName").html(`<input type="text" id="firstNameInput" name="firstNameInput" value="${parent.firstName}">`); //change to input
+        $("#lastName").html(`<input type="text" id="lastNameInput" name="lastNameInput" value="${parent.lastName}">`); //change to input
+
+        $("#editAccountValues").hide(); //hide edit button
+        $("#saveAccountValues").show(); //show save button
+      });
+      $("#saveAccountValues").click(function() { //save button
+        let firstName = $("#firstNameInput").val(); //get new first name
+        let lastName = $("#lastNameInput").val(); //get new last name
+
+        $.ajax({ //send ajax request to save changes
+          url: "/editParentAccount", //edit user route
+          type: "GET", //get request
+          data: { //data to send
+            firstName: firstName,
+            lastName: lastName,
+
+          },
+          success: function(data) { //on success
+            if (data.success) { //if success
+              $("#firstName").text(firstName); //change first name
+              $("#lastName").text(lastName); //change last name
+
+              $("#editAccountValues").show(); //show edit button
+              $("#saveAccountValues").hide(); //hide save button
+              Swal.fire({ //show success alert
+                title: "Success",
+                text: "Your changes have been saved.",
+                icon: "success",
+                confirmButtonText: "Ok"
+              });
+            } else {
+              Swal.fire({ //show error alert
+                title: "Error",
+                text: data.error,
+                icon: "error",
+                confirmButtonText: "Ok"
+              });
+            }
+          },
+          error: function(err) { //on error
+            Swal.fire({ //show error alert
+              title: "Error",
+              text: "An error occurred while trying to save your changes.",
+              icon: "error",
+              confirmButtonText: "Ok"
+            })
+          }
+        });
+      });
+
+    }
+
+  </script>
+  <style>
+    h1{
+      color: #024b0c;
+    }
+    h2{
+      color: #024b0c;
+    }
+  
+    h3{
+      color: #024b0c;
+    }
+
+    h4{
+      color: #024b0c;
+    }
+
+    h5{
+      color: #024b0c;
+    }
+  .logoutButton{
+  
+    background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
+  
+  }
+  .manageStudentButton{
+  
+  background-color: #DC8D9C;
+  border-color: #DC8D9C;
+  color: black;
+  border-radius: 8px;
+  
+}
+.editButton{
+  
+  background-color: #DC8D9C;
+  border-color: #DC8D9C;
+  color: black;
+  border-radius: 8px;
+
+  
+}
+.center{
+  border: 1px solid black; 
+  width: 60%; 
+  padding-left: 2%; 
+  padding-top: 2%; 
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+
+  
+  </style>

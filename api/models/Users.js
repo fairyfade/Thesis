@@ -26,10 +26,11 @@ module.exports = {
         type: 'string',
         required: true,
       },
-      interests: { // Interests
+      account_type: { //student or parent account
         type: 'string',
-        defaultsTo: '',
+        required: true,
       },
+
     }
   };
   

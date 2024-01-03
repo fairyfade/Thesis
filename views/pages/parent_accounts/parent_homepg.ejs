@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
     <div class="container-fluid ">
     <a class="navbar-brand " href="#">Space Python</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,18 +7,143 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav ">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="#">Parent Dashboard</a>
+        <a class="nav-link active" aria-current="page" href="/parent_dashboard">Parent Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Progress/Acheivements</a>
+        <a class="nav-link" href="/viewProgress">Progress/Acheivements</a>
       </li>		
       <li class="nav-item">
-        <a class="nav-link active" href="#">Manage Account</a>
+        <a class="nav-link" href="/manage_account">Manage Account</a>
       </li>	
       </ul>		  
     </div>
     </div>
   </nav>
 
-  <h1>Parent Dashboard</h1>
+  <br>
+  <br>
+  <br>
+
+  <h2>Parent Dashboard</h2>
   <p>Check each child's progress, acheievements, and manage accounts</p>
+  <br>
+  <!--a href="/create_student_account"><button class="studentButton">Add a Student Account</button></a-->
+  <button id="studentButton" class="studentButton">Add a Student Account</button>
+  <br>
+  <br>
+  <h3 style="text-align: center;">Students: </h3>
+  <div id="accountData" data-post="<%=accountdata%>">
+  </div>
+  <div id="studentData" data-post="<%=studentdata%>">
+  </div>
+
+  
+
+  <div class="account-wrapper">
+  
+  </div>
+
+  <div class="students-wrapper">
+  
+  </div>
+  <br>
+  <hr style="border-top: dotted 5px;" />
+  <br>
+  <h3>Parent Controls: </h3>
+  <br>
+  <div class="parent">
+    <div class="child"><img src="/images/homepg/kidWorking.jpg" alt="Girl in a jacket" style="width: 90%"></div>
+    
+  <!--Might want to change these links up to lead to other parts of the site.... maybe...-->
+  <div class="child">
+  <a href="/manage_account"><button id="account" class="controlButton">Your Account</button></a> <br> <br>
+  <a href="/viewProgress"><button id="childAcc" class="controlButton">Manage Child Account</button></a> <br> <br>
+  <a href="/viewProgress"><button id="progress" class="controlButton">View Student Progress/Activity</button></a> <br> <br>
+ 
+</div>
+</div>
+<br>
+<br>
+  <script>
+    $("#studentButton").on("click", () => { // When the add student button is clicked
+      window.location.href = "/parent_dashboard/create_student_account"; // Redirect to the register student page
+    });
+    $(document).ready(() => {console.log($("#accountData").data("post"))});
+  
+  //var requestedPlantName = document.getElementById("plantSearchBar").value;
+
+
+  $(".account-wrapper").empty();
+  $(".students-wrapper").empty();
+
+  let account = $("#accountData").data("post");
+
+  if(account.account_type == 'student'){
+    window.location.href = "/student_dashboard";
+  }
+  let parent_email = account.email;
+  parent_name = account.firstName;
+ // console.log("First name-", parent_name);
+ // console.log("Parent account-", parent_email);
+
+  let students = $("#studentData").data("post");
+  //will need to filter students by those with the same email as the parent account
+
+  for(i = 0; i < students.length; i++){  //update to include general info instead of water info
+    student_email = students[i].email;
+    account_type = students[i].account_type;
+   // console.log("Student account-", student_email);
+    if(student_email == parent_email && account_type == 'student'){
+      $(".students-wrapper").append(`
+      <div class="flex-container" style="border: 1px solid black; width: 60%; padding-left: 2%; padding-top: 2%; display: block; margin-left: auto; margin-right: auto;">
+        <h4>Student Name: <a href="/parent_dashboard/view_profile/${students[i].username}">${students[i].firstName}</a></h4>
+        <h5>Username: ${students[i].username}</h5>
+        <br>
+        <br>
+      </div>`);
+
+    }
+    
+          
+      }
+
+  </script>
+<style>
+  h2{
+    color: #024b0c;
+  }
+
+  h3{
+    color: #024b0c;
+  }
+.controlButton{
+
+  background-color: #DC8D9C;
+  border-color: #DC8D9C;
+  color: black;
+  border-radius: 8px;
+  
+
+}
+
+.studentButton{
+  background-color: #374B4A;
+  color: white;
+  border-radius: 8px;
+  border-color: #0F402C; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.parent {
+  display: flex;
+}
+.child {
+  flex: 1;
+}
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+
+</style>

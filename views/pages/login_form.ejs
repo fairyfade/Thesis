@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #191970;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
   <div class="container-fluid ">
   <a class="navbar-brand " href="/">Space Python</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,30 +20,60 @@
   </div>
 </nav>
 <style>
+    body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+  h2{
+    color: #0F402C;
+  }
   .loginContainer {
       margin: auto;
       width: 50%;
       padding: 10px;
   }
+  input {
+      margin-left: 0px;
+      width: 35%;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
+  }
   #username {
-      margin-left: 20px;
+      margin-left: 5%;
       width: 35%;
   }
   #password {
-      margin-left: 25px;
+      margin-left: 5%;
       width: 35%;
   }
   #login {
-      margin-left: 50%;
+      margin-left: 60%;
+      background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
   }
   #register {
-      margin-left: 37%;
+      margin-left: 47%;
+          background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
+  }
+  #stu_login{
+      margin-left: 60%;
+      background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
   }
 </style>
 
-<h1>Space Python</h1><br/><br/><br/>
+<h1>Space Python</h1><br/>
 <div class="loginContainer"> <!-- This is the login container -->
-  <h2>Log In to Space Python:</h2><br/>
+  <h2>Student and Parent Log In</h2><br/>
   <label for="username">Username</label> <!-- Username label -->
   <input name="username" id="username" placeholder="Username"> <!-- Username input -->
   <br/><br/>
@@ -55,6 +85,12 @@
   <br/>
   <button id="register">Create Account</button> <!-- Register button -->
 </div>
+
+
+
+<hr>
+<br>
+
 <button id="bypass">Click me to bypass login</button> <!-- Bypass button -->
 <div id="developerSettings" data-devmode="<%=sails.config.custom.devMode%>"></div> <!-- Developer settings -->
 
@@ -127,6 +163,7 @@ $(document).ready(() => { // When the page is ready
   $("#register").on("click", () => { // When the register button is clicked
       window.location.href = "/register"; // Redirect to the register page
   });
+ 
 });
 </script>
 

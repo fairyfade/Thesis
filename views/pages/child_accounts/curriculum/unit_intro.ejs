@@ -1,0 +1,163 @@
+
+<head>
+  </head>
+  
+  <!-- Navigation bar start  -->
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
+    <div class="container-fluid ">
+    <a class="navbar-brand " href="#">Space Python</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/student_dashboard">Student Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/my_progress">Progress/Achievements</a>
+      </li>		
+      <li class="nav-item">
+        <a class="nav-link" href="/my_profile">Student Profile</a>
+      </li>		
+  
+      </ul>		  
+    </div>
+    </div>
+  </nav>
+  <!-- Navigation bar end  -->
+  
+  <body>
+    <br>
+    <br>
+    <br>
+    <div id="unitData" data-unit="<%=unitInfo%>"></div>
+    <div class="codingJourneyGraphic"></div> <!--Leaving space (lol) for interactive graphic that shows where they are along their coding journey-->
+    <div class="unitNameHeader">
+      <h3 id="unitName"></h3>
+    </div>
+    <br>
+    <h5>Learning Goals:</h5>
+    <div class="learningGoals">
+      <h4 id="learningGoalsHeader"></h4>
+      <p id="unitLearningGoals"></p>
+    </div>
+    <div class="syntaxLink">
+      <h4 id="syntaxHeader"></h4>
+    </div>
+    <h5>Unit Introduction:</h5>
+    <div class="unitIntroduction">
+      <h4 id="introductionHeader"></h4>
+      <p id="unitIntroText"></p>
+    </div>
+    <h5>Lesson Plan:</h5>
+    <div class="unitLessons">
+      <h4 id="lessongJourneyHeader"></h4>
+      <div id="lessonInformation"></div>
+    </div>
+
+    <br>
+
+    <div class="continueButton">
+      <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
+    </div>
+  
+  
+  
+    <script type="text/javascript">
+
+      // adapted from @Npitcher12 & @ascemek: Script to populate plant information
+
+        
+        const unitData = $("#unitData").data("unit");
+        /* If I write a function to change the link, what would be the best way to do so from this page...*/
+        /*This page will always lead to the first lesson introduction for the current unit, so I should make the link go there */
+        const curr_unit = unitData.unit_number;
+
+        $("#unitName").text(unitData.topic);
+        $("#unitLearningGoals").text(unitData.learning_goals);
+        $("#syntaxHeader").text(unitData.syntax_link);
+     //   $("#introductionHeader").text(unitData.introHeader);
+        $("#unitIntroText").text(unitData.introduction_text);
+        $("#lessonInformation").text(unitData.lesson_journey);
+
+        lessonLink ="/lesson/overview/" + curr_unit + '/1'
+   //     $("#continueLink").attr("href", lessonLink);
+
+
+      $("#continueButton").on("click", () => { 
+      $.ajax({ // update student progress
+          type: 'GET', 
+          url: "/updateStudentProgress",
+          dataType: 'json',
+          contentType: 'json',
+          data: {
+                 unit_number: unitData.unit_number,
+                 lesson_number: '0',
+                 sublesson_number: '0',
+                 activity_number: '0',
+                 type_curriculum: "Introduction",
+                 topic: unitData.topic,
+                 grade: '100'}, // Use the username and password
+          async: false, // Make the request synchronous
+          success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Congratulations',
+                text: 'You have completed the unit introduction. : )',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+           }).then(function() {
+            window.location.href = lessonLink;
+          })
+           console.log(data);
+              }
+          },
+          error: (err) => { // If the request fails
+            Swal.fire({ // Show an error message
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!'
+            })
+          }
+      });
+
+    })
+    </script>
+  
+    <br>
+    <br>
+    <br>
+    <br>
+  </body>
+  <style>
+    h2{
+  color: #024b0c;
+}
+h3{
+  color: #024b0c;
+}
+h4{
+  color: #024b0c;
+}
+h5{
+  color: #024b0c;
+}
+button{
+  background-color: #4895ef;
+  border-color: #4895ef;
+  color: white;
+  border-radius: 8px;
+}
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+</style>
+  
+  

@@ -1,27 +1,519 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #191970;">
-    <div class="container-fluid ">
-    <a class="navbar-brand " href="#">Space Python</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav ">
-      <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="#">Child Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Progress/Acheivements</a>
-      </li>		
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Rewards Store</a>
-      </li>	
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Coding Profile</a> <!--Mayve this is like their "profile"-->
-      </li>	
-      </ul>		  
-    </div>
-    </div>
-  </nav>
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
+  <div class="container-fluid ">
+  <a class="navbar-brand " href="#">Space Python</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav ">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/student_dashboard">Student Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/my_progress">Progress/Achievements</a>
+    </li>		
+    <li class="nav-item">
+      <a class="nav-link" href="/my_profile">Student Profile</a>
+    </li>		
 
-  <h1>Progress and acheievements page</h1>
+    </ul>		  
+  </div>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+
+  <h1>My Progress</h1>
   <p>See how far you've come!</p>
+  <p>Completed units, lessons, and activities will show up as colorful buttons instead of gray buttons when completed. You can also look for the percentage complete or incomplete/complete marker to see if a unit, lesson, or activity is complete.</p>
+
+  <hr style="border-top: dotted 5px;" />
+  <a href="/unit/overview/1"><button id = "unit1Button" class="unit">Unit 1: </button></a> <b><p id = "unit1Percentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <a href="/lesson/overview/1/1"><button id="u1lesson1Button" class="lesson">Lesson 1: </button></a> <b><p id = "u1lesson1Percentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <a href="/sublesson/guided_activity/1/1/1"><button id = "u1l1guided" class="act">Guided Activity "Hello World": </button></a> <b><p id = "guidedActu1l1" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/1/1/1/1"><button id ="u1l1act" class="act">Activity "Favorite Foods": </button></a> <b><p id = "u1l1actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/1/1/1/1"><button id ="u1l1act_review" class="act">Activity Review "Favorite Foods": </button></a> <b><p id = "u1l1actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/lesson/overview/1/2"><button id="u1lesson2Button" class="lesson">Lesson 2: </button> </a><b><p id = "u1lesson2Percentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <!--Sublesson 1-->
+  <a href="/sublesson/guided_activity/1/2/1"><button id = "u1l2s1guided" class="act">Guided Activity "Making a Sandwich": </button></a> <b><p id = "u1l2s1guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <!--Sublesson 2-->
+  <a href="/sublesson/guided_activity/1/2/2"><button id = "u1l2s2guided" class="act">Guided Activity "Sandwich Making Program": </button></a> <b><p id = "u1l2s2guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/1/2/2/1"><button id ="u1l2s2act" class="act">Activity "Getting Ready For School": </button></a> <b><p id = "u1l2s2actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/1/2/2/1"><button id ="u1l2s2act_review" class="act">Activity Review "Getting Ready For School": </button></a> <b><p id = "u1l2s2actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <!--Sublesson 3-->
+  <a href="/sublesson/guided_activity/1/2/3"><button id = "u1l2s3guided" class="act">Guided Activity "Debugging": </button></a> <b><p id = "u1l2s3guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/1/2/3/1"><button id ="u1l2s3act" class="act">Activity "Fix the Errors": </button></a> <b><p id = "u1l2s3actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/1/2/3/1"><button id ="u1l2s3act_review" class="act">Activity Review "Fix the Errors": </button></a> <b><p id = "u1l2s3actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/lesson/overview/1/3"><button id="u1l3Button" class="lesson">Lesson 3: </button></a> <b><p id = "u1lesson3Percentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <!--Sublesson 1-->
+  <a href="/sublesson/guided_activity/1/3/1"><button id = "u1l3s1guided" class="act">Guided Activity "Creating Your First For Loop": </button></a> <b><p id = "u1l3s1guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/1/3/1/1"><button id ="u1l3s1act" class="act">Activity "Multiples": </button></a> <b><p id = "u1l3s1actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/1/3/1/1"><button id ="u1l3s1act_review" class="act">Activity Review "Multiples": </button></a> <b><p id = "u1l3s1actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <!--Sublesson 2-->
+  <a href="/sublesson/guided_activity/1/3/2"><button id = "u1l3s2guided" class="act">Guided Activity "Taking User Input": </button> </a><b><p id = "u1l3s2guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/1/3/1/2"><button id ="u1l3s2act" class="act">Activity "Planning Your Journey": </button></a> <b><p id = "u1l3s2actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/1/3/1/2"><button id ="u1l3s2act_review" class="act">Activity Review "Planning Your Journey": </button></a> <b><p id = "u1l3s2actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/unit/review/1"><button id = "u1ReviewButton" class="unit">Unit 1 Review: </button></a> <b><p id = "u1ReviewPercentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <a href="/unit/quiz/1"><button id = "u1QuizButton" class="unit">Unit 1 Quiz: </button></a> <b><p id = "u1QuizPercentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <a href="/unit/challenge/1"><button id = "u1ChallengeButton" class="unit">Unit 1 Challenge: </button></a> <b><p id = "u1ChallengePercentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <!--End of Unit 1-->
+
+  <hr style="border-top: dotted 5px;" />
+
+  <button id = "unit2Button" class="unit">Unit 2: </button> <b><p id = "unit2Percentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <a href="/lesson/overview/2/1"><button id="u2lesson1Button" class="lesson">Lesson 1: </button></a> <b><p id = "u2lesson1Percentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <!--Sublesson 1-->
+  <a href="/sublesson/guided_activity/2/1/1"><button id = "u2l1s1guided" class="act">Guided Activity "Checking Coordinates": </button></a> <b><p id = "u2l1s1guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/2/1/1/1"><button id ="u2l1s1act" class="act">Activity "Launch Countdown": </button> </a><b><p id = "u2l1s1actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/2/1/1/1"><button id ="u2l1s1act_review" class="act">Activity Review "Launch Countdown": </button></a> <b><p id = "u2l1s1actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <!--Sublesson 2-->
+  <a href="/sublesson/guided_activity/2/1/2"><button id = "u2l1s2guided" class="act">Guided Activity "How to Write an If Statement": </button> </a><b><p id = "u2l1s2guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/2/1/2/1"><button id ="u2l1s2act" class="act">Activity "Checking Distance": </button> </a><b><p id = "u2l1s2actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/2/1/2/1"><button id ="u2l1s2act_review" class="act">Activity Review "Checking Distance": </button></a> <b><p id = "u2l1s2actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <!--Sublesson 3-->
+  <a href="/sublesson/guided_activity/2/1/3"><button id = "u2l1s3guided" class="act">Guided Activity "Using Conditional Statements": </button></a> <b><p id = "u2l1s3guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/2/1/3/1"><button id ="u2l1s3act" class="act">Activity "Checking Distance and Fuel Levels": </button></a> <b><p id = "u2l1s3actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/2/1/3/1"><button id ="u2l1s3act_review" class="act">Activity Review "Checking Distance and Fuel Levels": </button></a> <b><p id = "u2l1s3actReviewCompletion" style="display:inline-block;">incomplete</p>
+  <br>
+  <a href="/lesson/overview/2/2"><button id="u2lesson2Button" class="lesson">Lesson 2: </button> </a><b><p id = "u2lesson2Percentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <!--Sublesson 1-->
+  <a href="/sublesson/guided_activity/2/2/1"><button id = "u2l2s1guided" class="act">Guided Activity "Checking Supplies": </button></a> <b><p id = "u2l2s1guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/2/2/1/1"><button id ="u2l2s1act" class="act">Activity "Calculating Fuel": </button> </a><b><p id = "u2l2s1actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/2/2/1/1"><button id ="u2l2s1act_review" class="act">Activity Review "Calculating Fuel": </button></a> <b><p id = "u2l2s1actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <!--Sublesson 2-->
+  <a href="/sublesson/guided_activity/2/2/2"><button id = "u2l2s2guided" class="act">Guided Activity "Make a While Loop": </button></a> <b><p id = "u2l2s2guidedAct" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity/2/2/2/1"><button id ="u2l2s2act" class="act">Activity "Making Another While Loop": </button></a> <b><p id = "u2l2s2actCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/sublesson/activity_answer/2/2/2/1"><button id ="u2l2s2act_review" class="act">Activity Review "Making Another While Loop": </button> </a><b><p id = "u2l2s2actReviewCompletion" style="display:inline-block;">incomplete</p></b>
+  <br>
+  <a href="/unit/review/2"><button id = "u2ReviewButton" class="unit">Unit 2 Review: </button></a> <b><p id = "u2ReviewPercentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <a href="/unit/quiz/2"><button id = "u2QuizButton" class="unit">Unit 2 Quiz: </button></a> <b><p id = "u2QuizPercentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <a href="/unit/challenge/2"><button id = "u2ChallengeButton" class="unit">Unit 2 Challenge: </button></a> <b><p id = "u2ChallengePercentage" style="display:inline-block;">% completed</p></b>
+  <br>
+  <!--End of Unit 2-->
+  <div id="progressData" data-post="<%=progressdata%>">
+  </div>
+
+
+
+
+  <div class="progress-wrapper">
+
+  <script type="text/javascript">
+    $(document).ready(() => {console.log($("#progressData").data("post"))});
+  
+  //var requestedPlantName = document.getElementById("plantSearchBar").value;
+
+
+  $(".progress-wrapper").empty();
+
+
+  let studentProgress = $("#progressData").data("post");
+  u1_act_num = 0; //number of activities complete in unit 1
+  u1l1_act_num = 0; //number of activities complete in unit 1 lesson 1
+  u1l2_act_num = 0; //number of activities complete in unit 1 lesson 2
+  u1l3_act_num = 0; //number of activities complete in unit 1 lesson 3
+  u2_act_num = 0; //number of activities complete in unit 2
+  u2l1_act_num = 0; //number of activities complete in unit 2 lesson 1
+  u2l2_act_num = 0; //number of activities complete in unit 2 lesson 2
+
+  for(i=0; i<studentProgress.length; i++){
+    progress_type = studentProgress[i].type_curriculum;//get type of curriculum
+    console.log("Progress Type: ", progress_type);
+    unit_num = studentProgress[i].unit_number; //get unit num
+    console.log("Unit num: ", unit_num);
+    lesson_num = studentProgress[i].lesson_number; //get lesson num
+    console.log("Lesson num: ", lesson_num);
+    sublesson_num = studentProgress[i].sublesson_number; //get sublesson num
+    console.log("sublesson num: ", sublesson_num);
+    activity_num = studentProgress[i].activity_number; //get activity num
+    console.log("activity num: ", activity_num);
+
+    //calculate unit 1 activities complete
+    //calculate unit 1 lesson 1 activities complete
+    if(progress_type == "Guided Activity" && unit_num == "1" && lesson_num == "1" && sublesson_num == "1" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#guidedActu1l1").text("complete");
+      $("#u1l1guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "1" && lesson_num == "1" && sublesson_num == "1" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l1actCompletion").text("complete");
+      $("#u1l1act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "1" && lesson_num == "1" && sublesson_num == "1" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l1actReviewCompletion").text("complete");
+      $("#u1l1act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    //calculate unit 1 lesson 2 activities complete
+    if(progress_type == "Guided Activity" && unit_num == "1" && lesson_num == "2" && sublesson_num == "1" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l2s1guidedAct").text("complete");
+      $("#u1l2s1guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Guided Activity" && unit_num == "1" && lesson_num == "2" && sublesson_num == "2" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l2s2guidedAct").text("complete");
+      $("#u1l2s2guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "1" && lesson_num == "2" && sublesson_num == "2" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l2s2actCompletion").text("complete");
+      $("#u1l2s2act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "1" && lesson_num == "2" && sublesson_num == "2" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l2s2actReviewCompletion").text("complete");
+      $("#u1l2s2act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Guided Activity" && unit_num == "1" && lesson_num == "2" && sublesson_num == "3" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l2s3guidedAct").text("complete");
+      $("#u1l2s3guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "1" && lesson_num == "2" && sublesson_num == "3" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l2s3actCompletion").text("complete");
+      $("#u1l2s3act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "1" && lesson_num == "2" && sublesson_num == "3" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l2s3actReviewCompletion").text("complete");
+      $("#u1l2s3act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    //calculate unit 1 lesson 3 activities complete
+    if(progress_type == "Guided Activity" && unit_num == "1" && lesson_num == "3" && sublesson_num == "1" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l3_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l3s1guidedAct").text("complete");
+      $("#u1l3s1guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "1" && lesson_num == "3" && sublesson_num == "1" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l3_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l3s1actCompletion").text("complete");
+      $("#u1l3s1act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "1" && lesson_num == "3" && sublesson_num == "1" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l3_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l3s1actReviewCompletion").text("complete");
+      $("#u1l3s1act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Guided Activity" && unit_num == "1" && lesson_num == "3" && sublesson_num == "2" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l3_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l3s2guidedAct").text("complete");
+      $("#u1l3s2guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "1" && lesson_num == "3" && sublesson_num == "2" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l3_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l3s2actCompletion").text("complete");
+      $("#u1l3s2act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "1" && lesson_num == "3" && sublesson_num == "2" && activity_num == "1"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      u1l3_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u1l3s2actReviewCompletion").text("complete");
+      $("#u1l3s2act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Unit Review" && unit_num == "1" && lesson_num == "0" && sublesson_num == "0" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      //button if review is complete
+      $("#u1ReviewPercentage").text("complete");
+      $("#u1ReviewButton").attr("style", "  background-color: #0a7bfd; border-color: #0a7bfd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Quiz" && unit_num == "1" && lesson_num == "0" && sublesson_num == "0" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      //button if review is complete
+      $("#u1QuizPercentage").text("complete");
+      $("#u1QuizButton").attr("style", "  background-color: #0a7bfd; border-color: #0a7bfd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Unit Challenge" && unit_num == "1" && lesson_num == "0" && sublesson_num == "0" && activity_num == "0"){
+      u1_act_num += 1; //add to activities complete in unit 1
+      //button if review is complete
+      $("#u1ChallengePercentage").text("complete");
+      $("#u1ChallengeButton").attr("style", "  background-color: #0a7bfd; border-color: #0a7bfd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+
+    //calculate unit 2 activities complete 
+    if(progress_type == "Guided Activity" && unit_num == "2" && lesson_num == "1" && sublesson_num == "1" && activity_num == "0"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s1guidedAct").text("complete");
+      $("#u2l1s1guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "2" && lesson_num == "1" && sublesson_num == "1" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s1actCompletion").text("complete");
+      $("#u2l1s1act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "2" && lesson_num == "1" && sublesson_num == "1" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s1actReviewCompletion").text("complete");
+      $("#u2l1s1act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Guided Activity" && unit_num == "2" && lesson_num == "1" && sublesson_num == "2" && activity_num == "0"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s2guidedAct").text("complete");
+      $("#u2l1s2guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "2" && lesson_num == "1" && sublesson_num == "2" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s2actCompletion").text("complete");
+      $("#u2l1s2act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "2" && lesson_num == "1" && sublesson_num == "2" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s2actReviewCompletion").text("complete");
+      $("#u2l1s2act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Guided Activity" && unit_num == "2" && lesson_num == "1" && sublesson_num == "3" && activity_num == "0"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s3guidedAct").text("complete");
+      $("#u2l1s3guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "2" && lesson_num == "1" && sublesson_num == "3" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s3actCompletion").text("complete");
+      $("#u2l1s3act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "2" && lesson_num == "1" && sublesson_num == "3" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l1_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l1s3actReviewCompletion").text("complete");
+      $("#u2l1s3act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    //calculate unit 2 lesson 2 activies complete
+    if(progress_type == "Guided Activity" && unit_num == "2" && lesson_num == "2" && sublesson_num == "1" && activity_num == "0"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l2s1guidedAct").text("complete");
+      $("#u2l2s1guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "2" && lesson_num == "2" && sublesson_num == "1" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l2s1actCompletion").text("complete");
+      $("#u2l2s1act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "2" && lesson_num == "2" && sublesson_num == "1" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l2s1actReviewCompletion").text("complete");
+      $("#u2l2s1act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Guided Activity" && unit_num == "2" && lesson_num == "2" && sublesson_num == "2" && activity_num == "0"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l2s2guidedAct").text("complete");
+      $("#u2l2s2guided").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Sublesson Activity" && unit_num == "2" && lesson_num == "2" && sublesson_num == "2" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l2s2actCompletion").text("complete");
+      $("#u2l2s2act").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Activity Review" && unit_num == "2" && lesson_num == "2" && sublesson_num == "2" && activity_num == "1"){
+      u2_act_num += 1; //add to activities complete in unit 1
+      u2l2_act_num += 1; //add to activities complete in unit 1 lesson 1
+      //change unit 1 lesson 1 guided activity button if activity is complete
+      $("#u2l2s2actReviewCompletion").text("complete");
+      $("#u2l2s2act_review").attr("style", "  background-color: #DC8D9C; border-color: #DC8D9C; color: black; border-radius: 8px; font-weight: bold;");
+    }
+
+    if(progress_type == "Unit Review" && unit_num == "2" && lesson_num == "0" && sublesson_num == "0" && activity_num == "0"){
+      u2_act_num += 1; //add to activities complete in unit 2
+      //button if review is complete
+      $("#u2ReviewPercentage").text("complete");
+      $("#u2ReviewButton").attr("style", "  background-color: #0a7bfd; border-color: #0a7bfd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Quiz" && unit_num == "2" && lesson_num == "0" && sublesson_num == "0" && activity_num == "0"){
+      u2_act_num += 1; //add to activities complete in unit 2
+      //button if review is complete
+      $("#u2QuizPercentage").text("complete");
+      $("#u2QuizButton").attr("style", "  background-color: #0a7bfd; border-color: #0a7bfd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+    if(progress_type == "Unit Challenge" && unit_num == "2" && lesson_num == "0" && sublesson_num == "0" && activity_num == "0"){
+      u2_act_num += 1; //add to activities complete in unit 2
+      //button if review is complete
+      $("#u2ChallengePercentage").text("complete");
+      $("#u2ChallengeButton").attr("style", "  background-color: #0a7bfd; border-color: #0a7bfd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+  }
+  //calculate percentages complete
+  unit1_percentage = (u1_act_num / 19) * 100
+  unit1_percentage = parseFloat(unit1_percentage).toFixed(2)
+  u1l1_percentage = (u1l1_act_num / 3) * 100
+  u1l1_percentage = parseFloat(u1l1_percentage).toFixed(2)
+  u1l2_percentage = (u1l2_act_num / 7) * 100
+  u1l2_percentage = parseFloat(u1l2_percentage).toFixed(2)
+  u1l3_percentage = (u1l3_act_num / 6) * 100
+  u1l3_percentage = parseFloat(u1l3_percentage).toFixed(2)
+  console.log(unit1_percentage)
+  //unit 2 
+  unit2_percentage = (u2_act_num / 18) * 100
+  unit2_percentage = parseFloat(unit2_percentage).toFixed(2)
+  u2l1_percentage = (u2l1_act_num / 9) * 100
+  u2l1_percentage = parseFloat(u2l1_percentage).toFixed(2)
+  u2l2_percentage = (u2l2_act_num / 6) * 100
+  u2l2_percentage = parseFloat(u2l2_percentage).toFixed(2)
+
+  for(i=0; i<studentProgress.length; i++){
+    //filter student data and change the styling of buttons based on that...
+
+    //change unit 1 button if unit one is 100% complete (all 19 activities are complete )
+    //$("#unit1Button").attr("style", "color: color");
+    $("#unit1Percentage").text(unit1_percentage + "% complete");
+    if(unit1_percentage == "100.00"){
+      $("#unit1Button").attr("style", "  background-color: #0a7bfd; border-color: #0a7bfd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+    //change unit 1 lesson 1 button if lesson 1 is 100% complete (complete if all 3 activities are complete)
+    $("#u1lesson1Percentage").text(u1l1_percentage + "% complete");
+    if(u1l1_percentage == "100.00"){
+      $("#u1lesson1Button").attr("style", "  background-color: #980afd; border-color: #980afd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+    //change unit 1 lesson 2 button if lesson 2 is 100% complete (complete if all 7 activites from 3 sublessons are complete)
+    $("#u1lesson2Percentage").text(u1l2_percentage + "% complete");
+    if(u1l2_percentage == "100.00"){
+      $("#u1lesson2Button").attr("style", "  background-color: #980afd; border-color: #980afd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+    //change unit 1 lesson 3 button if lesson 3 is 100% complete (complete if all 6 activites from 2 sublessons are complete)
+    $("#u1lesson3Percentage").text(u1l3_percentage + "% complete");
+    if(u1l3_percentage == "100.00"){
+      $("#u1l3Button").attr("style", "  background-color: #980afd; border-color: #980afd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+
+
+    //change unit 2 button is unit is 100% complete 
+    $("#unit2Percentage").text(unit2_percentage + "% complete");
+      if(unit2_percentage == "100.00"){
+        $("#unit2Button").attr("style", "  background-color: #0a7bfd; border-color: #0a7bfd; color: white; border-radius: 8px; font-weight: bold;");
+      }
+    //change unit 2 lesson 1 button if lesson 1 is 100% complete (complete if all _ activities from _ sublessons are complete)
+    $("#u2lesson1Percentage").text(u2l1_percentage + "% complete");
+    if(u2l1_percentage == "100.00"){
+      $("#u2lesson1Button").attr("style", "  background-color: #980afd; border-color: #980afd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+
+    //change unit 2 lesson 2 button if lesson 2 is 100% complete (complete if all _ activities from _ sublessons are complete)
+    $("#u2lesson2Percentage").text(u2l2_percentage + "% complete");
+    if(u2l2_percentage == "100.00"){
+      $("#u2lesson2Button").attr("style", "  background-color: #980afd; border-color: #980afd; color: white; border-radius: 8px; font-weight: bold;");
+    }
+
+  }
+
+   
+
+  </script>
+
+  <style>
+    .lesson{
+      margin-left: 5%;
+    }
+    .act{
+      margin-left: 10%;
+    }
+    button{
+      border-radius: 8px;
+    }
+    h1{
+        color: #0F402C;
+    }
+    body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+  </style>

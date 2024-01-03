@@ -1,0 +1,118 @@
+
+<head>
+</head>
+
+<!-- Navigation bar start  -->
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
+  <div class="container-fluid ">
+  <a class="navbar-brand " href="#">Space Python</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav ">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/student_dashboard">Student Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/my_progress">Progress/Achievements</a>
+    </li>		
+    <li class="nav-item">
+      <a class="nav-link" href="/my_profile">Student Profile</a>
+    </li>		
+
+    </ul>		  
+  </div>
+  </div>
+</nav>
+<!-- Navigation bar end  -->
+
+<body>
+  <br>
+  <br>
+  <br>
+  <div id="lessonData" data-lesson="<%=lessonInfo%>"></div>
+  <div class="codingJourneyGraphic"></div> <!--Leaving space (lol) for interactive graphic that shows where they are along their coding journey-->
+  <div class="lessonNameHeader">
+    <h3 id="lessonName"></h3>
+  </div>
+  <div class="newData">
+    <p id="newData"></p>
+  </div>
+  <div class="lessonIntro">
+    <p id="lessonIntro"></p>
+  </div>
+
+  <h4>Lesson Goal:</h4>
+  <div class="lessonGoal">
+    <p id="lessonGoal"></p>
+  </div>
+
+  <div class="continueButton">
+    <a id=continueLink><button id="continueButton" style="float: right;">Continue</button></a> <!--Will need to work out exactly how I am continuing the unit-->
+  </div>
+
+</body>
+
+  <script type="text/javascript">
+
+    // adapted from @Npitcher12 & @ascemek: Script to populate plant information
+
+      const lessonData = $("#lessonData").data("lesson");
+      $("#lessonName").text(lessonData.topic);
+      $("#lessontIntro").text(lessonData.introduction);
+      $("#lessonGoal").text(lessonData.lesson_goal);
+      $("#newData").text(lessonData.newData);
+
+   //   $("#introductionHeader").text(unitData.introHeader);
+  //    $("#unitIntroText").text(unitData.introduction_text);
+  //    $("#lessonInformation").text(unitData.lesson_journey);
+      //link = "/sublesson/video/" + lessonData.unit_number + '/' + lessonData.lesson_number + '/' +
+      lessonLink ="/sublesson/video/" + lessonData.unit_number + "/" + lessonData.lesson_number + "/1"
+        $("#continueLink").attr("href", lessonLink);
+        //confetti effect if lesson is not the first lesson (meaning the completed the past lesson)
+        lessonNum = parseInt(lessonData.lesson_number)
+        if(lessonNum > 1){
+          startConfetti();
+          setTimeout(stopEffect1, 3000);
+
+        }
+        
+        function stopEffect1() {
+          stopConfetti();
+      }
+
+
+    
+
+  </script>
+  <script src="/assets/js/confetti-falling-animation/confetti-falling-animation/confetti.js"></script>
+  <!--https://www.cssscript.com/confetti-animation-party/-->
+
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+</body>
+
+<style>
+  h4{
+color: #024b0c;
+}
+h3{
+color: #024b0c;
+}
+button{
+background-color: #4895ef;
+border-color: #4895ef;
+color: white;
+border-radius: 8px;
+}
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+</style>
+

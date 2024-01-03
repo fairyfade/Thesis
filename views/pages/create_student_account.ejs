@@ -1,0 +1,171 @@
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0F402C;">
+  <div class="container-fluid ">
+  <a class="navbar-brand " href="/">Space Python</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav ">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/about">About</a>
+    </li>		
+    <li class="nav-item">
+      <a class="nav-link active" href="/login">Sign Up/Log In</a>
+    </li>	
+    </ul>		  
+  </div>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+
+<div class="registerForm">
+  <h2>Student Registration Information</h2><br/>
+<form id="registerForm"> <!-- Register form -->
+  
+    <p style="color: red">*Remember to use the same email that you used for your "parent" account!</p>
+    <label for="firstName"> <!--Student First name label-->
+      Student First Name
+    </label>
+    <input name="firstName" id="firstName" placeholder="Student First Name" required>
+    <br/><br/>
+    <label for="lastName"> <!--Student Last Name label-->
+      Student Last Name
+    </label>
+    <input name="lastName" id="lastName" placeholder="Student Last Name" required>
+    <br/><br/>
+    <label for="username"> <!--Student Username label-->
+      Student Username
+    </label>
+    <input name="username" id="username" placeholder="Student Username" required>
+    <br/><br/>
+    <label for="email"> <!--Student Email label-->
+      Parent Email
+    </label>
+    <input name="email" id="email" placeholder="Parent Email" required>
+    <br/><br/>
+    <label for="password"> <!--Student Password label-->
+      Student Password
+    </label>
+    <input type="password" name="password" id="password" placeholder="Student Password" required>
+    <br/><br/>
+    <label for="confirmPassword"> <!-- Confirm password label -->
+      Confirm Password
+    </label>
+    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required> <!-- Confirm password input -->
+    <br/><br/>
+    <button id="cancel">Cancel</button> <!-- Cancel button -->
+    <button type="submit" id="register">Register</button> <!-- Register button -->
+    </form>
+  </div>
+    <script>
+
+      function initPage() { // Initialize the page
+        $("#cancel").on("click", () => { // When the cancel button is clicked
+          window.location.href = "/"; // Redirect to the home page
+        });
+        $("#registerForm").on("submit", async (e) => { // When the register form is submitted
+          e.preventDefault(); // Prevent the form from submitting
+          //let userId = req.session.userId;
+          let firstName = $("#firstName").val(); // Get the first name
+          let lastName = $("#lastName").val(); // Get the last name
+          let username = $("#username").val(); // Get the username
+          let email = $("#email").val(); // Get the email
+          let password = $("#password").val(); // Get the password
+          let confirmPassword = $("#confirmPassword").val(); // Get the confirm password
+          if (password !== confirmPassword) { // If the passwords do not match
+            Swal.fire({ // Display an error message
+              icon: 'error',
+              text: "Passwords do not match"
+            })
+          } else { // If the passwords match
+            $.ajax({ // Send a request to the server to register the user
+              type: 'GET',
+              url: "/user/register",
+              dataType: 'json',
+              contentType: 'json',
+              async: false,
+              data: {firstName: firstName, lastName: lastName, email: email, username: username, password: password, account_type: 'student'}, // Send the user's information
+              success: (data) => { // If the request is successful
+              if (data.error) { // If there is an error
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  text: data.error
+                })
+              } else { // If there is no error
+                Swal.fire({
+                title: 'Student Account Created',
+                text: 'Would you like to create another student account?',
+                icon: 'success',
+                showCancelButton: true,
+                showDenyButton: true,
+                confirmButtonText: 'Create another student account',
+                denyButtonText: 'Continue to login page'
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  //go to this page again
+                  window.location.href = "/create_student_account";
+                } else if (result.isDenied) {
+                  //go to login page
+                  window.location.href = "/login";
+                }
+              });
+              console.log(data);
+                  }
+              },
+              error: (err) => { // If the request fails
+                Swal.fire({ // Show an error message
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!'
+                })
+              }
+            });
+          }
+          return false; // Prevent the form from submitting
+        });
+      }
+      
+      $(document).ready(() => { // When the page is ready
+        initPage(); // Initialize the page
+      });
+</script>
+
+<style>
+    input {
+      margin-left: 20px;
+      width: 35%;
+  }
+    h2{
+    color: #024b0c;
+  }
+  .registerForm {
+      margin: auto;
+      width: 50%;
+      padding: 10px;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
+  }
+  button{
+    background-color: #DC8D9C;
+    border-color: #DC8D9C;
+    color: black;
+    border-radius: 8px;
+    }
+    #register {
+    margin-left: 42%;
+  }
+  body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+</style>
+      
+      
