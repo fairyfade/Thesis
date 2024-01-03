@@ -24,9 +24,10 @@
   <br>
   <br>
 
-  <h1>Student Progress Reports</h1>
+  <h2>Student Progress Reports</h2>
 
   <p>Select a student to view their progress.</p>
+
   <hr style="border-top: dotted 5px;" />
   <h3>Students:</h3>
   <div id="accountData" data-post="<%=accountdata%>">
@@ -34,14 +35,21 @@
   <div id="studentData" data-post="<%=studentdata%>">
   </div>
 
-  <div class="account-wrapper">
+
+  <div class="parent">
+
+    <div class="child">
+      <div class="account-wrapper">
   
+      </div>
+    
+      <div class="students-wrapper">
+      
+      </div>
+    </div>
+    <div class="child"><img src="/images/progress/familyWorking.png" alt="Family Working On Laptops on a Couch together" style="width: 100%"></div>
   </div>
 
-  <div class="students-wrapper">
-  
-  </div>
-  
   
     <script>
 
@@ -86,10 +94,32 @@
     </script>
 
     <style>
+        h2{
+    color: #024b0c;
+  }
+  h3{
+    color: #024b0c;
+  }
       button{
         background-color: #DC8D9C;
         border-color: #DC8D9C;
         color: black;
         border-radius: 8px;
       }
+      body {
+    font-family: Verdana, sans-serif;
+    background-color: #FAF9F6;
+  }
+  .centerImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+} 
+.parent {
+  display: flex;
+}
+.child {
+  flex: 1;
+}
     </style>
